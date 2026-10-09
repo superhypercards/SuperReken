@@ -115,27 +115,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .close-btn {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      background: #f1f5f9;
-      border: 2px solid var(--border);
-      color: var(--dark);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: background 0.2s;
-      z-index: 10;
-    }
-    .close-btn:hover { background: #e2e8f0; border-color: var(--muted); }
-
     .form-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
     .form-header-icon-wrap { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .form-header-icon-wrap svg { width: 100%; height: 100%; fill: var(--primary); }
@@ -174,8 +153,26 @@
     .btn-google { background: white; border: 2px solid var(--border); color: var(--dark); box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-top: 8px; font-weight: 600; }
     .btn-google:hover { background: #f8fafc; border-color: #94a3b8; transform: translateY(-1px); }
 
-    .status { font-size: 15px; margin-top: 16px; text-align: center; font-weight: 700; min-height: 24px; transition: transform 0.15s ease; }
-    .status.pop { transform: scale(1.1); }
+    .status { font-size: 15px; margin-top: 16px; text-align: center; font-weight: 700; min-height: 24px; }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(0.9); }
+      50% { transform: translateY(-30px) scale(1.2); }
+      100% { opacity: 0; transform: translateY(-60px) scale(1); }
+    }
+    .floating-popup {
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--success);
+      pointer-events: none;
+      animation: floatUp 0.8s ease-out forwards;
+      z-index: 999;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
 
     .student-section { display: none; }
     .student-section.active { display: flex; flex-direction: column; flex: 1; }
@@ -255,12 +252,64 @@
     .avatar-option svg { width: 42px; height: 42px; }
     .avatar-option.selected { border-color: var(--primary); background: #ede9fe; transform: scale(1.05); }
 
-    .math-question-box { background: #f8fafc; border: 2px solid var(--border); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; }
+    .math-question-box { background: #f8fafc; border: 2px solid var(--border); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; position: relative; }
     .math-expr { font-size: 42px; font-weight: 800; color: var(--primary); margin: 15px 0; }
 
-    .podium-list { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; flex: 1; overflow-y: auto; }
-    .podium-item { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border: 2px solid var(--border); padding: 16px 20px; border-radius: 14px; font-weight: 700; font-size: 16px; }
-    .podium-rank { font-size: 20px; font-weight: 800; width: 40px; color: var(--primary); }
+    /* 99math Podium Stijl */
+    .math99-results-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      background: #7c3aed;
+      border-radius: 20px;
+      padding: 24px;
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .math99-stat-box .title { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+    .math99-stat-box .value { font-size: 36px; font-weight: 800; margin-top: 4px; }
+
+    .math99-podium-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media(max-width: 768px) { .math99-podium-grid { grid-template-columns: 1fr; } }
+
+    .math99-podium-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border: 2px solid var(--border);
+      text-align: center;
+      display: none; /* Wordt 1 voor 1 onthuld */
+      animation: popIn 0.4s ease forwards;
+    }
+    .math99-podium-card.revealed { display: block; }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .math99-card-header {
+      padding: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      color: white;
+    }
+    .card-yellow { background: #f59e0b; }
+    .card-red { background: #ef4444; }
+    .card-green { background: #10b981; }
+
+    .math99-card-body {
+      padding: 20px;
+    }
+    .math99-card-name { font-size: 22px; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
+    .math99-card-sub { font-size: 15px; color: var(--muted); font-weight: 700; }
   </style>
 </head>
 <body>
@@ -286,20 +335,22 @@
       </button>
     </div>
 
-    <!-- STUDENT DASHBOARD & INLOGGING -->
+    <!-- STUDENT DASHBOARD -->
     <div class="form-card" id="studentCard">
-      <button class="close-btn" id="studentGlobalBackBtn">×</button>
       
       <!-- Hoofdmenu Student -->
       <div class="student-section active" id="studentMenuSection">
-        <div class="form-header">
-          <h2>Leerling Portaal</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="form-header" style="margin: 0;">
+            <h2>Leerling Portaal</h2>
+          </div>
+          <button class="btn btn-secondary" id="backToRoleFromStudent" style="width: auto; padding: 6px 14px; margin: 0;">Terug</button>
         </div>
-        <p style="margin-bottom: 20px;">Kies wat je wilt doen of log optioneel in met Google:</p>
+        <p style="margin-bottom: 20px;">Kies wat je wilt doen of log in met Google:</p>
 
         <button class="btn btn-google" id="studentGoogleBtn" style="margin-bottom: 20px;">
           <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.17 21.36 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.15 0 9.89 0 12s.43 3.85 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-          Inloggen met Google (Optioneel)
+          Inloggen met Google (Leerling)
         </button>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1;">
@@ -387,7 +438,7 @@
           <span style="background: #fee2e2; color: var(--danger); padding: 6px 14px; border-radius: 10px;" id="gameTimerDisplay">02:00</span>
         </div>
 
-        <div class="math-question-box">
+        <div class="math-question-box" id="mathQuestionBoxContainer">
           <div class="math-expr" id="mathExpression">12 + 5 = ?</div>
           <input class="field" id="studentAnswer" type="text" placeholder="Jouw antwoord en druk op Enter" autocomplete="off" style="text-align: center; font-size: 28px;">
         </div>
@@ -409,20 +460,21 @@
 
     <!-- LEERKRACHT INLOG & DASHBOARD -->
     <div class="form-card" id="teacherCard">
-      <button class="close-btn" class-role="back">×</button>
-      
       <div id="teacherLoginSection" style="max-width: 600px; margin: 0 auto; width: 100%;">
-        <div class="form-header">
-          <div class="form-header-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM18 20H6V4H11V12L14.5 9.5L18 12V4H18V20Z"/></svg>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div class="form-header" style="margin: 0;">
+            <div class="form-header-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM18 20H6V4H11V12L14.5 9.5L18 12V4H18V20Z"/></svg>
+            </div>
+            <h2>Leerkracht Portaal</h2>
           </div>
-          <h2>Leerkracht Portaal</h2>
+          <button class="btn btn-secondary" id="backToRoleFromTeacher" style="width: auto; padding: 6px 14px; margin: 0;">Terug</button>
         </div>
-        <p>Log in met Google om klassen, taken en leerlingen te beheren[cite: 5].</p>
+        <p>Log in met Google om klassen, taken en leerlingen te beheren.</p>
         
         <button class="btn btn-google" id="teacherGoogleBtn">
           <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.17 21.36 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.15 0 9.89 0 12s.43 3.85 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-          Inloggen met Google
+          Inloggen met Google (Leerkracht)
         </button>
         <div class="status" id="teacherStatus"></div>
       </div>
@@ -430,9 +482,12 @@
       <div class="teacher-dashboard" id="teacherDashboard">
         
         <div id="teacherHomeMenu" style="display: flex; flex-direction: column; height: 100%;">
-          <div style="margin-bottom: 16px;">
-            <h2 style="margin: 0; font-size: 28px; font-weight: 800;">Welkom, <span id="teacherNameDisplay">Leerkracht</span></h2>
-            <p style="color: var(--muted); margin: 6px 0 0; font-size: 16px;">Kies hieronder een optie om te openen:</p>
+          <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h2 style="margin: 0; font-size: 28px; font-weight: 800;">Welkom, <span id="teacherNameDisplay">Leerkracht</span></h2>
+              <p style="color: var(--muted); margin: 6px 0 0; font-size: 16px;">Kies hieronder een optie om te openen:</p>
+            </div>
+            <button class="btn btn-secondary" id="teacherLogoutBtn" style="width: auto; padding: 8px 16px;">Uitloggen</button>
           </div>
           
           <div class="teacher-menu-grid">
@@ -442,7 +497,7 @@
             </button>
             <button class="menu-card-btn" data-opentab="taken">
               <span class="menu-card-title">Taken (Per Kind / Klas)</span>
-              <p class="menu-card-desc">Wijs specifieke rekenvaardigheden toe aan kinderen of klassen[cite: 5].</p>
+              <p class="menu-card-desc">Wijs specifieke vaardigheden toe aan kinderen of klassen.</p>
             </button>
             <button class="menu-card-btn" data-opentab="rapporten">
               <span class="menu-card-title">Rapporten</span>
@@ -450,13 +505,13 @@
             </button>
             <button class="menu-card-btn" data-opentab="race">
               <span class="menu-card-title">Live Race (3 Rondes)</span>
-              <p class="menu-card-desc">Start een live wedstrijd van 3 rondes[cite: 5].</p>
+              <p class="menu-card-desc">Start een live wedstrijd van 3 rondes.</p>
             </button>
           </div>
         </div>
 
         <div class="tab-content" id="teacherTabKlassen">
-          <button class="close-btn" class-role="hometab">×</button>
+          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
             <h2>Klassen Beheren</h2>
           </div>
@@ -473,11 +528,11 @@
         </div>
 
         <div class="tab-content" id="teacherTabTaken">
-          <button class="close-btn" class-role="hometab">×</button>
+          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
             <h2>Taken Toewijzen</h2>
           </div>
-          <p>Wijs taken toe aan een specifieke leerling of een gehele klas met alle vaardigheden[cite: 5].</p>
+          <p>Wijs taken toe aan een specifieke leerling of een gehele klas met alle vaardigheden.</p>
           
           <div class="field-group">
             <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Doelgroep:</label>
@@ -519,7 +574,7 @@
         </div>
 
         <div class="tab-content" id="teacherTabRapporten">
-          <button class="close-btn" class-role="hometab">×</button>
+          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
             <h2>Rapporten & Voortgang</h2>
           </div>
@@ -531,7 +586,7 @@
 
         <!-- LIVE RACE TAB -->
         <div class="tab-content" id="teacherTabRace">
-          <button class="close-btn" class-role="hometab">×</button>
+          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           
           <div id="teacherScreenLobby" style="display: flex; flex-direction: column; flex: 1;">
             <div class="clean-lobby-card">
@@ -556,7 +611,7 @@
                 </div>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 16px;">
-                <div style="font-size: 14px; color: var(--muted);">Start een race bestaande uit 3 rondes van elk 2 minuten[cite: 5].</div>
+                <div style="font-size: 14px; color: var(--muted);">Start een race bestaande uit 3 rondes van elk 2 minuten.</div>
                 <button class="btn btn-primary" id="startActiveGameBtn" style="width: auto; padding: 16px 36px; font-size: 18px;">Start 3-Rondes Race</button>
               </div>
             </div>
@@ -579,13 +634,57 @@
             <div style="font-size: 48px; font-weight: 800; color: var(--primary); margin-top: 30px;" id="teacherGameCountdown">02:00</div>
           </div>
 
-          <div id="teacherScreenPodium" style="display: none; flex-direction: column; flex: 1; padding: 10px;">
-            <h2 style="font-size: 32px; color: var(--primary); margin-bottom: 6px;" id="podiumHeaderTitle">Podium</h2>
-            <p style="color: var(--muted); margin-bottom: 20px; font-size: 16px;" id="podiumSubText">Overzicht van de ronde</p>
+          <!-- 99MATH PODIUM / UITREIKING SCHERM -->
+          <div id="teacherScreenPodium" style="display: none; flex-direction: column; flex: 1; padding: 10px; overflow-y: auto;">
             
-            <div class="podium-list" id="top5PodiumList"></div>
+            <!-- Klas Score & Correct Answers Header -->
+            <div class="math99-results-top">
+              <div class="math99-stat-box">
+                <div class="title">Class score</div>
+                <div class="value" id="summaryClassScore">0</div>
+              </div>
+              <div class="math99-stat-box">
+                <div class="title">Correct answers</div>
+                <div class="value" id="summaryAccuracy">100%</div>
+              </div>
+            </div>
 
-            <button class="btn btn-primary" id="nextRoundBtn" style="margin-top: 24px;">Volgende Ronde Starten</button>
+            <!-- Podium Grid (1 voor 1 onthullen) -->
+            <div class="math99-podium-grid">
+              
+              <!-- 1st Place -->
+              <div class="math99-podium-card" id="podiumCard1">
+                <div class="math99-card-header card-yellow">1st place</div>
+                <div class="math99-card-body">
+                  <div class="math99-card-name" id="p1Name">-</div>
+                  <div class="math99-card-sub" id="p1Score">0 points</div>
+                </div>
+              </div>
+
+              <!-- 2nd Place -->
+              <div class="math99-podium-card" id="podiumCard2">
+                <div class="math99-card-header card-red">2nd place</div>
+                <div class="math99-card-body">
+                  <div class="math99-card-name" id="p2Name">-</div>
+                  <div class="math99-card-sub" id="p2Score">0 points</div>
+                </div>
+              </div>
+
+              <!-- Most Accurate -->
+              <div class="math99-podium-card" id="podiumCard3">
+                <div class="math99-card-header card-green">Most accurate</div>
+                <div class="math99-card-body">
+                  <div class="math99-card-name" id="p3Name">-</div>
+                  <div class="math99-card-sub" id="p3Acc">100% accurate</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: auto; padding-top: 10px;">
+              <button class="btn btn-secondary" id="revealNextPodiumBtn" style="flex: 1;">Volgende onthullen ➔</button>
+              <button class="btn btn-primary" id="nextRoundBtn" style="flex: 1; display: none;">Volgende Ronde Starten</button>
+            </div>
           </div>
 
         </div>
@@ -596,10 +695,20 @@
 
   </div>
 
+  <!-- Keuzemenu Modal -->
+  <div id="accountChoiceModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999; place-items: center; padding: 16px;">
+    <div style="background: white; border-radius: 24px; padding: 30px; width: min(450px, 100%); text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
+      <h2 style="margin-top: 0; font-size: 24px; color: var(--dark);">Kies je rol of account</h2>
+      <p style="color: var(--muted); font-size: 15px; margin-bottom: 20px;">We hebben meerdere accounts of sessies gevonden. Wat wil je openen?</p>
+      <div id="accountChoiceButtons" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;"></div>
+      <button class="btn btn-secondary" id="closeChoiceModalBtn">Sluiten</button>
+    </div>
+  </div>
+
   <!-- Firebase Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
     import { getFirestore, collection, addDoc, query, where, getDocs, deleteDoc, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -619,7 +728,7 @@
 
     let currentUser = null;
     let selectedAvatar = 'fox';
-    let currentStudent = { name: '', code: '', avatar: 'fox', score: 0, topic: 'addition', studentDocId: '', correctCount: 0, totalCount: 0, isGoogle: false };
+    let currentStudent = { name: '', code: '', avatar: 'fox', score: 0, topic: 'addition', studentDocId: '', correctCount: 0, totalCount: 0, lastSeenStartTime: 0, isGoogle: false };
     let currentMathProblem = { question: '', answer: '', topic: 'addition' };
     let studentCheckInterval = null;
     let activePollInterval = null;
@@ -628,6 +737,7 @@
     let currentRaceRound = 1;
     let cachedRoundStudents = [];
     let activeStudentMode = 'task';
+    let podiumRevealStep = 0;
 
     const svgIcons = {
       fox: `<svg viewBox="0 0 24 24"><path fill="#f97316" d="M12 2L2 19h20L12 2zm0 4.5l6.5 11.5h-13L12 6.5z"/></svg>`,
@@ -655,6 +765,60 @@
       document.getElementById(sectionId).classList.add('active');
     }
 
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        const savedStudentSession = localStorage.getItem('superreken_student');
+
+        if (savedStudentSession) {
+          showAccountChoiceModal(user, JSON.parse(savedStudentSession));
+        } else {
+          openTeacherDashboard(user);
+        }
+      }
+    });
+
+    function showAccountChoiceModal(googleUser, studentObj) {
+      const modal = document.getElementById('accountChoiceModal');
+      const container = document.getElementById('accountChoiceButtons');
+      container.innerHTML = "";
+
+      container.innerHTML += `
+        <button class="btn btn-primary" id="chooseTeacherRole">Doorgaan als Leerkracht (${googleUser.displayName || 'Google Account'})</button>
+        <button class="btn btn-primary" id="chooseStudentRole" style="background: var(--success);">Doorgaan als Leerling (${studentObj.name})</button>
+      `;
+
+      modal.style.display = 'grid';
+
+      document.getElementById('chooseTeacherRole').addEventListener('click', () => {
+        modal.style.display = 'none';
+        openTeacherDashboard(googleUser);
+      });
+
+      document.getElementById('chooseStudentRole').addEventListener('click', () => {
+        modal.style.display = 'none';
+        currentStudent = studentObj;
+        selectionScreen.classList.add('hidden');
+        mainContainer.classList.add('fullscreen-active');
+        studentCard.classList.add('active');
+        showStudentSection('studentMenuSection');
+      });
+    }
+
+    document.getElementById('closeChoiceModalBtn').addEventListener('click', () => {
+      document.getElementById('accountChoiceModal').style.display = 'none';
+    });
+
+    function openTeacherDashboard(user) {
+      selectionScreen.classList.add('hidden');
+      mainContainer.classList.add('fullscreen-active');
+      teacherCard.classList.add('active');
+      document.getElementById("teacherLoginSection").style.display = "none";
+      document.getElementById("teacherDashboard").classList.add("active");
+      document.getElementById("teacherNameDisplay").textContent = user.displayName ? user.displayName.split(" ")[0] : "Leerkracht";
+      loadTeacherClasses();
+    }
+
     document.getElementById('selectStudentBtn').addEventListener('click', () => {
       selectionScreen.classList.add('hidden');
       mainContainer.classList.add('fullscreen-active');
@@ -668,26 +832,32 @@
       teacherCard.classList.add('active');
     });
 
-    document.getElementById('studentGlobalBackBtn').addEventListener('click', () => {
-      selectionScreen.classList.remove('hidden');
+    document.getElementById('backToRoleFromStudent').addEventListener('click', () => {
       studentCard.classList.remove('active');
-      teacherCard.classList.remove('active');
       mainContainer.classList.remove('fullscreen-active');
-      showStudentSection('studentMenuSection');
-      if (studentCheckInterval) clearInterval(studentCheckInterval);
-      if (studentGameTimerInterval) clearInterval(studentGameTimerInterval);
+      selectionScreen.classList.remove('hidden');
     });
 
-    document.querySelectorAll('[class-role="back"]').forEach(btn => {
-      if (btn.id === 'studentGlobalBackBtn') return;
+    document.getElementById('backToRoleFromTeacher').addEventListener('click', () => {
+      teacherCard.classList.remove('active');
+      mainContainer.classList.remove('fullscreen-active');
+      selectionScreen.classList.remove('hidden');
+    });
+
+    document.getElementById('teacherLogoutBtn').addEventListener('click', async () => {
+      await signOut(auth);
+      currentUser = null;
+      localStorage.removeItem('superreken_student');
+      selectionScreen.classList.remove('hidden');
+      teacherCard.classList.remove('active');
+      mainContainer.classList.remove('fullscreen-active');
+      document.getElementById("teacherLoginSection").style.display = "block";
+      document.getElementById("teacherDashboard").classList.remove("active");
+    });
+
+    document.querySelectorAll('.hometab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        selectionScreen.classList.remove('hidden');
-        studentCard.classList.remove('active');
-        teacherCard.classList.remove('active');
-        mainContainer.classList.remove('fullscreen-active');
-        showStudentSection('studentMenuSection');
-        document.getElementById('teacherLoginSection').style.display = 'block';
-        document.getElementById('teacherDashboard').classList.remove('active');
+        document.querySelectorAll('#teacherCard .tab-content').forEach(c => c.classList.remove('active'));
         document.getElementById('teacherHomeMenu').style.display = 'flex';
         if (activePollInterval) clearInterval(activePollInterval);
         if (teacherRoundTimerInterval) clearInterval(teacherRoundTimerInterval);
@@ -698,12 +868,12 @@
       try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
-        currentStudent.name = user.displayName;
+        currentStudent.name = user.displayName || "Leerling";
         currentStudent.isGoogle = true;
-        document.getElementById('studentNameDisplay').textContent = user.displayName.split(" ")[0];
-      } catch (e) {
-        alert("Google login mislukt.");
-      }
+        currentStudent.avatar = selectedAvatar;
+        localStorage.setItem('superreken_student', JSON.stringify(currentStudent));
+        showStudentSection('studentMenuSection');
+      } catch (error) {}
     });
 
     document.getElementById('chooseTasksBtn').addEventListener('click', () => {
@@ -739,6 +909,7 @@
       currentStudent.name = name;
       currentStudent.avatar = selectedAvatar;
       currentStudent.score = 0;
+      localStorage.setItem('superreken_student', JSON.stringify(currentStudent));
       status.textContent = "";
 
       if (activeStudentMode === 'task') {
@@ -774,7 +945,6 @@
         timestamp: new Date().toISOString()
       });
 
-      const loginTimestamp = Date.now();
       if (studentCheckInterval) clearInterval(studentCheckInterval);
 
       studentCheckInterval = setInterval(async () => {
@@ -782,13 +952,14 @@
           const taskSnap = await getDoc(doc(db, "tasks", code));
           if (taskSnap.exists()) {
             const taskData = taskSnap.data();
-            if (taskData.gameStarted && taskData.startTime && taskData.startTime > loginTimestamp) {
+            if (taskData.gameStarted && taskData.startTime && taskData.startTime !== currentStudent.lastSeenStartTime) {
+              currentStudent.lastSeenStartTime = taskData.startTime;
               currentStudent.topic = taskData.topic;
               currentRaceRound = taskData.round || 1;
+              
               showStudentSection('studentOefenScherm');
               generateQuestion();
-              startStudentGameTimer();
-              if (studentCheckInterval) clearInterval(studentCheckInterval);
+              startSyncedGameTimer(taskData.startTime);
             }
           }
         } catch(e) {}
@@ -834,7 +1005,7 @@
             currentStudent.topic = btn.getAttribute('data-skill');
             showStudentSection('studentOefenScherm');
             generateQuestion();
-            startStudentGameTimer();
+            startSyncedGameTimer(Date.now());
           });
         });
       } catch (e) {}
@@ -884,12 +1055,15 @@
       document.getElementById('studentAnswer').value = '';
     }
 
-    function startStudentGameTimer() {
-      let timeLeft = 120;
+    function startSyncedGameTimer(startTime) {
       if (studentGameTimerInterval) clearInterval(studentGameTimerInterval);
 
       studentGameTimerInterval = setInterval(() => {
-        timeLeft--;
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        let timeLeft = 120 - elapsed;
+        
+        if (timeLeft < 0) timeLeft = 0;
+
         let m = Math.floor(timeLeft / 60);
         let s = timeLeft % 60;
         document.getElementById('gameTimerDisplay').textContent = `${m}:${s < 10 ? '0' + s : s}`;
@@ -901,7 +1075,7 @@
           let acc = currentStudent.totalCount > 0 ? Math.round((currentStudent.correctCount / currentStudent.totalCount) * 100) : 100;
           document.getElementById('finalAccText').textContent = `${acc}%`;
         }
-      }, 1000);
+      }, 500);
     }
 
     async function submitAnswerAction() {
@@ -916,9 +1090,13 @@
         currentStudent.score += 10;
         currentStudent.correctCount++;
         feedback.style.color = "var(--success)";
-        feedback.textContent = "Goed gedaan! +10 punten";
-        feedback.classList.add('pop');
-        setTimeout(() => feedback.classList.remove('pop'), 200);
+        feedback.textContent = "";
+
+        const popup = document.createElement('div');
+        popup.className = 'floating-popup';
+        popup.textContent = 'Goed gedaan! +10';
+        document.getElementById('mathQuestionBoxContainer').appendChild(popup);
+        setTimeout(() => popup.remove(), 800);
       } else {
         currentStudent.score -= 10;
         feedback.style.color = "#ef4444";
@@ -945,7 +1123,7 @@
         });
       } catch (e) {}
 
-      setTimeout(() => { feedback.textContent = ""; generateQuestion(); }, 700);
+      generateQuestion();
     }
 
     document.getElementById("submitAnswerBtn").addEventListener('click', submitAnswerAction);
@@ -958,17 +1136,12 @@
 
     document.getElementById("teacherGoogleBtn").addEventListener('click', async () => {
       const statusEl = document.getElementById("teacherStatus");
+      statusEl.textContent = "";
       try {
         const result = await signInWithPopup(auth, provider);
         currentUser = result.user;
-        document.getElementById("teacherLoginSection").style.display = "none";
-        document.getElementById("teacherDashboard").classList.add("active");
-        document.getElementById("teacherNameDisplay").textContent = currentUser.displayName.split(" ")[0];
-        loadTeacherClasses();
-      } catch (error) {
-        statusEl.style.color = "#ef4444";
-        statusEl.textContent = "Inloggen mislukt.";
-      }
+        openTeacherDashboard(currentUser);
+      } catch (error) {}
     });
 
     document.querySelectorAll('.menu-card-btn').forEach(card => {
@@ -996,14 +1169,6 @@
           if (activePollInterval) clearInterval(activePollInterval);
           activePollInterval = setInterval(loadActiveStudents, 2000);
         }
-      });
-    });
-
-    document.querySelectorAll('[class-role="hometab"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#teacherCard .tab-content').forEach(c => c.classList.remove('active'));
-        document.getElementById('teacherHomeMenu').style.display = 'flex';
-        if (activePollInterval) clearInterval(activePollInterval);
       });
     });
 
@@ -1171,6 +1336,7 @@
     async function startRoundExecution() {
       const classCode = document.getElementById('liveGameCodeBig').textContent;
       const topic = document.getElementById("raceSkillSelect").value;
+      const startTime = Date.now();
       
       try {
         const q = query(collection(db, "activeStudents"), where("code", "==", classCode));
@@ -1187,7 +1353,7 @@
           topic, 
           round: currentRaceRound,
           gameStarted: true, 
-          startTime: Date.now(),
+          startTime: startTime,
           teacherId: currentUser.uid 
         });
 
@@ -1197,11 +1363,13 @@
         document.getElementById('teacherRoundTitle').textContent = `Ronde ${currentRaceRound} in volle gang!`;
         if (activePollInterval) clearInterval(activePollInterval);
 
-        let timeLeft = 120;
         if (teacherRoundTimerInterval) clearInterval(teacherRoundTimerInterval);
 
         teacherRoundTimerInterval = setInterval(async () => {
-          timeLeft--;
+          const elapsed = Math.floor((Date.now() - startTime) / 1000);
+          let timeLeft = 120 - elapsed;
+          if (timeLeft < 0) timeLeft = 0;
+
           let m = Math.floor(timeLeft / 60);
           let s = timeLeft % 60;
           document.getElementById('teacherGameCountdown').textContent = `${m}:${s < 10 ? '0' + s : s}`;
@@ -1210,7 +1378,7 @@
             clearInterval(teacherRoundTimerInterval);
             showTeacherPodium(classCode);
           }
-        }, 1000);
+        }, 500);
 
       } catch(e) {
         alert("Fout bij starten ronde.");
@@ -1221,111 +1389,74 @@
       document.getElementById('teacherScreenPlaying').style.display = 'none';
       document.getElementById('teacherScreenPodium').style.display = 'flex';
 
-      let podiumListEl = document.getElementById('top5PodiumList');
-      podiumListEl.innerHTML = "";
+      // Reset onthulling stappen
+      podiumRevealStep = 0;
+      document.getElementById('podiumCard1').classList.remove('revealed');
+      document.getElementById('podiumCard2').classList.remove('revealed');
+      document.getElementById('podiumCard3').classList.remove('revealed');
+      document.getElementById('revealNextPodiumBtn').style.display = 'inline-flex';
+      document.getElementById('nextRoundBtn').style.display = 'none';
 
       try {
         const q = query(collection(db, "activeStudents"), where("code", "==", classCode));
         const snap = await getDocs(q);
         
         let students = [];
+        let totalScore = 0;
         let totalAccSum = 0;
         let countAcc = 0;
 
         snap.forEach(docSnap => {
           let d = docSnap.data();
           students.push({ id: docSnap.id, ...d });
+          totalScore += (d.score || 0);
           if (d.accuracy !== undefined) {
             totalAccSum += d.accuracy;
             countAcc++;
           }
         });
 
-        if (currentRaceRound === 1) {
-          document.getElementById('podiumHeaderTitle').textContent = "Ronde 1 Podium (Top 5 Punten)";
-          document.getElementById('podiumSubText').textContent = "De 5 leerlingen met de meeste punten na ronde 1.";
-          
-          students.sort((a, b) => (b.score || 0) - (a.score || 0));
-          let top5 = students.slice(0, 5);
+        let classAccuracy = countAcc > 0 ? Math.round(totalAccSum / countAcc) : 100;
 
-          if (top5.length === 0) {
-            podiumListEl.innerHTML = `<div style="color: var(--muted); padding: 20px;">Geen spelers gevonden.</div>`;
-          } else {
-            top5.forEach((st, idx) => {
-              podiumListEl.innerHTML += `
-                <div class="podium-item">
-                  <div style="display: flex; align-items: center; gap: 16px;">
-                    <span class="podium-rank">#${idx + 1}</span>
-                    <span>${st.name}</span>
-                  </div>
-                  <span style="color: var(--primary);">${st.score || 0} punten</span>
-                </div>
-              `;
-            });
-          }
-          document.getElementById('nextRoundBtn').textContent = "Start Ronde 2";
+        // Vul de klas statistieken bovenaan in stijl van 99math
+        document.getElementById('summaryClassScore').textContent = totalScore;
+        document.getElementById('summaryAccuracy').textContent = `${classAccuracy}%`;
 
-        } else if (currentRaceRound === 2) {
-          document.getElementById('podiumHeaderTitle').textContent = "Ronde 2 Klimmers (Meeste Stijging)";
-          document.getElementById('podiumSubText').textContent = "Leerlingen die de meeste punten zijn gestegen in ronde 2.";
+        // Sorteer op punten voor 1e en 2e plek
+        students.sort((a, b) => (b.score || 0) - (a.score || 0));
+        let p1 = students[0] || { name: 'Geen', score: 0 };
+        let p2 = students[1] || { name: 'Geen', score: 0 };
 
-          let diffList = students.map(st => {
-            let oldObj = cachedRoundStudents.find(o => o.id === st.id);
-            let prevScore = oldObj ? (oldObj.score || 0) : 0;
-            let diff = (st.score || 0) - prevScore;
-            return { ...st, diffScore: diff };
-          });
+        // Sorteer op accuratesse voor Most accurate
+        let accurateStudents = [...students].sort((a, b) => (b.accuracy || 100) - (a.accuracy || 100));
+        let p3 = accurateStudents[0] || { name: 'Geen', accuracy: 100 };
 
-          diffList.sort((a, b) => b.diffScore - a.diffScore);
-          let topClimbers = diffList.slice(0, 5);
+        // Gegevens vullen in de kaarten
+        document.getElementById('p1Name').textContent = p1.name;
+        document.getElementById('p1Score').textContent = `${p1.score || 0} points`;
 
-          if (topClimbers.length === 0) {
-            podiumListEl.innerHTML = `<div style="color: var(--muted); padding: 20px;">Geen spelers gevonden.</div>`;
-          } else {
-            topClimbers.forEach((st, idx) => {
-              podiumListEl.innerHTML += `
-                <div class="podium-item">
-                  <div style="display: flex; align-items: center; gap: 16px;">
-                    <span class="podium-rank">#${idx + 1}</span>
-                    <span>${st.name}</span>
-                  </div>
-                  <span style="color: var(--success);">+${st.diffScore} punten gestegen</span>
-                </div>
-              `;
-            });
-          }
-          document.getElementById('nextRoundBtn').textContent = "Start Ronde 3 (Finale)";
+        document.getElementById('p2Name').textContent = p2.name;
+        document.getElementById('p2Score').textContent = `${p2.score || 0} points`;
 
-        } else {
-          document.getElementById('podiumHeaderTitle').textContent = "Eindpodium & Accuratesse";
-          document.getElementById('podiumSubText').textContent = "Eindstand van alle 3 de rondes inclusief nauwkeurigheid[cite: 5].";
-
-          students.sort((a, b) => (b.score || 0) - (a.score || 0));
-
-          if (students.length === 0) {
-            podiumListEl.innerHTML = `<div style="color: var(--muted); padding: 20px;">Geen spelers gevonden.</div>`;
-          } else {
-            students.forEach((st, idx) => {
-              let acc = st.accuracy !== undefined ? st.accuracy : 100;
-              podiumListEl.innerHTML += `
-                <div class="podium-item">
-                  <div style="display: flex; align-items: center; gap: 16px;">
-                    <span class="podium-rank">#${idx + 1}</span>
-                    <span>${st.name}</span>
-                  </div>
-                  <div style="display: flex; gap: 16px; align-items: center;">
-                    <span style="color: var(--success); font-size: 14px;">Accuratesse: ${acc}%</span>
-                    <span style="color: var(--primary); font-weight: 800;">${st.score || 0} pts</span>
-                  </div>
-                </div>
-              `;
-            });
-          }
-          document.getElementById('nextRoundBtn').textContent = "Nieuwe Race Sessie Starten";
-        }
+        document.getElementById('p3Name').textContent = p3.name;
+        document.getElementById('p3Acc').textContent = `${p3.accuracy !== undefined ? p3.accuracy : 100}% accurate`;
 
       } catch(e) {}
     }
+
+    // Klikknop om de kaarten 1 voor 1 te onthullen à la 99math
+    document.getElementById('revealNextPodiumBtn').addEventListener('click', () => {
+      podiumRevealStep++;
+      if (podiumRevealStep === 1) {
+        document.getElementById('podiumCard1').classList.add('revealed');
+      } else if (podiumRevealStep === 2) {
+        document.getElementById('podiumCard2').classList.add('revealed');
+      } else if (podiumRevealStep === 3) {
+        document.getElementById('podiumCard3').classList.add('revealed');
+        document.getElementById('revealNextPodiumBtn').style.display = 'none';
+        document.getElementById('nextRoundBtn').style.display = 'inline-flex';
+      }
+    });
 
     document.getElementById('nextRoundBtn').addEventListener('click', () => {
       if (currentRaceRound < 3) {
