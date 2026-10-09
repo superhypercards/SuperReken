@@ -163,13 +163,13 @@
     .floating-popup {
       position: absolute;
       left: 50%;
-      top: 40%;
+      top: 30%;
       transform: translate(-50%, -50%);
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 900;
       color: var(--success);
       pointer-events: none;
-      animation: floatUp 0.8s ease-out forwards;
+      animation: floatUp 0.6s ease-out forwards;
       z-index: 999;
       text-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
@@ -204,7 +204,8 @@
     .dashboard-section-title { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; color: var(--muted); margin-bottom: 10px; }
     
     .class-list { flex: 1; max-height: none !important; overflow-y: auto; margin-bottom: 20px; border: 2px solid #f1f5f9; border-radius: 16px; padding: 12px; background: #faf5ff; }
-    .class-item { padding: 16px 20px; background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+    .class-item { padding: 16px 20px; background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); cursor: pointer; transition: all 0.2s; }
+    .class-item:hover { border-color: var(--primary); background: #faf5ff; transform: translateY(-1px); }
     .class-item-info { display: flex; align-items: center; gap: 10px; }
     .class-code-badge { background: #ede9fe; color: var(--primary); padding: 6px 12px; border-radius: 10px; font-size: 14px; font-weight: 800; }
 
@@ -255,7 +256,6 @@
     .math-question-box { background: #f8fafc; border: 2px solid var(--border); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; position: relative; }
     .math-expr { font-size: 42px; font-weight: 800; color: var(--primary); margin: 15px 0; }
 
-    /* 99math Podium Stijl */
     .math99-results-top {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -285,7 +285,7 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       border: 2px solid var(--border);
       text-align: center;
-      display: none; /* Wordt 1 voor 1 onthuld */
+      display: none;
       animation: popIn 0.4s ease forwards;
     }
     .math99-podium-card.revealed { display: block; }
@@ -295,19 +295,11 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .math99-card-header {
-      padding: 14px;
-      font-weight: 800;
-      font-size: 15px;
-      color: white;
-    }
+    .math99-card-header { padding: 14px; font-weight: 800; font-size: 15px; color: white; }
     .card-yellow { background: #f59e0b; }
     .card-red { background: #ef4444; }
     .card-green { background: #10b981; }
-
-    .math99-card-body {
-      padding: 20px;
-    }
+    .math99-card-body { padding: 20px; }
     .math99-card-name { font-size: 22px; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
     .math99-card-sub { font-size: 15px; color: var(--muted); font-weight: 700; }
   </style>
@@ -346,23 +338,31 @@
           </div>
           <button class="btn btn-secondary" id="backToRoleFromStudent" style="width: auto; padding: 6px 14px; margin: 0;">Terug</button>
         </div>
-        <p style="margin-bottom: 20px;">Kies wat je wilt doen of log in met Google:</p>
-
-        <button class="btn btn-google" id="studentGoogleBtn" style="margin-bottom: 20px;">
-          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.17 21.36 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.15 0 9.89 0 12s.43 3.85 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-          Inloggen met Google (Leerling)
-        </button>
+        <p style="margin-bottom: 20px;">Kies wat je wilt doen of log in:</p>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1;">
           <button class="menu-card-btn" id="chooseTasksBtn">
             <span class="menu-card-title">Mijn Taken (Join Klas)</span>
-            <p class="menu-card-desc">Bekijk opdrachten die voor jou of je klas zijn klaargezet.</p>
+            <p class="menu-card-desc">Vereist Google-inlog om bij de klas te horen.</p>
           </button>
           <button class="menu-card-btn" id="chooseRaceBtn">
             <span class="menu-card-title">Live Race</span>
-            <p class="menu-card-desc">Doe mee aan een live wedstrijd met een racecode.</p>
+            <p class="menu-card-desc">Meedoen met een snelle racecode.</p>
           </button>
         </div>
+      </div>
+
+      <!-- Google Inlog voor Klassen / Taken -->
+      <div class="student-section" id="studentGoogleTaskSection">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="margin: 0; font-size: 20px;">Inloggen met Google voor Klas</h3>
+          <button class="btn btn-secondary" id="backToStudentMenuFromGoogle" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
+        </div>
+        <p>Om bij een klas te horen en opdrachten te maken, moet je eerst inloggen met je school- of Google-account.</p>
+        <button class="btn btn-google" id="studentGoogleLoginForClassBtn" style="margin-bottom: 20px;">
+          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.17 21.36 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.15 0 9.89 0 12s.43 3.85 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+          Inloggen met Google (Verplicht voor Klas)
+        </button>
       </div>
 
       <!-- Invoergegevens Scherm (Avatar, Naam, Codes) -->
@@ -443,15 +443,21 @@
           <input class="field" id="studentAnswer" type="text" placeholder="Jouw antwoord en druk op Enter" autocomplete="off" style="text-align: center; font-size: 28px;">
         </div>
         <button class="btn btn-primary" id="submitAnswerBtn">Antwoord indienen (+10 / -10)</button>
-        <div class="status" id="gameFeedbackStatus"></div>
+        <div class="status" id="gameFeedbackStatus" style="min-height: 28px; font-weight: 700; margin-top: 12px;"></div>
       </div>
 
-      <!-- Klaar scherm -->
+      <!-- Klaar scherm met Persoonlijk Advies -->
       <div class="student-section" id="studentKlaarScherm">
         <div class="waiting-box" style="border-style: solid; background: #faf5ff;">
           <h2 style="color: var(--primary); font-size: 32px; margin-bottom: 12px;">Ronde Voltooid!</h2>
           <p style="font-size: 18px;">Jouw totale score: <span id="finalScoreText" style="font-size: 26px; font-weight: 800;">0</span> punten</p>
           <p style="font-size: 18px;">Nauwkeurigheid: <span id="finalAccText" style="font-size: 24px; font-weight: 800; color: var(--success);">100%</span></p>
+          
+          <div style="background: white; border: 2px solid var(--border); border-radius: 16px; padding: 16px; margin-top: 16px; width: 100%; text-align: left;">
+            <div style="font-weight: 800; font-size: 16px; color: var(--dark); margin-bottom: 6px;">Persoonlijk Advies & Wat te doen:</div>
+            <p id="studentAdviceText" style="margin: 0; font-size: 15px; color: var(--muted);">Goed gewerkt! Blijf vooral oefenen op je basissommen om nog sneller te worden.</p>
+          </div>
+
           <button class="btn btn-primary" id="finishBackMenuBtn" style="margin-top: 20px; max-width: 250px; margin-left: auto; margin-right: auto;">Terug naar Menu</button>
         </div>
       </div>
@@ -500,8 +506,8 @@
               <p class="menu-card-desc">Wijs specifieke vaardigheden toe aan kinderen of klassen.</p>
             </button>
             <button class="menu-card-btn" data-opentab="rapporten">
-              <span class="menu-card-title">Rapporten</span>
-              <p class="menu-card-desc">Bekijk de voortgang en score van leerlingen.</p>
+              <span class="menu-card-title">Rapporten (Cito-stijl)</span>
+              <p class="menu-card-desc">Klik op een leerling voor een Cito-prestatielijn en advies.</p>
             </button>
             <button class="menu-card-btn" data-opentab="race">
               <span class="menu-card-title">Live Race (3 Rondes)</span>
@@ -576,9 +582,9 @@
         <div class="tab-content" id="teacherTabRapporten">
           <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
-            <h2>Rapporten & Voortgang</h2>
+            <h2>Rapporten & Prestatielijn</h2>
           </div>
-          <p>Overzicht van alle resultaten van leerlingen.</p>
+          <p>Klik op een leerling om de Cito-stijl voortgangslijn en verbeteradviezen te bekijken.</p>
           <div class="class-list" id="reportList">
             <div style="text-align: center; color: var(--muted); padding: 40px; font-size: 16px;">Nog geen leerlingdata beschikbaar.</div>
           </div>
@@ -637,7 +643,6 @@
           <!-- 99MATH PODIUM / UITREIKING SCHERM -->
           <div id="teacherScreenPodium" style="display: none; flex-direction: column; flex: 1; padding: 10px; overflow-y: auto;">
             
-            <!-- Klas Score & Correct Answers Header -->
             <div class="math99-results-top">
               <div class="math99-stat-box">
                 <div class="title">Class score</div>
@@ -649,10 +654,8 @@
               </div>
             </div>
 
-            <!-- Podium Grid (1 voor 1 onthullen) -->
             <div class="math99-podium-grid">
               
-              <!-- 1st Place -->
               <div class="math99-podium-card" id="podiumCard1">
                 <div class="math99-card-header card-yellow">1st place</div>
                 <div class="math99-card-body">
@@ -661,7 +664,6 @@
                 </div>
               </div>
 
-              <!-- 2nd Place -->
               <div class="math99-podium-card" id="podiumCard2">
                 <div class="math99-card-header card-red">2nd place</div>
                 <div class="math99-card-body">
@@ -670,7 +672,6 @@
                 </div>
               </div>
 
-              <!-- Most Accurate -->
               <div class="math99-podium-card" id="podiumCard3">
                 <div class="math99-card-header card-green">Most accurate</div>
                 <div class="math99-card-body">
@@ -693,6 +694,28 @@
 
     </div>
 
+  </div>
+
+  <!-- Cito-stijl Prestatielijn & Advies Modal voor Leerkracht -->
+  <div id="studentCitoModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999; place-items: center; padding: 16px;">
+    <div style="background: white; border-radius: 24px; padding: 30px; width: min(600px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
+      <h2 id="modalStudentTitle" style="margin-top: 0; font-size: 24px; color: var(--dark);">Cito Voortgang</h2>
+      <p id="modalStudentSub" style="color: var(--muted); font-size: 15px; margin-bottom: 20px;">Prestatielijn over recente opdrachten.</p>
+      
+      <!-- Cito Grafiek Lijn -->
+      <div style="background: #f8fafc; border: 2px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 20px;">
+        <div style="font-weight: 700; font-size: 14px; color: var(--muted); margin-bottom: 12px;">Prestatielijn (Nauwkeurigheid per oefening):</div>
+        <canvas id="citoLineChart" width="500" height="180" style="width: 100%; height: 180px; background: white; border-radius: 12px; border: 1px solid var(--border);"></canvas>
+      </div>
+
+      <!-- Wat moet er gebeuren & beter oefenen -->
+      <div style="background: #faf5ff; border: 2px solid #ede9fe; border-radius: 16px; padding: 20px; margin-bottom: 20px;">
+        <div style="font-weight: 800; font-size: 16px; color: var(--primary); margin-bottom: 8px;">Wat te doen & Beter oefenen:</div>
+        <p id="modalStudentAdvice" style="margin: 0; font-size: 15px; color: var(--dark); line-height: 1.5;"></p>
+      </div>
+
+      <button class="btn btn-primary" id="closeCitoModalBtn">Sluiten</button>
+    </div>
   </div>
 
   <!-- Keuzemenu Modal -->
@@ -738,6 +761,7 @@
     let cachedRoundStudents = [];
     let activeStudentMode = 'task';
     let podiumRevealStep = 0;
+    let isSubmitting = false;
 
     const svgIcons = {
       fox: `<svg viewBox="0 0 24 24"><path fill="#f97316" d="M12 2L2 19h20L12 2zm0 4.5l6.5 11.5h-13L12 6.5z"/></svg>`,
@@ -864,7 +888,17 @@
       });
     });
 
-    document.getElementById('studentGoogleBtn').addEventListener('click', async () => {
+    // Google Inlog Alleen bij Klas / Taken
+    document.getElementById('chooseTasksBtn').addEventListener('click', () => {
+      activeStudentMode = 'task';
+      if (!currentStudent.isGoogle) {
+        showStudentSection('studentGoogleTaskSection');
+      } else {
+        proceedToTaskSetup();
+      }
+    });
+
+    document.getElementById('studentGoogleLoginForClassBtn').addEventListener('click', async () => {
       try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
@@ -872,27 +906,33 @@
         currentStudent.isGoogle = true;
         currentStudent.avatar = selectedAvatar;
         localStorage.setItem('superreken_student', JSON.stringify(currentStudent));
-        showStudentSection('studentMenuSection');
-      } catch (error) {}
+        proceedToTaskSetup();
+      } catch (e) {}
     });
 
-    document.getElementById('chooseTasksBtn').addEventListener('click', () => {
-      activeStudentMode = 'task';
+    function proceedToTaskSetup() {
       document.getElementById('setupTitle').textContent = "Gegevens voor Mijn Taken";
       document.getElementById('classCodeFieldGroup').style.display = 'block';
       document.getElementById('raceCodeFieldGroup').style.display = 'none';
+      document.getElementById('studentName').value = currentStudent.name;
+      document.getElementById('studentName').disabled = true; // Naam gekoppeld aan Google
       showStudentSection('studentSetupSection');
-    });
+    }
 
     document.getElementById('chooseRaceBtn').addEventListener('click', () => {
       activeStudentMode = 'race';
       document.getElementById('setupTitle').textContent = "Gegevens voor Live Race";
       document.getElementById('classCodeFieldGroup').style.display = 'none';
       document.getElementById('raceCodeFieldGroup').style.display = 'block';
+      document.getElementById('studentName').disabled = false;
+      document.getElementById('studentName').value = "";
       showStudentSection('studentSetupSection');
     });
 
     document.getElementById('backToStudentMenuMain').addEventListener('click', () => {
+      showStudentSection('studentMenuSection');
+    });
+    document.getElementById('backToStudentMenuFromGoogle').addEventListener('click', () => {
       showStudentSection('studentMenuSection');
     });
 
@@ -982,7 +1022,7 @@
       try {
         const snap = await getDocs(collection(db, "assignedTasks"));
         if (snap.empty) {
-          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Geen taken beschikbaar.</div>`;
+          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Geen taken gevonden.</div>`;
           return;
         }
         listEl.innerHTML = "";
@@ -1052,7 +1092,15 @@
       currentMathProblem = { question: q, answer: a.trim(), topic: topic };
       document.getElementById('mathExpression').textContent = q;
       document.getElementById('currentTopicLabel').textContent = `Skill: ${topic.toUpperCase()}`;
-      document.getElementById('studentAnswer').value = '';
+      
+      const answerField = document.getElementById('studentAnswer');
+      answerField.value = '';
+      answerField.disabled = false;
+      answerField.focus();
+      
+      document.querySelectorAll('.floating-popup').forEach(el => el.remove());
+      document.getElementById('gameFeedbackStatus').textContent = "";
+      isSubmitting = false;
     }
 
     function startSyncedGameTimer(startTime) {
@@ -1074,14 +1122,22 @@
           document.getElementById('finalScoreText').textContent = currentStudent.score;
           let acc = currentStudent.totalCount > 0 ? Math.round((currentStudent.correctCount / currentStudent.totalCount) * 100) : 100;
           document.getElementById('finalAccText').textContent = `${acc}%`;
+
+          let advice = acc >= 85 ? "Uitstekend gedaan! Je hebt een hoge nauwkeurigheid. Blijf zo doorgaan met uitdagende sommen." : "Je hebt al punten gehaald, maar let op: je maakt nog wat foutjes. Beter oefenen op basissommen en rustiger lezen helpt om je score te verhogen!";
+          document.getElementById('studentAdviceText').textContent = advice;
         }
       }, 500);
     }
 
     async function submitAnswerAction() {
-      const val = document.getElementById('studentAnswer').value.trim().replace('.', ',');
+      if (isSubmitting) return;
+      const answerField = document.getElementById('studentAnswer');
+      const val = answerField.value.trim().replace('.', ',');
       const feedback = document.getElementById('gameFeedbackStatus');
       if (!val) return;
+
+      isSubmitting = true;
+      answerField.disabled = true;
 
       currentStudent.totalCount++;
       const isCorrect = val === currentMathProblem.answer || val === currentMathProblem.answer.replace('.', ',');
@@ -1096,7 +1152,7 @@
         popup.className = 'floating-popup';
         popup.textContent = 'Goed gedaan! +10';
         document.getElementById('mathQuestionBoxContainer').appendChild(popup);
-        setTimeout(() => popup.remove(), 800);
+        setTimeout(() => popup.remove(), 600);
       } else {
         currentStudent.score -= 10;
         feedback.style.color = "#ef4444";
@@ -1123,7 +1179,9 @@
         });
       } catch (e) {}
 
-      generateQuestion();
+      setTimeout(() => {
+        generateQuestion();
+      }, 350);
     }
 
     document.getElementById("submitAnswerBtn").addEventListener('click', submitAnswerAction);
@@ -1252,33 +1310,112 @@
       const reportListEl = document.getElementById("reportList");
       try {
         const snap = await getDocs(collection(db, "studentResults"));
-        if (snap.empty) return;
+        if (snap.empty) {
+          reportListEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 40px; font-size: 16px;">Nog geen leerlingdata beschikbaar.</div>`;
+          return;
+        }
 
         let stats = {};
         snap.forEach(docSnap => {
           const d = docSnap.data();
-          if (!stats[d.studentName]) stats[d.studentName] = { goed: 0, totaal: 0, code: d.classCode };
+          if (!stats[d.studentName]) stats[d.studentName] = { goed: 0, totaal: 0, code: d.classCode, history: [] };
           stats[d.studentName].totaal++;
           if (d.correct) stats[d.studentName].goed++;
+          stats[d.studentName].history.push(d.correct ? 100 : 0);
         });
 
         reportListEl.innerHTML = "";
         for (let name in stats) {
           let perc = Math.round((stats[name].goed / stats[name].totaal) * 100);
-          reportListEl.innerHTML += `
-            <div style="background: #ffffff; border: 1px solid var(--border); padding: 16px 20px; border-radius: 12px; margin-bottom: 10px;">
+          const itemEl = document.createElement('div');
+          itemEl.className = 'class-item';
+          itemEl.innerHTML = `
+            <div style="width: 100%;">
               <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 16px; margin-bottom: 8px;">
-                <span>${name} (Code/Taak: ${stats[name].code})</span>
-                <span>${perc}% goed (${stats[name].goed}/${stats[name].totaal})</span>
+                <span>👤 ${name} (Code: ${stats[name].code})</span>
+                <span style="color: var(--primary);">${perc}% goed (${stats[name].goed}/${stats[name].totaal})</span>
               </div>
               <div class="progress-bar-container">
                 <div class="progress-bar-fill" style="width: ${perc}%;"></div>
               </div>
+              <div style="font-size: 13px; color: var(--muted); margin-top: 6px;">Klik om Cito-prestatielijn en advies te openen ➔</div>
             </div>
           `;
+
+          itemEl.addEventListener('click', () => {
+            openCitoReportModal(name, perc, stats[name].history);
+          });
+
+          reportListEl.appendChild(itemEl);
         }
       } catch (e) {}
     }
+
+    function openCitoReportModal(studentName, accuracy, historyArray) {
+      document.getElementById('modalStudentTitle').textContent = `Cito Voortgang: ${studentName}`;
+      document.getElementById('modalStudentSub').textContent = `Totale nauwkeurigheid: ${accuracy}%`;
+      
+      let advice = "";
+      if (accuracy >= 90) {
+        advice = `• Wat gaat er goed: ${studentName} werkt heel nauwkeurig en begrijpt de stof uitstekend.\n• Wat moet er gebeuren: Kan doorstromen naar moeilijkere plus-opdrachten en complexere vraagstukken.`;
+      } else if (accuracy >= 70) {
+        advice = `• Wat gaat er goed: Voldoende basisvaardigheden zijn aanwezig.\n• Wat beter moet oefenen: Meer focus op snelle automatisering van tafels en min-sommen. Aan te raden om extra te oefenen in de oefenmodus.`;
+      } else {
+        advice = `• Wat gaat er goed: De leerling zet door en maakt stappen.\n• Wat beter moet oefenen: Er worden nog veel fouten gemaakt door haast of onzekerheid. Advies: rustig de som lezen, eventueel kladpapier gebruiken en basissommen herhalen.`;
+      }
+      document.getElementById('modalStudentAdvice').style.whiteSpace = 'pre-line';
+      document.getElementById('modalStudentAdvice').textContent = advice;
+
+      document.getElementById('studentCitoModal').style.display = 'grid';
+
+      // Teken Cito-stijl lijn in canvas
+      setTimeout(() => {
+        const canvas = document.getElementById('citoLineChart');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        let dataPoints = historyArray.length > 0 ? historyArray : [50, 60, 70, 80, accuracy];
+        
+        // Teken achtergrondrooster
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 4; i++) {
+          let y = (canvas.height / 4) * i;
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(canvas.width, y);
+          ctx.stroke();
+        }
+
+        // Teken prestatielijn
+        ctx.strokeStyle = '#7c3aed';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        
+        let stepX = canvas.width / Math.max(dataPoints.length - 1, 1);
+        dataPoints.forEach((val, index) => {
+          let x = index * stepX;
+          let y = canvas.height - (val / 100) * canvas.height;
+          if (index === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        // Teken punten
+        dataPoints.forEach((val, index) => {
+          let x = index * stepX;
+          let y = canvas.height - (val / 100) * canvas.height;
+          ctx.fillStyle = '#10b981';
+          ctx.beginPath();
+          ctx.arc(x, y, 5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }, 50);
+    }
+
+    document.getElementById('closeCitoModalBtn').addEventListener('click', () => {
+      document.getElementById('studentCitoModal').style.display = 'none';
+    });
 
     async function loadActiveStudents() {
       const listEl = document.getElementById("activeStudentsList");
@@ -1389,7 +1526,6 @@
       document.getElementById('teacherScreenPlaying').style.display = 'none';
       document.getElementById('teacherScreenPodium').style.display = 'flex';
 
-      // Reset onthulling stappen
       podiumRevealStep = 0;
       document.getElementById('podiumCard1').classList.remove('revealed');
       document.getElementById('podiumCard2').classList.remove('revealed');
@@ -1418,20 +1554,16 @@
 
         let classAccuracy = countAcc > 0 ? Math.round(totalAccSum / countAcc) : 100;
 
-        // Vul de klas statistieken bovenaan in stijl van 99math
         document.getElementById('summaryClassScore').textContent = totalScore;
         document.getElementById('summaryAccuracy').textContent = `${classAccuracy}%`;
 
-        // Sorteer op punten voor 1e en 2e plek
         students.sort((a, b) => (b.score || 0) - (a.score || 0));
         let p1 = students[0] || { name: 'Geen', score: 0 };
         let p2 = students[1] || { name: 'Geen', score: 0 };
 
-        // Sorteer op accuratesse voor Most accurate
         let accurateStudents = [...students].sort((a, b) => (b.accuracy || 100) - (a.accuracy || 100));
         let p3 = accurateStudents[0] || { name: 'Geen', accuracy: 100 };
 
-        // Gegevens vullen in de kaarten
         document.getElementById('p1Name').textContent = p1.name;
         document.getElementById('p1Score').textContent = `${p1.score || 0} points`;
 
@@ -1444,7 +1576,6 @@
       } catch(e) {}
     }
 
-    // Klikknop om de kaarten 1 voor 1 te onthullen à la 99math
     document.getElementById('revealNextPodiumBtn').addEventListener('click', () => {
       podiumRevealStep++;
       if (podiumRevealStep === 1) {
