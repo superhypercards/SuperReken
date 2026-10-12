@@ -620,12 +620,24 @@
                 <div>
                   <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Categorie voor Race:</label>
                   <select class="field" id="raceSkillSelect" style="background-color: white;">
-                    <option value="optellen">Optellen (+)</option>
-                    <option value="aftrekken">Aftrekken (-)</option>
-                    <option value="tafels">Tafels van Vermenigvuldiging (×)</option>
-                    <option value="delen">Delen (:)</option>
-                    <option value="procenten">Procenten (%)</option>
-                    <option value="kwadraten">Kwadraten & Worteltrekken (√)</option>
+                    <optgroup label="Rekenfeiten (Basis)">
+                      <option value="optellen">Optellen (+)</option>
+                      <option value="aftrekken">Aftrekken (-)</option>
+                      <option value="tafels">Tafels van vermenigvuldiging (×)</option>
+                      <option value="delen">Delen (:)</option>
+                    </optgroup>
+                    <optgroup label="Curriculum vaardigheden (Uitdagend)">
+                      <option value="getalpatronen">Getalpatronen & Reeksen</option>
+                      <option value="vergelijken">Vergelijken & Ordenen (&lt;, &gt;, =)</option>
+                      <option value="breuken">Breuken (Vereenvoudigen & Optellen)</option>
+                      <option value="klokkijken">Klokkijken & Tijd</option>
+                      <option value="geldrekenen">Geldrekenen & Bedragen</option>
+                      <option value="procenten">Procenten & Verhoudingen (%)</option>
+                      <option value="kommagetallen">Kommagetallen & Decimalen</option>
+                      <option value="kwadraten">Kwadraten & Worteltrekken (√)</option>
+                      <option value="machten">Machten & Exponenten (x²)</option>
+                      <option value="metrisch">Lengte, Inhoud & Oppervlakte (m, L, kg)</option>
+                    </optgroup>
                   </select>
                 </div>
               </div>
@@ -1084,7 +1096,7 @@
           listEl.innerHTML += `
             <div class="class-item">
               <div class="class-item-info"><span>Taak: ${d.skill.toUpperCase()} (${amount} sommen)</span></div>
-              <button class="btn btn-primary start-task-btn" data-skill="${d.skill}" data-amount="${amount}" type="button" style="width: auto; padding: 6px 16px; font-size: 14px;">Start Taak</button>
+              <button class="btn btn-primary start-task-btn" data-skill="${d.skill}" data-amount="${amount}" type="button" style="width: auto; padding: 6px 14px; font-size: 14px;">Start Taak</button>
             </div>
           `;
         });
@@ -1107,44 +1119,112 @@
       } catch (e) {}
     }
 
-    // Generator voor Moeilijke & Nederlandse Sommen
+    // Geoptimaliseerde Sommen Generator met Strikte Koppeling & Hoge Variatie
     function generateQuestion() {
       const topic = currentStudent.topic || 'optellen';
       let q = "", a = "";
+      const rand = Math.random();
 
-      if (topic === 'optellen') {
-        let n1 = Math.floor(Math.random() * 800) + 100, n2 = Math.floor(Math.random() * 800) + 100;
-        q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
-      } else if (topic === 'aftrekken') {
-        let n1 = Math.floor(Math.random() * 800) + 200, n2 = Math.floor(Math.random() * n1);
-        q = `${n1} - ${n2} = ?`; a = (n1 - n2).toString();
-      } else if (topic === 'tafels') {
-        let n1 = Math.floor(Math.random() * 12) + 2, n2 = Math.floor(Math.random() * 12) + 2;
-        q = `${n1} × ${n2} = ?`; a = (n1 * n2).toString();
-      } else if (topic === 'delen') {
-        let n2 = Math.floor(Math.random() * 12) + 2, mult = Math.floor(Math.random() * 12) + 2, n1 = n2 * mult;
+      if (topic === 'optellen' || topic === 'addition') {
+        if (rand < 0.33) {
+          let n1 = Math.floor(Math.random() * 80) + 10, n2 = Math.floor(Math.random() * 80) + 10;
+          q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
+        } else if (rand < 0.66) {
+          let n1 = Math.floor(Math.random() * 400) + 100, n2 = Math.floor(Math.random() * 400) + 100;
+          q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
+        } else {
+          let n1 = Math.floor(Math.random() * 50) + 10, n2 = Math.floor(Math.random() * 50) + 10, n3 = Math.floor(Math.random() * 20) + 5;
+          q = `${n1} + ${n2} + ${n3} = ?`; a = (n1 + n2 + n3).toString();
+        }
+      } 
+      else if (topic === 'aftrekken' || topic === 'subtraction') {
+        if (rand < 0.5) {
+          let n1 = Math.floor(Math.random() * 100) + 50, n2 = Math.floor(Math.random() * (n1 - 10)) + 5;
+          q = `${n1} - ${n2} = ?`; a = (n1 - n2).toString();
+        } else {
+          let n1 = Math.floor(Math.random() * 800) + 200, n2 = Math.floor(Math.random() * (n1 - 100)) + 50;
+          q = `${n1} - ${n2} = ?`; a = (n1 - n2).toString();
+        }
+      } 
+      else if (topic === 'tafels' || topic === 'multiplication') {
+        if (rand < 0.7) {
+          let n1 = Math.floor(Math.random() * 10) + 1, n2 = Math.floor(Math.random() * 10) + 1;
+          q = `${n1} × ${n2} = ?`; a = (n1 * n2).toString();
+        } else {
+          let n1 = Math.floor(Math.random() * 12) + 2, n2 = Math.floor(Math.random() * 15) + 2;
+          q = `${n1} × ${n2} = ?`; a = (n1 * n2).toString();
+        }
+      } 
+      else if (topic === 'delen' || topic === 'division') {
+        let n2 = Math.floor(Math.random() * 10) + 2;
+        let mult = Math.floor(Math.random() * 12) + 1;
+        let n1 = n2 * mult;
         q = `${n1} : ${n2} = ?`; a = mult.toString();
-      } else if (topic === 'procenten') {
-        let p = [10, 20, 25, 50][Math.floor(Math.random() * 4)];
+      } 
+      else if (topic === 'procenten') {
+        let pOptions = [10, 20, 25, 50, 75];
+        let p = pOptions[Math.floor(Math.random() * pOptions.length)];
         let base = (Math.floor(Math.random() * 20) + 1) * 20;
         q = `${p}% van ${base} = ?`; a = ((p / 100) * base).toString();
-      } else if (topic === 'kommagetallen') {
-        let n1 = (Math.random() * 10).toFixed(1), n2 = (Math.random() * 10).toFixed(1);
-        q = `${n1} + ${n2} = ?`; a = (parseFloat(n1) + parseFloat(n2)).toFixed(1).replace('.', ',');
-      } else if (topic === 'kwadraten') {
-        let isWortel = Math.random() > 0.5;
-        if (isWortel) {
+      } 
+      else if (topic === 'kommagetallen') {
+        if (rand < 0.5) {
+          let n1 = (Math.random() * 10).toFixed(1), n2 = (Math.random() * 10).toFixed(1);
+          q = `${n1} + ${n2} = ?`; a = (parseFloat(n1) + parseFloat(n2)).toFixed(1).replace('.', ',');
+        } else {
+          let n1 = (Math.random() * 15 + 5).toFixed(1), n2 = (Math.random() * 5).toFixed(1);
+          q = `${n1} - ${n2} = ?`; a = (parseFloat(n1) - parseFloat(n2)).toFixed(1).replace('.', ',');
+        }
+      } 
+      else if (topic === 'kwadraten') {
+        if (rand < 0.5) {
           let base = Math.floor(Math.random() * 10) + 2;
           q = `√${base * base} = ?`; a = base.toString();
         } else {
-          let base = Math.floor(Math.random() * 10) + 2;
+          let base = Math.floor(Math.random() * 12) + 2;
           q = `${base}² = ?`; a = (base * base).toString();
         }
-      } else if (topic === 'breuken') {
-        let b = Math.floor(Math.random() * 4) + 2;
-        q = `1/${b} + 1/${b} = ? (teller)`; a = '2';
-      } else {
-        q = `15 + 25 = ?`; a = '40';
+      } 
+      else if (topic === 'machten') {
+        let base = Math.floor(Math.random() * 5) + 2;
+        let exp = Math.floor(Math.random() * 2) + 3;
+        q = `${base}^${exp} = ?`; a = (Math.pow(base, exp)).toString();
+      }
+      else if (topic === 'breuken') {
+        let noemers = [3, 4, 5, 6, 8, 10];
+        let n = noemers[Math.floor(Math.random() * noemers.length)];
+        let t1 = Math.floor(Math.random() * (n - 2)) + 1;
+        let t2 = Math.floor(Math.random() * (n - t1 - 1)) + 1;
+        q = `${t1}/${n} + ${t2}/${n} = ? (Geef de teller)`; a = (t1 + t2).toString();
+      }
+      else if (topic === 'vergelijken') {
+        let n1 = Math.floor(Math.random() * 100) + 1, n2 = Math.floor(Math.random() * 100) + 1;
+        let symbol = n1 < n2 ? '<' : n1 > n2 ? '>' : '=';
+        q = `${n1} [ ? ] ${n2} (kies <, > of =)`; a = symbol;
+      }
+      else if (topic === 'getalpatronen') {
+        let start = Math.floor(Math.random() * 20) + 2;
+        let stap = Math.floor(Math.random() * 6) + 2;
+        q = `${start}, ${start + stap}, ${start + stap*2}, ?`; a = (start + stap*3).toString();
+      }
+      else if (topic === 'geldrekenen') {
+        let bedrag1 = (Math.floor(Math.random() * 10) + 1) * 0.5;
+        let bedrag2 = (Math.floor(Math.random() * 10) + 1) * 0.5;
+        q = `€${bedrag1.toFixed(2).replace('.', ',')} + €${bedrag2.toFixed(2).replace('.', ',')} = €?`; 
+        a = (bedrag1 + bedrag2).toFixed(2).replace('.', ',');
+      }
+      else if (topic === 'klokkijken') {
+        let uur = Math.floor(Math.random() * 10) + 1;
+        let min = Math.floor(Math.random() * 4) * 15;
+        q = `Hoeveel minuten is ${uur} uur en ${min} minuten?`; a = (uur * 60 + min).toString();
+      }
+      else if (topic === 'metrisch') {
+        let m = Math.floor(Math.random() * 8) + 1;
+        q = `${m} m = ? cm`; a = (m * 100).toString();
+      }
+      else {
+        let n1 = Math.floor(Math.random() * 50) + 10, n2 = Math.floor(Math.random() * 50) + 10;
+        q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
       }
 
       currentMathProblem = { question: q, answer: a.trim(), topic: topic };
