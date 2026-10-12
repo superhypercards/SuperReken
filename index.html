@@ -48,7 +48,7 @@
     }
 
     .selection-screen { text-align: center; display: block; }
-    .selection-screen.hidden { display: none; }
+    .selection-screen.hidden { display: none !important; }
 
     h1 {
       color: white;
@@ -98,7 +98,7 @@
       position: relative;
       width: 100%;
     }
-    .form-card.active { display: block; }
+    .form-card.active { display: block !important; }
 
     .container.fullscreen-active .form-card.active {
       flex: 1;
@@ -230,14 +230,14 @@
     <div class="selection-screen" id="selectionScreen">
       <h1>Maak je gratis account aan als...</h1>
       
-      <button class="role-card-btn" id="selectStudentBtn">
+      <button class="role-card-btn" id="selectStudentBtn" type="button">
         <div class="role-icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.5 8.13 21 12 21C15.87 21 19 19.5 19 17.18V13.18L12 17L5 13.18Z" fill="#ffffff"/></svg>
         </div>
         <span>Student</span>
       </button>
 
-      <button class="role-card-btn" id="selectTeacherBtn">
+      <button class="role-card-btn" id="selectTeacherBtn" type="button">
         <div class="role-icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM18 20H6V4H11V12L14.5 9.5L18 12V4H18V20Z" fill="#ffffff"/></svg>
         </div>
@@ -248,19 +248,20 @@
     <!-- STUDENT DASHBOARD -->
     <div class="form-card" id="studentCard">
       
+      <!-- Hoofdmenu Student -->
       <div class="student-section active" id="studentMenuSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <div class="form-header" style="margin: 0;">
             <h2>Leerling Portaal</h2>
           </div>
-          <button class="btn btn-secondary" id="backToRoleFromStudent" style="width: auto; padding: 6px 14px; margin: 0;">Terug</button>
+          <button class="btn btn-secondary" id="backToRoleFromStudent" type="button" style="width: auto; padding: 6px 14px; margin: 0;">Terug</button>
         </div>
         <p style="margin-bottom: 20px;">Kies wat je wilt doen:</p>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1;">
           <button type="button" class="menu-card-btn" id="chooseTasksBtn">
-            <span class="menu-card-title">Mijn Taken (Join Klas)</span>
-            <p class="menu-card-desc">Voeg een klas toe met code of selecteer je klas.</p>
+            <span class="menu-card-title">Mijn Taken (Taken / Klas)</span>
+            <p class="menu-card-desc">Maak een nieuw leerling-account of log direct in.</p>
           </button>
           <button type="button" class="menu-card-btn" id="chooseRaceBtn">
             <span class="menu-card-title">Live Race</span>
@@ -269,42 +270,85 @@
         </div>
       </div>
 
-      <div class="student-section" id="studentGoogleTaskSection">
+      <!-- Keuzemenu: Account Maken of Inloggen -->
+      <div class="student-section" id="studentAuthChoiceSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h3 style="margin: 0; font-size: 20px;">Inloggen met Google voor Klas</h3>
-          <button class="btn btn-secondary" id="backToStudentMenuFromGoogle" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
+          <h3 style="margin: 0; font-size: 20px;">Taken & Klas</h3>
+          <button class="btn btn-secondary" id="backToStudentMenuFromChoice" type="button" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
         </div>
-        <p>Om je account te koppelen aan je klas en opdrachten te maken, moet je inloggen met je Google-account.</p>
-        <button class="btn btn-google" id="studentGoogleLoginForClassBtn" style="margin-bottom: 20px;">
-          <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.17 21.36 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.15 0 9.89 0 12s.43 3.85 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-          Inloggen met Google (Koppel Account)
-        </button>
+        <p>Wil je een nieuw account aanmaken of inloggen op je bestaande account?</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px;">
+          <button class="btn btn-primary" id="goToRegisterBtn" type="button" style="padding: 24px; font-size: 18px; flex-direction: column; gap: 8px;">
+            <span>✨ Account Maken</span>
+            <span style="font-size: 13px; font-weight: 500; opacity: 0.9;">Nieuw profiel & PIN instellen</span>
+          </button>
+          <button class="btn btn-secondary" id="goToLoginBtn" type="button" style="padding: 24px; font-size: 18px; flex-direction: column; gap: 8px; border: 2px solid var(--primary); color: var(--primary);">
+            <span>🔑 Inloggen</span>
+            <span style="font-size: 13px; font-weight: 500; opacity: 0.9;">Met je bestaande Account Code</span>
+          </button>
+        </div>
       </div>
 
-      <div class="student-section" id="studentManageClassesSection">
+      <!-- Registratiescherm -->
+      <div class="student-section" id="studentRegisterSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h3 style="margin: 0; font-size: 20px;">Mijn Klassen & Taken</h3>
-          <button class="btn btn-secondary" id="backToStudentMenuFromManage" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
+          <h3 style="margin: 0; font-size: 20px;">Nieuw Leerling Account Maken</h3>
+          <button class="btn btn-secondary" id="backToChoiceFromRegister" type="button" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
         </div>
-        <p>Voeg een nieuwe klas toe met een code of selecteer een bestaande klas:</p>
+        <p>Vul je naam in, de bestaande klascode van je leerkracht en bedenk een eigen Account Code / PIN:</p>
 
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-          <input class="field" id="newStudentClassCodeInput" type="text" placeholder="Voer klascode in (bijv. 482910)" maxlength="6" style="margin: 0;">
-          <button class="btn btn-primary" id="addStudentClassBtn" style="width: auto; padding: 0 24px;">Klas Toevoegen</button>
+        <div class="field-group">
+          <input class="field" id="regStudentName" type="text" placeholder="Jouw voornaam" autocomplete="name">
+        </div>
+        <div class="field-group">
+          <input class="field" id="regClassCode" type="text" placeholder="Klascode van leerkracht (bijv. 482910)" maxlength="6">
+        </div>
+        <div class="field-group">
+          <input class="field" id="regAccountCode" type="text" placeholder="Bedenk een Account Code / PIN (bijv. 1234)" maxlength="8">
         </div>
 
-        <div class="status" id="studentClassAddStatus" style="margin-bottom: 12px;"></div>
+        <button class="btn btn-primary" id="confirmRegisterBtn" type="button">Account Aanmaken & Starten</button>
+        <div class="status" id="regStatus"></div>
+      </div>
 
-        <div class="dashboard-section-title">Selecteer je toegevoegde klas:</div>
-        <div class="class-list" id="studentMyClassesList">
-          <div style="text-align: center; color: var(--muted); padding: 30px;">Nog geen klassen toegevoegd. Voeg hierboven een klascode in.</div>
+      <!-- Inlogscherm -->
+      <div class="student-section" id="studentLoginSection">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="margin: 0; font-size: 20px;">Inloggen op je Account</h3>
+          <button class="btn btn-secondary" id="backToChoiceFromLogin" type="button" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
+        </div>
+        <p>Vul je exacte gegevens in om door te gaan:</p>
+
+        <div class="field-group">
+          <input class="field" id="loginStudentName" type="text" placeholder="Jouw voornaam" autocomplete="name">
+        </div>
+        <div class="field-group">
+          <input class="field" id="loginClassCode" type="text" placeholder="Klascode (bijv. 482910)" maxlength="6">
+        </div>
+        <div class="field-group">
+          <input class="field" id="loginAccountCode" type="password" placeholder="Jouw Account Code / PIN" maxlength="8">
+        </div>
+
+        <button class="btn btn-primary" id="confirmLoginBtn" type="button">Inloggen</button>
+        <div class="status" id="loginStatus"></div>
+      </div>
+
+      <!-- Overzicht Taken -->
+      <div class="student-section" id="studentTaskSection">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="margin: 0; font-size: 20px;" id="studentTaskHeaderTitle">Openstaande Taken</h3>
+          <button class="btn btn-secondary" id="backToStudentMenu1" type="button" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
+        </div>
+        <div class="class-list" id="studentAssignedTasksList">
+          <div style="text-align: center; color: var(--muted); padding: 30px;">Geen taken gevonden.</div>
         </div>
       </div>
 
       <div class="student-section" id="studentSetupSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h3 style="margin: 0; font-size: 20px;" id="setupTitle">Gegevens voor Live Race</h3>
-          <button class="btn btn-secondary" id="backToStudentMenuMain" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
+          <button class="btn btn-secondary" id="backToStudentMenuMain" type="button" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
         </div>
 
         <div class="field-group">
@@ -315,24 +359,14 @@
           <input class="field" id="joinCode" type="text" placeholder="Voer de 6-cijferige racecode in" maxlength="6">
         </div>
 
-        <button class="btn btn-primary" id="confirmStudentSetupBtn">Start met spelen</button>
+        <button class="btn btn-primary" id="confirmStudentSetupBtn" type="button">Start met spelen</button>
         <div class="status" id="studentStatus"></div>
-      </div>
-
-      <div class="student-section" id="studentTaskSection">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h3 style="margin: 0; font-size: 20px;" id="studentTaskHeaderTitle">Openstaande Taken</h3>
-          <button class="btn btn-secondary" id="backToStudentMenu1" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
-        </div>
-        <div class="class-list" id="studentAssignedTasksList">
-          <div style="text-align: center; color: var(--muted); padding: 30px;">Geen taken gevonden.</div>
-        </div>
       </div>
 
       <div class="student-section" id="studentRaceSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
           <h3 style="margin: 0; font-size: 20px;">Live Race Lobby</h3>
-          <button class="btn btn-secondary" id="backToStudentMenu2" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
+          <button class="btn btn-secondary" id="backToStudentMenu2" type="button" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
         </div>
 
         <div class="waiting-box">
@@ -355,7 +389,7 @@
           <div class="math-expr" id="mathExpression">12 + 5 = ?</div>
           <input class="field" id="studentAnswer" type="text" placeholder="Jouw antwoord en druk op Enter" autocomplete="off" style="text-align: center; font-size: 28px;">
         </div>
-        <button class="btn btn-primary" id="submitAnswerBtn">Antwoord indienen (+10 / -10)</button>
+        <button class="btn btn-primary" id="submitAnswerBtn" type="button">Antwoord indienen (+10 / -10)</button>
         <div class="status" id="gameFeedbackStatus" style="min-height: 28px; font-weight: 700; margin-top: 12px;"></div>
       </div>
 
@@ -377,7 +411,7 @@
             </div>
           </div>
 
-          <button class="btn btn-primary" id="finishBackMenuBtn" style="margin-top: 10px; display: none; max-width: 250px;">Terug naar Menu</button>
+          <button class="btn btn-primary" id="finishBackMenuBtn" type="button" style="margin-top: 10px; display: none; max-width: 250px;">Terug naar Menu</button>
         </div>
       </div>
 
@@ -393,11 +427,11 @@
             </div>
             <h2>Leerkracht Portaal</h2>
           </div>
-          <button class="btn btn-secondary" id="backToRoleFromTeacher" style="width: auto; padding: 6px 14px; margin: 0;">Terug</button>
+          <button class="btn btn-secondary" id="backToRoleFromTeacher" type="button" style="width: auto; padding: 6px 14px; margin: 0;">Terug</button>
         </div>
         <p>Log in met Google om klassen, taken, leerlingen en rapporten te beheren.</p>
         
-        <button class="btn btn-google" id="teacherGoogleBtn">
+        <button class="btn btn-google" id="teacherGoogleBtn" type="button">
           <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.19v3.15C3.17 21.36 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.19C.43 8.15 0 9.89 0 12s.43 3.85 1.19 5.4l4.08-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.19 6.6l4.08 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
           Inloggen met Google (Leerkracht)
         </button>
@@ -412,23 +446,23 @@
               <h2 style="margin: 0; font-size: 28px; font-weight: 800;">Welkom, <span id="teacherNameDisplay">Leerkracht</span></h2>
               <p style="color: var(--muted); margin: 6px 0 0; font-size: 16px;">Kies hieronder een optie om te openen:</p>
             </div>
-            <button class="btn btn-secondary" id="teacherLogoutBtn" style="width: auto; padding: 8px 16px;">Uitloggen</button>
+            <button class="btn btn-secondary" id="teacherLogoutBtn" type="button" style="width: auto; padding: 8px 16px;">Uitloggen</button>
           </div>
           
           <div class="teacher-menu-grid">
-            <button class="menu-card-btn" data-opentab="klassen">
+            <button class="menu-card-btn" data-opentab="klassen" type="button">
               <span class="menu-card-title">Klassen & Kinderen</span>
-              <p class="menu-card-desc">Beheer groepen, codes en verwijder leerlingen.</p>
+              <p class="menu-card-desc">Beheer groepen, codes en zie wie er in de klas zit.</p>
             </button>
-            <button class="menu-card-btn" data-opentab="taken">
+            <button class="menu-card-btn" data-opentab="taken" type="button">
               <span class="menu-card-title">Taken Beheren & Toewijzen</span>
-              <p class="menu-card-desc">Wijs vaardigheden toe of verwijder oude taken.</p>
+              <p class="menu-card-desc">Wijs vaardigheden toe aan hele klas of specifiek kind.</p>
             </button>
-            <button class="menu-card-btn" data-opentab="rapporten">
+            <button class="menu-card-btn" data-opentab="rapporten" type="button">
               <span class="menu-card-title">Rapporten & Prestaties</span>
-              <p class="menu-card-desc">Bekijk Cito-prestatielijnen en wis rapporten direct.</p>
+              <p class="menu-card-desc">Bekijk Cito-prestatielijnen per leerling.</p>
             </button>
-            <button class="menu-card-btn" data-opentab="race">
+            <button class="menu-card-btn" data-opentab="race" type="button">
               <span class="menu-card-title">Live Race (3 Rondes)</span>
               <p class="menu-card-desc">Start een live wedstrijd.</p>
             </button>
@@ -437,11 +471,11 @@
 
         <!-- KLASSEN & KINDEREN TAB -->
         <div class="tab-content" id="teacherTabKlassen">
-          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
+          <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
             <h2>Klassen & Kinderen Beheren</h2>
           </div>
-          <p>Bekijk je klassen, gekoppelde leerlingen en verwijder leerlingen direct uit de groep.</p>
+          <p>Bekijk je klassen, welke leerlingen erin zitten en beheer groepen.</p>
           
           <div class="dashboard-section-title">Jouw Klassen & Gekoppelde Leerlingen:</div>
           <div class="class-list" id="classList">
@@ -451,13 +485,13 @@
           <div class="dashboard-section-title" style="margin-top: 24px;">Nieuwe klas toevoegen:</div>
           <div style="display: flex; gap: 12px;">
             <input class="field" id="newClassName" type="text" placeholder="Naam klas (bijv. Groep 6B)" style="margin: 0;">
-            <button class="btn btn-primary" id="addClassBtn" style="width: auto; padding: 0 32px;">Klas aanmaken</button>
+            <button class="btn btn-primary" id="addClassBtn" type="button" style="width: auto; padding: 0 32px;">Klas aanmaken</button>
           </div>
         </div>
 
         <!-- TAKEN TAB -->
         <div class="tab-content" id="teacherTabTaken">
-          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
+          <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
             <h2>Taken Beheren</h2>
           </div>
@@ -473,6 +507,18 @@
           <div class="dashboard-section-title">Nieuwe taak toewijzen:</div>
 
           <div class="field-group">
+            <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Niveau / Leerjaar:</label>
+            <select class="field" id="teacherGradeSelect">
+              <option value="groep3">Groep 3 (Basis optellen/aftrekken)</option>
+              <option value="groep4">Groep 4 (Tafels & Klokkijken)</option>
+              <option value="groep5">Groep 5 (Delen & Geldrekenen)</option>
+              <option value="groep6">Groep 6 (Breuken & Cijferen)</option>
+              <option value="groep7">Groep 7 (Procenten & Kommagetallen)</option>
+              <option value="groep8" selected>Groep 8 (Vergelijkingen, Machten & Wortels)</option>
+            </select>
+          </div>
+
+          <div class="field-group">
             <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Doelgroep:</label>
             <select class="field" id="taskTargetType">
               <option value="class">Hele Klas (via Klas Code)</option>
@@ -480,31 +526,40 @@
             </select>
           </div>
 
-          <div class="field-group" id="taskTargetContainer">
-            <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;" id="targetLabel">Selecteer Klas:</label>
+          <div class="field-group">
+            <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Klas:</label>
             <select class="field" id="taskClassSelect">
               <option value="">Selecteer klas...</option>
             </select>
-            <select class="field" id="taskStudentSelect" style="display: none; margin-top: 6px;">
+          </div>
+
+          <div class="field-group" id="taskStudentContainer" style="display: none;">
+            <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Specifiek Kind:</label>
+            <select class="field" id="taskStudentSelect">
               <option value="">Selecteer eerst een klas...</option>
             </select>
           </div>
 
           <div class="field-group">
-            <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Vaardigheid / Skill:</label>
+            <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Vaardigheid / Categorie:</label>
             <select class="field" id="teacherSkillSelect">
-              <optgroup label="Math facts">
-                <option value="addition">Addition (+)</option>
-                <option value="subtraction">Subtraction (-)</option>
-                <option value="multiplication">Multiplication (×)</option>
-                <option value="division">Division (:)</option>
+              <optgroup label="Rekenfeiten (Basis)">
+                <option value="optellen">Optellen (+)</option>
+                <option value="aftrekken">Aftrekken (-)</option>
+                <option value="tafels">Tafels van vermenigvuldiging (×)</option>
+                <option value="delen">Delen (:)</option>
               </optgroup>
-              <optgroup label="Curriculum skills">
-                <option value="patterns">Number patterns</option>
-                <option value="comparing">Comparing and ordering</option>
-                <option value="fractions">Fractions</option>
-                <option value="time">Time</option>
-                <option value="money">Money</option>
+              <optgroup label="Curriculum vaardigheden (Uitdagend)">
+                <option value="getalpatronen">Getalpatronen & Reeksen</option>
+                <option value="vergelijken">Vergelijken & Ordenen (&lt;, &gt;, =)</option>
+                <option value="breuken">Breuken (Vereenvoudigen & Optellen)</option>
+                <option value="klokkijken">Klokkijken & Tijd</option>
+                <option value="geldrekenen">Geldrekenen & Bedragen</option>
+                <option value="procenten">Procenten & Verhoudingen (%)</option>
+                <option value="kommagetallen">Kommagetallen & Decimalen</option>
+                <option value="kwadraten">Kwadraten & Worteltrekken (√)</option>
+                <option value="machten">Machten & Exponenten (x²)</option>
+                <option value="metrisch">Lengte, Inhoud & Oppervlakte (m, L, kg)</option>
               </optgroup>
             </select>
           </div>
@@ -519,31 +574,38 @@
             </select>
           </div>
 
-          <button class="btn btn-primary" id="assignTaskBtn" style="margin-top: 16px;">Taak Toewijzen</button>
+          <button class="btn btn-primary" id="assignTaskBtn" type="button" style="margin-top: 16px;">Taak Toewijzen</button>
           <div class="status" id="taskAssignStatus"></div>
         </div>
 
         <!-- RAPPORTEN TAB -->
         <div class="tab-content" id="teacherTabRapporten">
-          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
+          <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
-            <h2>Rapporten & Prestatielijn Beheren</h2>
+            <h2>Rapporten & Prestatielijn</h2>
           </div>
-          <p>Bekijk resultaten of verwijder rapporten per leerling:</p>
+          <p>Klik op een leerling om de Cito-prestatiegrafiek te bekijken:</p>
           
-          <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-            <button class="btn btn-primary" id="switchReportTaskBtn" style="flex: 1;">Rapporten van Taken</button>
-            <button class="btn btn-secondary" id="switchReportRaceBtn" style="flex: 1;">Rapporten van Live Race</button>
+          <div class="class-list" id="reportStudentList" style="max-height: 250px; margin-bottom: 20px;">
+            <div style="text-align: center; color: var(--muted); padding: 30px;">Geen leerlingdata beschikbaar.</div>
           </div>
 
-          <div class="class-list" id="reportList">
-            <div style="text-align: center; color: var(--muted); padding: 40px; font-size: 16px;">Nog geen leerlingdata beschikbaar.</div>
+          <div id="studentDetailGraphContainer" style="display: none; background: white; border: 2px solid var(--border); border-radius: 20px; padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 id="graphStudentTitle" style="margin: 0; font-size: 20px; color: var(--primary);">Prestatielijn: Naam</h3>
+              <button class="btn btn-secondary" id="closeGraphBtn" type="button" style="width: auto; padding: 4px 12px; font-size: 13px;">Sluiten</button>
+            </div>
+            <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">Voortgang en gemiddelde prestaties over tijd (Cito niveau I t/m V):</p>
+            
+            <div style="width: 100%; height: 280px; position: relative; background: #f8fafc; border: 1px solid var(--border); border-radius: 14px; padding: 10px;">
+              <canvas id="citoCanvas" width="600" height="260" style="width: 100%; height: 100%;"></canvas>
+            </div>
           </div>
         </div>
 
         <!-- LIVE RACE TAB -->
         <div class="tab-content" id="teacherTabRace">
-          <button class="btn btn-secondary hometab-btn" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
+          <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           
           <div id="teacherScreenLobby" style="display: flex; flex-direction: column; flex: 1;">
             <div class="clean-lobby-card">
@@ -552,24 +614,26 @@
                   <div style="font-size: 14px; font-weight: 600; color: var(--muted);">Live Race Code (Uniek)</div>
                   <div style="display: flex; align-items: center; gap: 10px;">
                     <div style="font-size: 42px; font-weight: 800; color: var(--primary); letter-spacing: 2px;" id="liveGameCodeBig">------</div>
-                    <button class="btn btn-secondary" id="generateNewCodeBtn" style="width: auto; padding: 6px 12px; font-size: 13px;">Nieuwe code</button>
+                    <button class="btn btn-secondary" id="generateNewCodeBtn" type="button" style="width: auto; padding: 6px 12px; font-size: 13px;">Nieuwe code</button>
                   </div>
                 </div>
                 <div>
-                  <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Skill voor Race:</label>
+                  <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Categorie voor Race:</label>
                   <select class="field" id="raceSkillSelect" style="background-color: white;">
-                    <option value="addition">Addition (+)</option>
-                    <option value="subtraction">Subtraction (-)</option>
-                    <option value="multiplication">Multiplication (×)</option>
-                    <option value="division">Division (:)</option>
+                    <option value="optellen">Optellen (+)</option>
+                    <option value="aftrekken">Aftrekken (-)</option>
+                    <option value="tafels">Tafels van Vermenigvuldiging (×)</option>
+                    <option value="delen">Delen (:)</option>
+                    <option value="procenten">Procenten (%)</option>
+                    <option value="kwadraten">Kwadraten & Worteltrekken (√)</option>
                   </select>
                 </div>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 16px;">
                 <div style="font-size: 14px; color: var(--muted);">Laat leerlingen de bovenstaande code invoeren om mee te doen.</div>
                 <div style="display: flex; gap: 10px;">
-                  <button class="btn btn-secondary" id="refreshStudentsBtn" style="width: auto; padding: 12px 18px;">🔄 Ververs Lijst</button>
-                  <button class="btn btn-primary" id="startActiveGameBtn" style="width: auto; padding: 12px 28px; font-size: 16px;">Start Race (3 Rondes)</button>
+                  <button class="btn btn-secondary" id="refreshStudentsBtn" type="button" style="width: auto; padding: 12px 18px;">🔄 Ververs Lijst</button>
+                  <button class="btn btn-primary" id="startActiveGameBtn" type="button" style="width: auto; padding: 12px 28px; font-size: 16px;">Start Race (3 Rondes)</button>
                 </div>
               </div>
             </div>
@@ -592,7 +656,6 @@
               <div style="background: #ede9fe; color: var(--primary); padding: 8px 16px; border-radius: 12px; font-weight: 800;" id="teacherTimerClock">Tijd over: 02:00</div>
             </div>
 
-            <!-- Dit blok met uitslagen is pas zichtbaar NA de 2 minuten -->
             <div id="teacherResultsContainer" style="display: none; flex-direction: column; flex: 1;">
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                 <div style="background: white; border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center;">
@@ -609,7 +672,6 @@
               <div class="class-list" id="teacherTopFiveList" style="background: white; max-height: none;"></div>
             </div>
 
-            <!-- Dit blok toont een vrolijke wachtmelding tijdens de actieve 2 minuten -->
             <div id="teacherActivePlayingMsg" class="waiting-box" style="flex: 1; background: white; margin-bottom: 16px;">
               <div class="pulse-dot"></div>
               <div style="font-size: 22px; font-weight: 800; color: var(--dark);">De leerlingen zijn volop aan het rekenen!</div>
@@ -617,8 +679,8 @@
             </div>
 
             <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: auto;">
-              <button class="btn btn-secondary" id="backToLobbyBtn" style="width: auto; padding: 10px 20px;">Afbreken & Terug</button>
-              <button class="btn btn-primary" id="nextRoundBtn" style="width: auto; padding: 10px 24px; display: none;">Volgende Ronde Starten</button>
+              <button class="btn btn-secondary" id="backToLobbyBtn" type="button" style="width: auto; padding: 10px 20px;">Afbreken & Terug</button>
+              <button class="btn btn-primary" id="nextRoundBtn" type="button" style="width: auto; padding: 10px 24px; display: none;">Volgende Ronde Starten</button>
             </div>
           </div>
         </div>
@@ -634,7 +696,7 @@
       <h2 style="margin-top: 0; font-size: 24px; color: var(--dark);">Kies je rol of account</h2>
       <p style="color: var(--muted); font-size: 15px; margin-bottom: 20px;">We hebben meerdere accounts of sessies gevonden. Wat wil je openen?</p>
       <div id="accountChoiceButtons" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;"></div>
-      <button class="btn btn-secondary" id="closeChoiceModalBtn">Sluiten</button>
+      <button class="btn btn-secondary" id="closeChoiceModalBtn" type="button">Sluiten</button>
     </div>
   </div>
 
@@ -661,8 +723,8 @@
 
     let currentUser = null;
     let currentStudentDocId = null;
-    let currentStudent = { name: '', code: '', score: 0, topic: 'addition', targetAmount: 20, completedCount: 0, correctCount: 0, totalCount: 0, isGoogle: false };
-    let currentMathProblem = { question: '', answer: '', topic: 'addition' };
+    let currentStudent = { name: '', code: '', pin: '', score: 0, topic: 'optellen', targetAmount: 20, completedCount: 0, correctCount: 0, totalCount: 0 };
+    let currentMathProblem = { question: '', answer: '', topic: 'optellen' };
     let activeStudentMode = 'task';
     let isSubmitting = false;
     let unsubscribeActiveStudents = null;
@@ -696,8 +758,8 @@
       const modal = document.getElementById('accountChoiceModal');
       const container = document.getElementById('accountChoiceButtons');
       container.innerHTML = `
-        <button class="btn btn-primary" id="chooseTeacherRole">Doorgaan als Leerkracht (${googleUser.displayName || 'Google Account'})</button>
-        <button class="btn btn-primary" id="chooseStudentRole" style="background: var(--success);">Doorgaan als Leerling (${studentObj.name})</button>
+        <button class="btn btn-primary" id="chooseTeacherRole" type="button">Doorgaan als Leerkracht (${googleUser.displayName || 'Google Account'})</button>
+        <button class="btn btn-primary" id="chooseStudentRole" type="button" style="background: var(--success);">Doorgaan als Leerling (${studentObj.name})</button>
       `;
       modal.style.display = 'grid';
 
@@ -776,27 +838,101 @@
       });
     });
 
+    // Student Menu
     document.getElementById('chooseTasksBtn').addEventListener('click', () => {
       activeStudentMode = 'task';
-      if (!currentStudent.isGoogle) {
-        showStudentSection('studentGoogleTaskSection');
-      } else {
-        showStudentSection('studentManageClassesSection');
-        loadStudentMyClasses();
+      showStudentSection('studentAuthChoiceSection');
+    });
+
+    document.getElementById('backToStudentMenuFromChoice').addEventListener('click', () => showStudentSection('studentMenuSection'));
+    document.getElementById('goToRegisterBtn').addEventListener('click', () => showStudentSection('studentRegisterSection'));
+    document.getElementById('goToLoginBtn').addEventListener('click', () => showStudentSection('studentLoginSection'));
+    document.getElementById('backToChoiceFromRegister').addEventListener('click', () => showStudentSection('studentAuthChoiceSection'));
+    document.getElementById('backToChoiceFromLogin').addEventListener('click', () => showStudentSection('studentAuthChoiceSection'));
+
+    // Account Maken
+    document.getElementById('confirmRegisterBtn').addEventListener('click', async () => {
+      const name = document.getElementById('regStudentName').value.trim();
+      const code = document.getElementById('regClassCode').value.trim();
+      const pin = document.getElementById('regAccountCode').value.trim();
+      const statusEl = document.getElementById('regStatus');
+      statusEl.textContent = "";
+
+      if (!name || !code || code.length !== 6 || !pin) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Vul alle velden correct in!";
+        return;
+      }
+
+      try {
+        const classSnap = await getDocs(query(collection(db, "teacherClasses"), where("classCode", "==", code)));
+        if (classSnap.empty) {
+          statusEl.style.color = "#ef4444";
+          statusEl.textContent = "Onjuiste of niet-bestaande klascode! Vraag de juiste code aan je leerkracht.";
+          return;
+        }
+
+        currentStudent.name = name;
+        currentStudent.code = code;
+        currentStudent.pin = pin;
+        localStorage.setItem('superreken_state', JSON.stringify(currentStudent));
+
+        await addDoc(collection(db, "classStudents"), {
+          classCode: code, studentName: name, pin: pin, createdAt: new Date().toISOString()
+        });
+
+        statusEl.style.color = "var(--success)";
+        statusEl.textContent = "Account aangemaakt!";
+        setTimeout(() => {
+          showStudentSection('studentTaskSection');
+          document.getElementById('studentTaskHeaderTitle').textContent = `Taken voor Klas ${code}`;
+          loadStudentAssignedTasks(code);
+        }, 400);
+      } catch(e) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Fout bij registreren.";
       }
     });
 
-    document.getElementById('studentGoogleLoginForClassBtn').addEventListener('click', async () => {
+    // Inloggen
+    document.getElementById('confirmLoginBtn').addEventListener('click', async () => {
+      const name = document.getElementById('loginStudentName').value.trim();
+      const code = document.getElementById('loginClassCode').value.trim();
+      const pin = document.getElementById('loginAccountCode').value.trim();
+      const statusEl = document.getElementById('loginStatus');
+      statusEl.textContent = "";
+
+      if (!name || !code || code.length !== 6 || !pin) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Vul alle velden in!";
+        return;
+      }
+
       try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        currentStudent.name = user.displayName || "Leerling";
-        currentStudent.isGoogle = true;
+        const q = query(collection(db, "classStudents"), where("classCode", "==", code), where("studentName", "==", name), where("pin", "==", pin));
+        const snap = await getDocs(q);
+
+        if (snap.empty) {
+          statusEl.style.color = "#ef4444";
+          statusEl.textContent = "Toegang geweigerd! Onjuiste naam, klascode of pincode.";
+          return;
+        }
+
+        currentStudent.name = name;
+        currentStudent.code = code;
+        currentStudent.pin = pin;
         localStorage.setItem('superreken_state', JSON.stringify(currentStudent));
-        showStudentSection('studentManageClassesSection');
-        loadStudentMyClasses();
-      } catch (e) {
-        alert("Inloggen met Google mislukt.");
+
+        statusEl.style.color = "var(--success)";
+        statusEl.textContent = "Succesvol ingelogd!";
+        setTimeout(() => {
+          showStudentSection('studentTaskSection');
+          document.getElementById('studentTaskHeaderTitle').textContent = `Taken voor Klas ${code}`;
+          loadStudentAssignedTasks(code);
+        }, 400);
+      } catch(e) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Fout bij controleren gegevens.";
       }
     });
 
@@ -820,10 +956,17 @@
         return;
       }
 
-      currentStudent.name = name;
-      currentStudent.code = joinCode;
-
       try {
+        const gameSnap = await getDocs(query(collection(db, "activeGames"), where("code", "==", joinCode)));
+        if (gameSnap.empty) {
+          statusEl.style.color = "#ef4444";
+          statusEl.textContent = "Ongeldige racecode! De leerkracht is de race nog niet gestart.";
+          return;
+        }
+
+        currentStudent.name = name;
+        currentStudent.code = joinCode;
+
         const docRef = await addDoc(collection(db, "activeStudents"), {
           name: currentStudent.name,
           code: currentStudent.code,
@@ -852,7 +995,7 @@
         if (docSnap.exists()) {
           let gameData = docSnap.data();
           if (gameData.status === 'playing') {
-            currentStudent.topic = gameData.skill || 'addition';
+            currentStudent.topic = gameData.skill || 'optellen';
             showStudentSection('studentOefenScherm');
             generateQuestion();
             syncTimer(gameData.startTime, 120, 'raceTimerDisplay', () => {
@@ -918,73 +1061,9 @@
     }
 
     document.getElementById('backToStudentMenuMain').addEventListener('click', () => showStudentSection('studentMenuSection'));
-    document.getElementById('backToStudentMenuFromGoogle').addEventListener('click', () => showStudentSection('studentMenuSection'));
-    document.getElementById('backToStudentMenuFromManage').addEventListener('click', () => showStudentSection('studentMenuSection'));
     document.getElementById('backToStudentMenu1').addEventListener('click', () => showStudentSection('studentMenuSection'));
     document.getElementById('backToStudentMenu2').addEventListener('click', () => showStudentSection('studentMenuSection'));
     document.getElementById('finishBackMenuBtn').addEventListener('click', () => showStudentSection('studentMenuSection'));
-
-    document.getElementById('addStudentClassBtn').addEventListener('click', async () => {
-      const code = document.getElementById('newStudentClassCodeInput').value.trim();
-      const statusEl = document.getElementById('studentClassAddStatus');
-      statusEl.textContent = "";
-
-      if (!code || code.length !== 6) {
-        statusEl.style.color = "#ef4444";
-        statusEl.textContent = "Voer een geldige 6-cijferige klascode in!";
-        return;
-      }
-
-      try {
-        await addDoc(collection(db, "classStudents"), {
-          classCode: code, studentName: currentStudent.name, createdAt: new Date().toISOString()
-        });
-        document.getElementById('newStudentClassCodeInput').value = '';
-        statusEl.style.color = "var(--success)";
-        statusEl.textContent = "Klas succesvol toegevoegd!";
-        loadStudentMyClasses();
-      } catch(e) {
-        statusEl.style.color = "#ef4444";
-        statusEl.textContent = "Fout bij toevoegen klas.";
-      }
-    });
-
-    async function loadStudentMyClasses() {
-      const listEl = document.getElementById('studentMyClassesList');
-      try {
-        const q = query(collection(db, "classStudents"), where("studentName", "==", currentStudent.name));
-        const snap = await getDocs(q);
-        if (snap.empty) {
-          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Nog geen klassen toegevoegd.</div>`;
-          return;
-        }
-
-        listEl.innerHTML = "";
-        let codesAdded = [];
-        snap.forEach(docSnap => {
-          let d = docSnap.data();
-          if (codesAdded.includes(d.classCode)) return;
-          codesAdded.push(d.classCode);
-
-          listEl.innerHTML += `
-            <div class="class-item" data-code="${d.classCode}">
-              <div class="class-item-info"><span>Klas Code: ${d.classCode}</span></div>
-              <button class="btn btn-primary select-class-btn" data-code="${d.classCode}" style="width: auto; padding: 6px 16px; font-size: 14px;">Selecteer Klas</button>
-            </div>
-          `;
-        });
-
-        document.querySelectorAll('.select-class-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const code = btn.getAttribute('data-code');
-            currentStudent.code = code;
-            showStudentSection('studentTaskSection');
-            document.getElementById('studentTaskHeaderTitle').textContent = `Taken voor Klas ${code}`;
-            loadStudentAssignedTasks(code);
-          });
-        });
-      } catch(e) {}
-    }
 
     async function loadStudentAssignedTasks(classCode) {
       const listEl = document.getElementById('studentAssignedTasksList');
@@ -998,19 +1077,20 @@
         let found = false;
         snap.forEach(docSnap => {
           const d = docSnap.data();
-          if (d.targetType === 'student' && d.targetName.toLowerCase() !== currentStudent.name.toLowerCase()) return;
+          if (d.classCode && d.classCode !== classCode) return;
+          if (d.targetType === 'student' && d.targetStudent && d.targetStudent.toLowerCase() !== currentStudent.name.toLowerCase()) return;
           found = true;
           let amount = d.amount || 20;
           listEl.innerHTML += `
             <div class="class-item">
               <div class="class-item-info"><span>Taak: ${d.skill.toUpperCase()} (${amount} sommen)</span></div>
-              <button class="btn btn-primary start-task-btn" data-skill="${d.skill}" data-amount="${amount}" style="width: auto; padding: 6px 16px; font-size: 14px;">Start Taak</button>
+              <button class="btn btn-primary start-task-btn" data-skill="${d.skill}" data-amount="${amount}" type="button" style="width: auto; padding: 6px 16px; font-size: 14px;">Start Taak</button>
             </div>
           `;
         });
 
         if (!found) {
-          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Geen openstaande taken gevonden.</div>`;
+          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Geen openstaande taken gevonden voor jouw account.</div>`;
           return;
         }
 
@@ -1027,28 +1107,49 @@
       } catch (e) {}
     }
 
+    // Generator voor Moeilijke & Nederlandse Sommen
     function generateQuestion() {
-      const topic = currentStudent.topic || 'addition';
+      const topic = currentStudent.topic || 'optellen';
       let q = "", a = "";
-      if (topic === 'addition') {
-        let n1 = Math.floor(Math.random() * 80) + 10, n2 = Math.floor(Math.random() * 80) + 10;
+
+      if (topic === 'optellen') {
+        let n1 = Math.floor(Math.random() * 800) + 100, n2 = Math.floor(Math.random() * 800) + 100;
         q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
-      } else if (topic === 'subtraction') {
-        let n1 = Math.floor(Math.random() * 80) + 20, n2 = Math.floor(Math.random() * n1);
+      } else if (topic === 'aftrekken') {
+        let n1 = Math.floor(Math.random() * 800) + 200, n2 = Math.floor(Math.random() * n1);
         q = `${n1} - ${n2} = ?`; a = (n1 - n2).toString();
-      } else if (topic === 'multiplication') {
-        let n1 = Math.floor(Math.random() * 9) + 2, n2 = Math.floor(Math.random() * 9) + 2;
+      } else if (topic === 'tafels') {
+        let n1 = Math.floor(Math.random() * 12) + 2, n2 = Math.floor(Math.random() * 12) + 2;
         q = `${n1} × ${n2} = ?`; a = (n1 * n2).toString();
-      } else if (topic === 'division') {
-        let n2 = Math.floor(Math.random() * 9) + 2, mult = Math.floor(Math.random() * 9) + 2, n1 = n2 * mult;
+      } else if (topic === 'delen') {
+        let n2 = Math.floor(Math.random() * 12) + 2, mult = Math.floor(Math.random() * 12) + 2, n1 = n2 * mult;
         q = `${n1} : ${n2} = ?`; a = mult.toString();
+      } else if (topic === 'procenten') {
+        let p = [10, 20, 25, 50][Math.floor(Math.random() * 4)];
+        let base = (Math.floor(Math.random() * 20) + 1) * 20;
+        q = `${p}% van ${base} = ?`; a = ((p / 100) * base).toString();
+      } else if (topic === 'kommagetallen') {
+        let n1 = (Math.random() * 10).toFixed(1), n2 = (Math.random() * 10).toFixed(1);
+        q = `${n1} + ${n2} = ?`; a = (parseFloat(n1) + parseFloat(n2)).toFixed(1).replace('.', ',');
+      } else if (topic === 'kwadraten') {
+        let isWortel = Math.random() > 0.5;
+        if (isWortel) {
+          let base = Math.floor(Math.random() * 10) + 2;
+          q = `√${base * base} = ?`; a = base.toString();
+        } else {
+          let base = Math.floor(Math.random() * 10) + 2;
+          q = `${base}² = ?`; a = (base * base).toString();
+        }
+      } else if (topic === 'breuken') {
+        let b = Math.floor(Math.random() * 4) + 2;
+        q = `1/${b} + 1/${b} = ? (teller)`; a = '2';
       } else {
-        q = `12 + 5 = ?`; a = '17';
+        q = `15 + 25 = ?`; a = '40';
       }
 
       currentMathProblem = { question: q, answer: a.trim(), topic: topic };
       document.getElementById('mathExpression').textContent = q;
-      document.getElementById('currentTopicLabel').textContent = `Skill: ${topic.toUpperCase()}`;
+      document.getElementById('currentTopicLabel').textContent = `Onderwerp: ${topic.toUpperCase()}`;
       document.getElementById('miniScoreVal').textContent = currentStudent.score;
       
       const answerField = document.getElementById('studentAnswer');
@@ -1099,7 +1200,7 @@
       try {
         await addDoc(collection(db, "studentResults"), {
           studentName: currentStudent.name, classCode: currentStudent.code || 'TAAK',
-          topic: currentMathProblem.topic, correct: isCorrect, mode: activeStudentMode, createdAt: new Date().toISOString()
+          topic: currentMathProblem.topic, correct: isCorrect, scoreVal: currentStudent.score, mode: activeStudentMode, createdAt: new Date().toISOString()
         });
       } catch (e) {}
 
@@ -1123,6 +1224,7 @@
       }
     });
 
+    // Dashboard Navigatie
     document.querySelectorAll('.menu-card-btn').forEach(card => {
       card.addEventListener('click', () => {
         const targetTab = card.getAttribute('data-opentab');
@@ -1132,10 +1234,13 @@
 
         if (targetTab === 'klassen') {
           document.getElementById('teacherTabKlassen').classList.add('active');
+          loadTeacherClassesWithStudents();
         } else if (targetTab === 'taken') {
           document.getElementById('teacherTabTaken').classList.add('active');
+          loadTeacherClassesForAssignment(); loadTeacherAssignedTasksList();
         } else if (targetTab === 'rapporten') {
           document.getElementById('teacherTabRapporten').classList.add('active');
+          loadReportsStudentList();
         } else if (targetTab === 'race') {
           document.getElementById('teacherTabRace').classList.add('active');
           const raceCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -1143,6 +1248,283 @@
           setupLiveActiveStudentsListener(raceCode);
         }
       });
+    });
+
+    document.getElementById('addClassBtn').addEventListener('click', async () => {
+      const nameInput = document.getElementById('newClassName');
+      const className = nameInput.value.trim();
+      if (!className) {
+        alert("Vul een klassennaam in!");
+        return;
+      }
+      const classCode = Math.floor(100000 + Math.random() * 900000).toString();
+      try {
+        await addDoc(collection(db, "teacherClasses"), {
+          className: className, classCode: classCode, teacherEmail: currentUser ? currentUser.email : 'local', createdAt: new Date().toISOString()
+        });
+        nameInput.value = '';
+        loadTeacherClassesWithStudents();
+        alert(`Klas '${className}' succesvol aangemaakt met code: ${classCode}`);
+      } catch(e) {
+        alert("Fout bij aanmaken klas: " + e.message);
+      }
+    });
+
+    async function loadTeacherClassesWithStudents() {
+      const listEl = document.getElementById('classList');
+      try {
+        const classSnap = await getDocs(collection(db, "teacherClasses"));
+        if (classSnap.empty) {
+          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Geen klassen gevonden. Maak er hieronder eentje aan.</div>`;
+          return;
+        }
+
+        const studentSnap = await getDocs(collection(db, "classStudents"));
+        let studentsByClass = {};
+        studentSnap.forEach(d => {
+          let st = d.data();
+          if (!studentsByClass[st.classCode]) studentsByClass[st.classCode] = [];
+          studentsByClass[st.classCode].push({ id: d.id, name: st.studentName });
+        });
+
+        listEl.innerHTML = "";
+        classSnap.forEach(docSnap => {
+          let d = docSnap.data();
+          let kids = studentsByClass[d.classCode] || [];
+          let kidsHtml = kids.length === 0 ? `<span style="color: var(--muted); font-size: 14px;">Nog geen leerlingen in deze klas.</span>` : kids.map(k => `<span style="background: white; border: 1px solid var(--border); padding: 4px 10px; border-radius: 8px; font-size: 13px; font-weight: 700;">👤 ${k.name}</span>`).join(' ');
+
+          listEl.innerHTML += `
+            <div class="class-item" style="flex-direction: column; align-items: flex-start; gap: 10px;">
+              <div style="display: flex; width: 100%; align-items: center; justify-content: space-between;">
+                <strong>📁 ${d.className}</strong>
+                <span style="background: #ede9fe; color: var(--primary); padding: 6px 12px; border-radius: 10px; font-size: 14px; font-weight: 800;">Code: ${d.classCode}</span>
+              </div>
+              <div style="width: 100%; background: #f8fafc; padding: 10px; border-radius: 12px; border: 1px solid var(--border);">
+                <div style="font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px;">Leerlingen in deze klas (${kids.length}):</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">${kidsHtml}</div>
+              </div>
+              <button class="btn btn-danger delete-class-btn" data-id="${docSnap.id}" type="button" style="width: auto; padding: 4px 10px; font-size: 12px;">Klas Verwijderen</button>
+            </div>
+          `;
+        });
+
+        document.querySelectorAll('.delete-class-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            if (confirm("Weet je zeker dat je deze klas wilt verwijderen?")) {
+              await deleteDoc(doc(db, "teacherClasses", btn.getAttribute('data-id')));
+              loadTeacherClassesWithStudents();
+            }
+          });
+        });
+      } catch(e) {}
+    }
+
+    async function loadTeacherClassesForAssignment() {
+      const selectEl = document.getElementById('taskClassSelect');
+      try {
+        const snap = await getDocs(collection(db, "teacherClasses"));
+        selectEl.innerHTML = `<option value="">Selecteer klas...</option>`;
+        snap.forEach(docSnap => {
+          let d = docSnap.data();
+          selectEl.innerHTML += `<option value="${d.classCode}">${d.className} (${d.classCode})</option>`;
+        });
+      } catch(e) {}
+    }
+
+    document.getElementById('taskTargetType').addEventListener('change', (e) => {
+      const val = e.target.value;
+      const container = document.getElementById('taskStudentContainer');
+      if (val === 'student') {
+        container.style.display = 'block';
+        updateStudentSelectForClass();
+      } else {
+        container.style.display = 'none';
+      }
+    });
+
+    document.getElementById('taskClassSelect').addEventListener('change', () => {
+      if (document.getElementById('taskTargetType').value === 'student') {
+        updateStudentSelectForClass();
+      }
+    });
+
+    async function updateStudentSelectForClass() {
+      const classCode = document.getElementById('taskClassSelect').value;
+      const studentSelect = document.getElementById('taskStudentSelect');
+      studentSelect.innerHTML = `<option value="">Selecteer leerling...</option>`;
+      if (!classCode) return;
+
+      try {
+        const snap = await getDocs(query(collection(db, "classStudents"), where("classCode", "==", classCode)));
+        snap.forEach(docSnap => {
+          let d = docSnap.data();
+          studentSelect.innerHTML += `<option value="${d.studentName}">${d.studentName}</option>`;
+        });
+      } catch(e) {}
+    }
+
+    async function loadTeacherAssignedTasksList() {
+      const listEl = document.getElementById('teacherAssignedTasksList');
+      try {
+        const snap = await getDocs(collection(db, "assignedTasks"));
+        if (snap.empty) {
+          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 20px;">Geen taken gevonden.</div>`;
+          return;
+        }
+        listEl.innerHTML = "";
+        snap.forEach(docSnap => {
+          let d = docSnap.data();
+          let targetText = d.targetType === 'student' ? `Kind: ${d.targetStudent}` : `Hele Klas (${d.classCode})`;
+          listEl.innerHTML += `
+            <div class="class-item">
+              <span>Taak: ${d.skill.toUpperCase()} (${d.amount} sommen) — <small style="color: var(--muted);">${targetText}</small></span>
+              <button class="btn btn-danger delete-task-btn" data-id="${docSnap.id}" type="button" style="width: auto; padding: 4px 10px; font-size: 12px;">Verwijderen</button>
+            </div>
+          `;
+        });
+
+        document.querySelectorAll('.delete-task-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            await deleteDoc(doc(db, "assignedTasks", btn.getAttribute('data-id')));
+            loadTeacherAssignedTasksList();
+          });
+        });
+      } catch(e) {}
+    }
+
+    document.getElementById('assignTaskBtn').addEventListener('click', async () => {
+      const targetType = document.getElementById('taskTargetType').value;
+      const classCode = document.getElementById('taskClassSelect').value;
+      const targetStudent = document.getElementById('taskStudentSelect').value;
+      const skill = document.getElementById('teacherSkillSelect').value;
+      const amount = parseInt(document.getElementById('teacherTaskAmount').value);
+      const statusEl = document.getElementById('taskAssignStatus');
+      statusEl.textContent = "";
+
+      if (!classCode) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Selecteer een klas!";
+        return;
+      }
+      if (targetType === 'student' && !targetStudent) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Selecteer een specifiek kind!";
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "assignedTasks"), {
+          targetType: targetType, classCode: classCode, targetStudent: targetStudent || '', skill: skill, amount: amount, createdAt: new Date().toISOString()
+        });
+        statusEl.style.color = "var(--success)";
+        statusEl.textContent = "Taak succesvol toegewezen!";
+        loadTeacherAssignedTasksList();
+      } catch(e) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Fout bij toewijzen taak.";
+      }
+    });
+
+    async function loadReportsStudentList() {
+      const listEl = document.getElementById('reportStudentList');
+      try {
+        const snap = await getDocs(collection(db, "studentResults"));
+        if (snap.empty) {
+          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Nog geen leerlingdata beschikbaar.</div>`;
+          return;
+        }
+
+        let studentMap = {};
+        snap.forEach(docSnap => {
+          let d = docSnap.data();
+          let name = d.studentName || 'Onbekend';
+          if (!studentMap[name]) studentMap[name] = [];
+          studentMap[name].push(d);
+        });
+
+        listEl.innerHTML = "";
+        for (let name in studentMap) {
+          let count = studentMap[name].length;
+          listEl.innerHTML += `
+            <div class="class-item">
+              <div>
+                <strong>👤 ${name}</strong> <small style="color: var(--muted); margin-left: 8px;">(${count} resultaten)</small>
+              </div>
+              <button class="btn btn-primary view-graph-btn" data-name="${name}" type="button" style="width: auto; padding: 6px 14px; font-size: 14px;">📊 Bekijk Prestatielijn</button>
+            </div>
+          `;
+        }
+
+        document.querySelectorAll('.view-graph-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            let studentName = btn.getAttribute('data-name');
+            showStudentCitoGraph(studentName, studentMap[studentName]);
+          });
+        });
+      } catch(e) {}
+    }
+
+    function showStudentCitoGraph(studentName, results) {
+      document.getElementById('studentDetailGraphContainer').style.display = 'block';
+      document.getElementById('graphStudentTitle').textContent = `Prestatielijn: ${studentName}`;
+      
+      const canvas = document.getElementById('citoCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#ecfdf5";
+      ctx.fillRect(50, 20, canvas.width - 80, 200);
+
+      ctx.fillStyle = "rgba(16, 185, 129, 0.2)";
+      ctx.beginPath();
+      ctx.moveTo(50, 100); ctx.lineTo(canvas.width - 30, 60); ctx.lineTo(canvas.width - 30, 140); ctx.lineTo(50, 180); ctx.fill();
+
+      ctx.strokeStyle = "#e2e8f0";
+      ctx.lineWidth = 1;
+      for (let y = 20; y <= 220; y += 40) {
+        ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(canvas.width - 30, y); ctx.stroke();
+      }
+
+      ctx.fillStyle = "#64748b";
+      ctx.font = "12px sans-serif";
+      ctx.fillText("I", canvas.width - 20, 30);
+      ctx.fillText("II", canvas.width - 20, 70);
+      ctx.fillText("III", canvas.width - 20, 110);
+      ctx.fillText("IV", canvas.width - 20, 150);
+      ctx.fillText("V", canvas.width - 20, 190);
+
+      results.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      let points = [];
+      let runningSum = 50;
+      results.forEach((r, idx) => {
+        if (r.correct) runningSum += 5; else runningSum -= 3;
+        if (runningSum > 200) runningSum = 200;
+        if (runningSum < 20) runningSum = 20;
+        let x = 70 + (idx * ((canvas.width - 120) / Math.max(results.length - 1, 1)));
+        let y = 220 - (runningSum * 0.9);
+        points.push({ x, y, correct: r.correct });
+      });
+
+      if (points.length > 0) {
+        ctx.strokeStyle = "#7c3aed";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        points.forEach((p, idx) => {
+          if (idx === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+        });
+        ctx.stroke();
+
+        points.forEach(p => {
+          ctx.fillStyle = "#7c3aed";
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+    }
+
+    document.getElementById('closeGraphBtn').addEventListener('click', () => {
+      document.getElementById('studentDetailGraphContainer').style.display = 'none';
     });
 
     document.getElementById('generateNewCodeBtn').addEventListener('click', () => {
@@ -1175,7 +1557,7 @@
             <div class="math99-avatar-card">
               <div class="name">👤 ${d.name}</div>
               <div class="score">${d.score || 0} pts</div>
-              <button class="btn btn-danger kick-btn" data-id="${docSnap.id}" style="padding: 2px 6px; font-size: 11px; margin-top: 6px;">Verwijderen</button>
+              <button class="btn btn-danger kick-btn" data-id="${docSnap.id}" type="button" style="padding: 2px 6px; font-size: 11px; margin-top: 6px;">Verwijderen</button>
             </div>
           `;
         });
