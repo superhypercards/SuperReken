@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#8b5cf6" />
-  <title>SuperReken — Compleet Platform & Leerkracht Dashboard</title>
+  <meta name="theme-color" content="#2e1065" />
+  <title>SuperReken — Halloween Editie & Compleet Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-purple: #8b5cf6;
+      --bg-purple: #2e1065;
+      --halloween-orange: #f97316;
+      --halloween-orange-hover: #ea580c;
       --card-bg: #ffffff;
       --dark: #0f172a;
       --muted: #64748b;
@@ -33,6 +35,8 @@
       display: grid;
       place-items: center;
       padding: 16px;
+      background-image: radial-gradient(#4c1d95 2px, transparent 2px);
+      background-size: 24px 24px;
     }
 
     .container {
@@ -51,16 +55,21 @@
     .selection-screen.hidden { display: none !important; }
 
     h1 {
-      color: white;
+      color: #fbbf24;
       font-size: clamp(26px, 4vw, 36px);
       font-weight: 800;
       margin-bottom: 32px;
       letter-spacing: -0.5px;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
     .role-card-btn {
       width: 100%;
-      background: #7c3aed;
+      background: var(--halloween-orange);
       border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 20px;
       padding: 22px 28px;
@@ -73,25 +82,25 @@
       justify-content: flex-start;
       gap: 24px;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       transition: all 0.2s ease;
       text-align: left;
     }
     .role-card-btn:hover {
-      background: #6d28d9;
+      background: var(--halloween-orange-hover);
       transform: translateY(-2px);
       border-color: rgba(255, 255, 255, 0.4);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
     }
 
     .role-icon-wrap { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .role-icon-wrap svg { width: 100%; height: 100%; }
+    .role-icon-wrap svg { width: 100%; height: 100%; fill: #ffffff; }
 
     .form-card {
       background: var(--card-bg);
       border-radius: var(--radius);
       padding: 36px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       text-align: left;
       display: none;
       animation: fadeIn 0.3s ease;
@@ -118,7 +127,7 @@
 
     .form-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
     .form-header-icon-wrap { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .form-header-icon-wrap svg { width: 100%; height: 100%; fill: var(--primary); }
+    .form-header-icon-wrap svg { width: 100%; height: 100%; fill: var(--halloween-orange); }
 
     .form-card h2 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; color: var(--dark); }
     .form-card p { color: var(--muted); font-size: 16px; margin: 0 0 24px; line-height: 1.5; }
@@ -145,8 +154,8 @@
       align-items: center; justify-content: center; gap: 10px; font-family: inherit;
     }
     .btn:active { transform: scale(0.98); }
-    .btn-primary { background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3); margin-top: 6px; }
-    .btn-primary:hover { background: var(--primary-hover); box-shadow: 0 12px 25px rgba(124, 58, 237, 0.4); transform: translateY(-1px); }
+    .btn-primary { background: var(--halloween-orange); color: white; box-shadow: 0 10px 20px rgba(249, 115, 22, 0.4); margin-top: 6px; }
+    .btn-primary:hover { background: var(--halloween-orange-hover); box-shadow: 0 12px 25px rgba(249, 115, 22, 0.5); transform: translateY(-1px); }
     .btn-secondary { background: #f1f5f9; color: var(--dark); border: 2px solid var(--border); margin-top: 10px; }
     .btn-secondary:hover { background: #e2e8f0; }
     .btn-danger { background: #fee2e2; color: var(--danger); border: 2px solid #fecaca; padding: 6px 12px; font-size: 13px; border-radius: 10px; width: auto; }
@@ -196,11 +205,11 @@
     .class-item { padding: 16px 20px; background: white; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: all 0.2s; }
 
     .waiting-box { background: #f8fafc; border: 2px dashed var(--border); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .pulse-dot { width: 20px; height: 20px; background: var(--primary); border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; margin-bottom: 16px; }
+    .pulse-dot { width: 20px; height: 20px; background: var(--halloween-orange); border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; margin-bottom: 16px; }
     @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(124, 58, 237, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 12px rgba(249, 115, 22, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
     }
 
     .clean-lobby-card { background: #f8fafc; border: 2px solid var(--border); border-radius: 20px; padding: 24px; margin-bottom: 20px; }
@@ -208,17 +217,23 @@
     .math99-avatars-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; flex: 1; overflow-y: auto; padding: 4px;
     }
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
     .math99-avatar-card {
       background: #ffffff; border: 2px solid var(--border); border-radius: 16px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     }
     .math99-avatar-card .name { font-weight: 800; font-size: 15px; color: var(--dark); text-align: center; word-break: break-all; }
-    .math99-avatar-card .score { background: #ede9fe; color: var(--primary); font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 8px; }
+    .math99-avatar-card .score { background: #ffedd5; color: var(--halloween-orange); font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 8px; }
 
     .math-question-box { background: #f8fafc; border: 2px solid var(--border); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 20px; position: relative; }
     .math-expr { font-size: 42px; font-weight: 800; color: var(--primary); margin: 15px 0; }
 
     .mini-score-badge {
-      background: #ede9fe; color: var(--primary); padding: 6px 14px; border-radius: 12px; font-weight: 800; font-size: 15px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(124,58,237,0.1);
+      background: #ffedd5; color: var(--halloween-orange); padding: 6px 14px; border-radius: 12px; font-weight: 800; font-size: 15px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(249,115,22,0.15);
     }
   </style>
 </head>
@@ -228,7 +243,11 @@
     
     <!-- Selectiescherm -->
     <div class="selection-screen" id="selectionScreen">
-      <h1>Maak je gratis account aan als...</h1>
+      <h1>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="#fbbf24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        SuperReken — Halloween Editie
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="#fbbf24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      </h1>
       
       <button class="role-card-btn" id="selectStudentBtn" type="button">
         <div class="role-icon-wrap">
@@ -237,7 +256,7 @@
         <span>Student</span>
       </button>
 
-      <button class="role-card-btn" id="selectTeacherBtn" type="button">
+      <button class="role-card-btn" id="selectTeacherBtn" type="button" style="background: #7c3aed;">
         <div class="role-icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM18 20H6V4H11V12L14.5 9.5L18 12V4H18V20Z" fill="#ffffff"/></svg>
         </div>
@@ -280,11 +299,11 @@
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px;">
           <button class="btn btn-primary" id="goToRegisterBtn" type="button" style="padding: 24px; font-size: 18px; flex-direction: column; gap: 8px;">
-            <span>✨ Account Maken</span>
+            <span>Account Maken</span>
             <span style="font-size: 13px; font-weight: 500; opacity: 0.9;">Nieuw profiel & PIN instellen</span>
           </button>
-          <button class="btn btn-secondary" id="goToLoginBtn" type="button" style="padding: 24px; font-size: 18px; flex-direction: column; gap: 8px; border: 2px solid var(--primary); color: var(--primary);">
-            <span>🔑 Inloggen</span>
+          <button class="btn btn-secondary" id="goToLoginBtn" type="button" style="padding: 24px; font-size: 18px; flex-direction: column; gap: 8px; border: 2px solid var(--halloween-orange); color: var(--halloween-orange);">
+            <span>Inloggen</span>
             <span style="font-size: 13px; font-weight: 500; opacity: 0.9;">Met je bestaande Account Code</span>
           </button>
         </div>
@@ -372,7 +391,8 @@
         <div class="waiting-box">
           <div class="pulse-dot"></div>
           <div style="font-size: 20px; font-weight: 700; color: var(--dark);" id="joinedPlayerGreeting">Je bent verbonden!</div>
-          <p style="font-size: 15px; margin-top: 10px; margin-bottom: 0;">Wachten tot de leerkracht de race start...</p>
+          <p style="font-size: 15px; margin-top: 10px; margin-bottom: 20px;">Wachten tot de leerkracht de race start...</p>
+          <button class="btn btn-primary" id="startWarmingUpFromLobbyBtn" type="button" style="width: auto; padding: 12px 24px; background: var(--halloween-orange);">Start alvast een Warming-up</button>
         </div>
       </div>
 
@@ -390,6 +410,7 @@
           <input class="field" id="studentAnswer" type="text" placeholder="Jouw antwoord en druk op Enter" autocomplete="off" style="text-align: center; font-size: 28px;">
         </div>
         <button class="btn btn-primary" id="submitAnswerBtn" type="button">Antwoord indienen (+10 / -10)</button>
+        <button class="btn btn-secondary" id="backToMenuFromPractice" type="button" style="margin-top: 10px; display: none;">Terug naar Wachtscherm</button>
         <div class="status" id="gameFeedbackStatus" style="min-height: 28px; font-weight: 700; margin-top: 12px;"></div>
       </div>
 
@@ -617,28 +638,25 @@
                     <button class="btn btn-secondary" id="generateNewCodeBtn" type="button" style="width: auto; padding: 6px 12px; font-size: 13px;">Nieuwe code</button>
                   </div>
                 </div>
-                <div>
-                  <label style="font-size: 14px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 6px;">Selecteer Categorie voor Race:</label>
-                  <select class="field" id="raceSkillSelect" style="background-color: white;">
-                    <optgroup label="Rekenfeiten (Basis)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                  <div>
+                    <label style="font-size: 13px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px;">Categorie:</label>
+                    <select class="field" id="raceSkillSelect" style="background-color: white; padding: 12px 14px; font-size: 14px;">
                       <option value="optellen">Optellen (+)</option>
                       <option value="aftrekken">Aftrekken (-)</option>
-                      <option value="tafels">Tafels van vermenigvuldiging (×)</option>
+                      <option value="tafels">Tafels (×)</option>
                       <option value="delen">Delen (:)</option>
-                    </optgroup>
-                    <optgroup label="Curriculum vaardigheden (Uitdagend)">
-                      <option value="getalpatronen">Getalpatronen & Reeksen</option>
-                      <option value="vergelijken">Vergelijken & Ordenen (&lt;, &gt;, =)</option>
-                      <option value="breuken">Breuken (Vereenvoudigen & Optellen)</option>
-                      <option value="klokkijken">Klokkijken & Tijd</option>
-                      <option value="geldrekenen">Geldrekenen & Bedragen</option>
-                      <option value="procenten">Procenten & Verhoudingen (%)</option>
-                      <option value="kommagetallen">Kommagetallen & Decimalen</option>
-                      <option value="kwadraten">Kwadraten & Worteltrekken (√)</option>
-                      <option value="machten">Machten & Exponenten (x²)</option>
-                      <option value="metrisch">Lengte, Inhoud & Oppervlakte (m, L, kg)</option>
-                    </optgroup>
-                  </select>
+                      <option value="procenten">Procenten (%)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="font-size: 13px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px;">Moeilijkheidsgraad:</label>
+                    <select class="field" id="teacherDifficultySelect" style="background-color: white; padding: 12px 14px; font-size: 14px;">
+                      <option value="easy">Makkelijk</option>
+                      <option value="medium" selected>Gemiddeld</option>
+                      <option value="hard">Uitdagend</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 16px;">
@@ -735,7 +753,7 @@
 
     let currentUser = null;
     let currentStudentDocId = null;
-    let currentStudent = { name: '', code: '', pin: '', score: 0, topic: 'optellen', targetAmount: 20, completedCount: 0, correctCount: 0, totalCount: 0 };
+    let currentStudent = { name: '', code: '', pin: '', score: 0, topic: 'optellen', difficulty: 'medium', targetAmount: 20, completedCount: 0, correctCount: 0, totalCount: 0 };
     let currentMathProblem = { question: '', answer: '', topic: 'optellen' };
     let activeStudentMode = 'task';
     let isSubmitting = false;
@@ -999,6 +1017,17 @@
       }
     });
 
+    document.getElementById('startWarmingUpFromLobbyBtn').addEventListener('click', () => {
+      showStudentSection('studentOefenScherm');
+      document.getElementById('backToMenuFromPractice').style.display = 'block';
+      currentStudent.score = 0; currentStudent.completedCount = 0; currentStudent.correctCount = 0; currentStudent.totalCount = 0;
+      generateQuestion();
+    });
+
+    document.getElementById('backToMenuFromPractice').addEventListener('click', () => {
+      showStudentSection('studentRaceSection');
+    });
+
     function listenToGameStart(raceCode) {
       if (unsubscribeGameStatus) unsubscribeGameStatus();
       const gameDocRef = doc(db, "activeGames", raceCode);
@@ -1008,7 +1037,9 @@
           let gameData = docSnap.data();
           if (gameData.status === 'playing') {
             currentStudent.topic = gameData.skill || 'optellen';
+            currentStudent.difficulty = gameData.difficulty || 'medium';
             showStudentSection('studentOefenScherm');
+            document.getElementById('backToMenuFromPractice').style.display = 'none';
             generateQuestion();
             syncTimer(gameData.startTime, 120, 'raceTimerDisplay', () => {
               showStudentSection('studentKlaarScherm');
@@ -1113,123 +1144,39 @@
             currentStudent.completedCount = 0; currentStudent.correctCount = 0; currentStudent.totalCount = 0; currentStudent.score = 0;
             document.getElementById('miniScoreVal').textContent = currentStudent.score;
             showStudentSection('studentOefenScherm');
+            document.getElementById('backToMenuFromPractice').style.display = 'none';
             generateQuestion();
           });
         });
       } catch (e) {}
     }
 
-    // Geoptimaliseerde Sommen Generator met Strikte Koppeling & Hoge Variatie
     function generateQuestion() {
       const topic = currentStudent.topic || 'optellen';
+      const diff = currentStudent.difficulty || 'medium';
+      let mult = diff === 'easy' ? 10 : diff === 'medium' ? 50 : 200;
       let q = "", a = "";
-      const rand = Math.random();
 
-      if (topic === 'optellen' || topic === 'addition') {
-        if (rand < 0.33) {
-          let n1 = Math.floor(Math.random() * 80) + 10, n2 = Math.floor(Math.random() * 80) + 10;
-          q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
-        } else if (rand < 0.66) {
-          let n1 = Math.floor(Math.random() * 400) + 100, n2 = Math.floor(Math.random() * 400) + 100;
-          q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
-        } else {
-          let n1 = Math.floor(Math.random() * 50) + 10, n2 = Math.floor(Math.random() * 50) + 10, n3 = Math.floor(Math.random() * 20) + 5;
-          q = `${n1} + ${n2} + ${n3} = ?`; a = (n1 + n2 + n3).toString();
-        }
-      } 
-      else if (topic === 'aftrekken' || topic === 'subtraction') {
-        if (rand < 0.5) {
-          let n1 = Math.floor(Math.random() * 100) + 50, n2 = Math.floor(Math.random() * (n1 - 10)) + 5;
-          q = `${n1} - ${n2} = ?`; a = (n1 - n2).toString();
-        } else {
-          let n1 = Math.floor(Math.random() * 800) + 200, n2 = Math.floor(Math.random() * (n1 - 100)) + 50;
-          q = `${n1} - ${n2} = ?`; a = (n1 - n2).toString();
-        }
-      } 
-      else if (topic === 'tafels' || topic === 'multiplication') {
-        if (rand < 0.7) {
-          let n1 = Math.floor(Math.random() * 10) + 1, n2 = Math.floor(Math.random() * 10) + 1;
-          q = `${n1} × ${n2} = ?`; a = (n1 * n2).toString();
-        } else {
-          let n1 = Math.floor(Math.random() * 12) + 2, n2 = Math.floor(Math.random() * 15) + 2;
-          q = `${n1} × ${n2} = ?`; a = (n1 * n2).toString();
-        }
-      } 
-      else if (topic === 'delen' || topic === 'division') {
-        let n2 = Math.floor(Math.random() * 10) + 2;
-        let mult = Math.floor(Math.random() * 12) + 1;
-        let n1 = n2 * mult;
-        q = `${n1} : ${n2} = ?`; a = mult.toString();
-      } 
-      else if (topic === 'procenten') {
-        let pOptions = [10, 20, 25, 50, 75];
-        let p = pOptions[Math.floor(Math.random() * pOptions.length)];
-        let base = (Math.floor(Math.random() * 20) + 1) * 20;
-        q = `${p}% van ${base} = ?`; a = ((p / 100) * base).toString();
-      } 
-      else if (topic === 'kommagetallen') {
-        if (rand < 0.5) {
-          let n1 = (Math.random() * 10).toFixed(1), n2 = (Math.random() * 10).toFixed(1);
-          q = `${n1} + ${n2} = ?`; a = (parseFloat(n1) + parseFloat(n2)).toFixed(1).replace('.', ',');
-        } else {
-          let n1 = (Math.random() * 15 + 5).toFixed(1), n2 = (Math.random() * 5).toFixed(1);
-          q = `${n1} - ${n2} = ?`; a = (parseFloat(n1) - parseFloat(n2)).toFixed(1).replace('.', ',');
-        }
-      } 
-      else if (topic === 'kwadraten') {
-        if (rand < 0.5) {
-          let base = Math.floor(Math.random() * 10) + 2;
-          q = `√${base * base} = ?`; a = base.toString();
-        } else {
-          let base = Math.floor(Math.random() * 12) + 2;
-          q = `${base}² = ?`; a = (base * base).toString();
-        }
-      } 
-      else if (topic === 'machten') {
-        let base = Math.floor(Math.random() * 5) + 2;
-        let exp = Math.floor(Math.random() * 2) + 3;
-        q = `${base}^${exp} = ?`; a = (Math.pow(base, exp)).toString();
-      }
-      else if (topic === 'breuken') {
-        let noemers = [3, 4, 5, 6, 8, 10];
-        let n = noemers[Math.floor(Math.random() * noemers.length)];
-        let t1 = Math.floor(Math.random() * (n - 2)) + 1;
-        let t2 = Math.floor(Math.random() * (n - t1 - 1)) + 1;
-        q = `${t1}/${n} + ${t2}/${n} = ? (Geef de teller)`; a = (t1 + t2).toString();
-      }
-      else if (topic === 'vergelijken') {
-        let n1 = Math.floor(Math.random() * 100) + 1, n2 = Math.floor(Math.random() * 100) + 1;
-        let symbol = n1 < n2 ? '<' : n1 > n2 ? '>' : '=';
-        q = `${n1} [ ? ] ${n2} (kies <, > of =)`; a = symbol;
-      }
-      else if (topic === 'getalpatronen') {
-        let start = Math.floor(Math.random() * 20) + 2;
-        let stap = Math.floor(Math.random() * 6) + 2;
-        q = `${start}, ${start + stap}, ${start + stap*2}, ?`; a = (start + stap*3).toString();
-      }
-      else if (topic === 'geldrekenen') {
-        let bedrag1 = (Math.floor(Math.random() * 10) + 1) * 0.5;
-        let bedrag2 = (Math.floor(Math.random() * 10) + 1) * 0.5;
-        q = `€${bedrag1.toFixed(2).replace('.', ',')} + €${bedrag2.toFixed(2).replace('.', ',')} = €?`; 
-        a = (bedrag1 + bedrag2).toFixed(2).replace('.', ',');
-      }
-      else if (topic === 'klokkijken') {
-        let uur = Math.floor(Math.random() * 10) + 1;
-        let min = Math.floor(Math.random() * 4) * 15;
-        q = `Hoeveel minuten is ${uur} uur en ${min} minuten?`; a = (uur * 60 + min).toString();
-      }
-      else if (topic === 'metrisch') {
-        let m = Math.floor(Math.random() * 8) + 1;
-        q = `${m} m = ? cm`; a = (m * 100).toString();
-      }
-      else {
-        let n1 = Math.floor(Math.random() * 50) + 10, n2 = Math.floor(Math.random() * 50) + 10;
+      if (topic === 'optellen') {
+        let n1 = Math.floor(Math.random() * mult) + 2, n2 = Math.floor(Math.random() * mult) + 2;
+        q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
+      } else if (topic === 'aftrekken') {
+        let n1 = Math.floor(Math.random() * mult) + 5, n2 = Math.floor(Math.random() * n1) + 1;
+        q = `${n1} - ${n2} = ?`; a = (n1 - n2).toString();
+      } else if (topic === 'tafels') {
+        let t1 = Math.floor(Math.random() * 10) + 1, t2 = Math.floor(Math.random() * 10) + 1;
+        q = `${t1} × ${t2} = ?`; a = (t1 * t2).toString();
+      } else if (topic === 'delen') {
+        let t2 = Math.floor(Math.random() * 10) + 2, m = Math.floor(Math.random() * 10) + 1;
+        q = `${t2 * m} : ${t2} = ?`; a = m.toString();
+      } else {
+        let n1 = Math.floor(Math.random() * mult) + 2, n2 = Math.floor(Math.random() * mult) + 2;
         q = `${n1} + ${n2} = ?`; a = (n1 + n2).toString();
       }
 
       currentMathProblem = { question: q, answer: a.trim(), topic: topic };
       document.getElementById('mathExpression').textContent = q;
-      document.getElementById('currentTopicLabel').textContent = `Onderwerp: ${topic.toUpperCase()}`;
+      document.getElementById('currentTopicLabel').textContent = `Onderwerp: ${topic.toUpperCase()} (${diff})`;
       document.getElementById('miniScoreVal').textContent = currentStudent.score;
       
       const answerField = document.getElementById('studentAnswer');
@@ -1280,7 +1227,7 @@
       try {
         await addDoc(collection(db, "studentResults"), {
           studentName: currentStudent.name, classCode: currentStudent.code || 'TAAK',
-          topic: currentMathProblem.topic, correct: isCorrect, scoreVal: currentStudent.score, mode: activeStudentMode, createdAt: new Date().toISOString()
+          topic: currentMathProblem.topic, correct: isCorrect, scoreVal: currentStudent.score, mode: activeStudentMode, teacherEmail: currentUser ? currentUser.email : 'global', createdAt: new Date().toISOString()
         });
       } catch (e) {}
 
@@ -1351,9 +1298,10 @@
     });
 
     async function loadTeacherClassesWithStudents() {
+      if (!currentUser) return;
       const listEl = document.getElementById('classList');
       try {
-        const classSnap = await getDocs(collection(db, "teacherClasses"));
+        const classSnap = await getDocs(query(collection(db, "teacherClasses"), where("teacherEmail", "==", currentUser.email)));
         if (classSnap.empty) {
           listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Geen klassen gevonden. Maak er hieronder eentje aan.</div>`;
           return;
@@ -1377,7 +1325,7 @@
             <div class="class-item" style="flex-direction: column; align-items: flex-start; gap: 10px;">
               <div style="display: flex; width: 100%; align-items: center; justify-content: space-between;">
                 <strong>📁 ${d.className}</strong>
-                <span style="background: #ede9fe; color: var(--primary); padding: 6px 12px; border-radius: 10px; font-size: 14px; font-weight: 800;">Code: ${d.classCode}</span>
+                <span style="background: #ffedd5; color: var(--halloween-orange); padding: 6px 12px; border-radius: 10px; font-size: 14px; font-weight: 800;">Code: ${d.classCode}</span>
               </div>
               <div style="width: 100%; background: #f8fafc; padding: 10px; border-radius: 12px; border: 1px solid var(--border);">
                 <div style="font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px;">Leerlingen in deze klas (${kids.length}):</div>
@@ -1400,9 +1348,10 @@
     }
 
     async function loadTeacherClassesForAssignment() {
+      if (!currentUser) return;
       const selectEl = document.getElementById('taskClassSelect');
       try {
-        const snap = await getDocs(collection(db, "teacherClasses"));
+        const snap = await getDocs(query(collection(db, "teacherClasses"), where("teacherEmail", "==", currentUser.email)));
         selectEl.innerHTML = `<option value="">Selecteer klas...</option>`;
         snap.forEach(docSnap => {
           let d = docSnap.data();
@@ -1506,11 +1455,12 @@
     });
 
     async function loadReportsStudentList() {
+      if (!currentUser) return;
       const listEl = document.getElementById('reportStudentList');
       try {
-        const snap = await getDocs(collection(db, "studentResults"));
+        const snap = await getDocs(query(collection(db, "studentResults"), where("teacherEmail", "==", currentUser.email)));
         if (snap.empty) {
-          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Nog geen leerlingdata beschikbaar.</div>`;
+          listEl.innerHTML = `<div style="text-align: center; color: var(--muted); padding: 30px;">Nog geen leerlingdata beschikbaar voor jouw account.</div>`;
           return;
         }
 
@@ -1519,26 +1469,40 @@
           let d = docSnap.data();
           let name = d.studentName || 'Onbekend';
           if (!studentMap[name]) studentMap[name] = [];
-          studentMap[name].push(d);
+          studentMap[name].push({ id: docSnap.id, ...d });
         });
 
         listEl.innerHTML = "";
         for (let name in studentMap) {
-          let count = studentMap[name].length;
+          let results = studentMap[name];
+          let count = results.length;
+          let firstResId = results[0].id;
           listEl.innerHTML += `
             <div class="class-item">
-              <div>
-                <strong>👤 ${name}</strong> <small style="color: var(--muted); margin-left: 8px;">(${count} resultaten)</small>
-              </div>
-              <button class="btn btn-primary view-graph-btn" data-name="${name}" type="button" style="width: auto; padding: 6px 14px; font-size: 14px;">📊 Bekijk Prestatielijn</button>
+              <span class="view-graph-span" data-name="${name}" style="flex: 1; cursor: pointer; color: var(--primary);">👤 ${name} — (${count} resultaten)</span>
+              <button class="btn btn-danger delete-report-btn" data-name="${name}" type="button" style="width: auto; padding: 4px 10px; font-size: 12px;">Rapport Verwijderen</button>
             </div>
           `;
         }
 
-        document.querySelectorAll('.view-graph-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            let studentName = btn.getAttribute('data-name');
+        document.querySelectorAll('.view-graph-span').forEach(span => {
+          span.addEventListener('click', () => {
+            let studentName = span.getAttribute('data-name');
             showStudentCitoGraph(studentName, studentMap[studentName]);
+          });
+        });
+
+        document.querySelectorAll('.delete-report-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            let studentName = btn.getAttribute('data-name');
+            if (confirm(`Weet je zeker dat je alle rapporten van ${studentName} wilt verwijderen?`)) {
+              let resList = studentMap[studentName];
+              for (let r of resList) {
+                await deleteDoc(doc(db, "studentResults", r.id));
+              }
+              loadReportsStudentList();
+              document.getElementById('studentDetailGraphContainer').style.display = 'none';
+            }
           });
         });
       } catch(e) {}
@@ -1555,23 +1519,11 @@
       ctx.fillStyle = "#ecfdf5";
       ctx.fillRect(50, 20, canvas.width - 80, 200);
 
-      ctx.fillStyle = "rgba(16, 185, 129, 0.2)";
-      ctx.beginPath();
-      ctx.moveTo(50, 100); ctx.lineTo(canvas.width - 30, 60); ctx.lineTo(canvas.width - 30, 140); ctx.lineTo(50, 180); ctx.fill();
-
       ctx.strokeStyle = "#e2e8f0";
       ctx.lineWidth = 1;
       for (let y = 20; y <= 220; y += 40) {
         ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(canvas.width - 30, y); ctx.stroke();
       }
-
-      ctx.fillStyle = "#64748b";
-      ctx.font = "12px sans-serif";
-      ctx.fillText("I", canvas.width - 20, 30);
-      ctx.fillText("II", canvas.width - 20, 70);
-      ctx.fillText("III", canvas.width - 20, 110);
-      ctx.fillText("IV", canvas.width - 20, 150);
-      ctx.fillText("V", canvas.width - 20, 190);
 
       results.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       let points = [];
@@ -1655,6 +1607,7 @@
     document.getElementById("startActiveGameBtn").addEventListener('click', async () => {
       const raceCode = document.getElementById('liveGameCodeBig').textContent;
       const skill = document.getElementById('raceSkillSelect').value;
+      const difficulty = document.getElementById('teacherDifficultySelect').value;
       currentRaceRound = 1;
       const startTime = Date.now();
 
@@ -1662,6 +1615,7 @@
         await setDoc(doc(db, "activeGames", raceCode), {
           code: raceCode,
           skill: skill,
+          difficulty: difficulty,
           round: currentRaceRound,
           startTime: startTime,
           status: 'playing',
@@ -1757,7 +1711,7 @@
             topFiveEl.innerHTML += `
               <div class="class-item">
                 <span>${medaille} 👤 ${st.name}</span>
-                <span style="color: var(--primary); font-weight: 800;">${st.correctCount || 0} goed (${st.score || 0} pts)</span>
+                <span style="color: var(--halloween-orange); font-weight: 800;">${st.correctCount || 0} goed (${st.score || 0} pts)</span>
               </div>
             `;
           });
