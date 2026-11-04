@@ -259,6 +259,63 @@
 </head>
 <body>
 
+  <!-- Floating Feedback & Suggestie Knoppen (Altijd zichtbaar rechtsonder) -->
+  <div style="position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 9998;">
+    <button class="btn btn-primary" id="openSuggestionModalBtn" type="button" style="width: auto; padding: 10px 16px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">💡 Suggestie</button>
+    <button class="btn btn-danger" id="openBugModalBtn" type="button" style="width: auto; padding: 10px 16px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">🐛 Bug Melden</button>
+  </div>
+
+  <!-- Update Log / Welkomst Modal (Verschijnt automatisch bij binnenkomst) -->
+  <div id="updateLogModal" style="display: grid; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; place-items: center; padding: 16px;">
+    <div style="background: white; border-radius: 24px; padding: 32px; width: min(520px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
+      <h2 style="margin-top: 0; font-size: 24px; color: var(--primary); margin-bottom: 8px;">🚀 Wat is er nieuw in SuperReken?</h2>
+      <p style="color: var(--muted); font-size: 15px; margin-bottom: 16px;">Bekijk de laatste updates en verbeteringen:</p>
+      
+      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 24px; max-height: 240px; overflow-y: auto; font-size: 15px; line-height: 1.6;">
+        <ul style="margin: 0; padding-left: 20px; color: var(--dark);">
+          <li><strong>Handmatige Race Start:</strong> Leerkrachten starten nu eerst een lobby en bepalen zelf wanneer de race begint.</li>
+          <li><strong>Live Kicken:</strong> Leerlingen worden direct uit de race gekicked zodra de leerkracht op verwijderen klikt.</li>
+          <li><strong>Schoon Leaderboard:</strong> Strakke weergave van topresultaten zonder overbodige labels.</li>
+          <li><strong>Suggesties & Bug Reports:</strong> Stuur direct feedback of meld bugs via de knoppen onderin!</li>
+        </ul>
+      </div>
+
+      <button class="btn btn-primary" id="closeUpdateModalBtn" type="button">Begrepen, start platform!</button>
+    </div>
+  </div>
+
+  <!-- Suggestie Modal -->
+  <div id="suggestionModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; place-items: center; padding: 16px;">
+    <div style="background: white; border-radius: 24px; padding: 30px; width: min(450px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
+      <h3 style="margin-top: 0; font-size: 20px; color: var(--dark);">💡 Stuur een Suggestie</h3>
+      <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Heb je een idee om SuperReken te verbeteren? Laat het ons weten!</p>
+      <div class="field-group">
+        <textarea class="field" id="suggestionInput" placeholder="Typ hier je suggestie..." rows="4" style="resize: none;"></textarea>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-secondary" id="closeSuggestionModalBtn" type="button">Annuleren</button>
+        <button class="btn btn-primary" id="sendSuggestionBtn" type="button">Versturen</button>
+      </div>
+      <div class="status" id="suggestionStatus"></div>
+    </div>
+  </div>
+
+  <!-- Bug Report Modal -->
+  <div id="bugModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; place-items: center; padding: 16px;">
+    <div style="background: white; border-radius: 24px; padding: 30px; width: min(450px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
+      <h3 style="margin-top: 0; font-size: 20px; color: var(--danger);">🐛 Meld een Bug</h3>
+      <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Kom je een foutje tegen? Beschrijf het hieronder:</p>
+      <div class="field-group">
+        <textarea class="field" id="bugInput" placeholder="Wat ging er mis en waar?" rows="4" style="resize: none;"></textarea>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-secondary" id="closeBugModalBtn" type="button">Annuleren</button>
+        <button class="btn btn-primary" id="sendBugBtn" type="button" style="background: var(--danger);">Bug Verzenden</button>
+      </div>
+      <div class="status" id="bugStatus"></div>
+    </div>
+  </div>
+
   <div class="container" id="mainContainer">
     
     <!-- Selectiescherm -->
@@ -793,6 +850,91 @@
     const studentCard = document.getElementById('studentCard');
     const teacherCard = document.getElementById('teacherCard');
     const mainContainer = document.getElementById('mainContainer');
+
+    // Discord Webhook URLs
+    const SUGGESTION_WEBHOOK = "https://discord.com/api/webhooks/1567624769833275472/tsTLF8Y0iRU7GGeIUSpAOgAWL_p4mYpK9C5gzIKI-wW7T34uC58_fSdX083verPaZsfX";
+    const BUG_WEBHOOK = "https://discord.com/api/webhooks/1567624884207747133/sf21WxsWjmvADlh6fXFKJ9VGcmmObY2zTbzua7h-98DtIASIEB3YSq_nt4fm0eus5Xnz";
+
+    // Modals Logica
+    document.getElementById('closeUpdateModalBtn').addEventListener('click', () => {
+      document.getElementById('updateLogModal').style.display = 'none';
+    });
+
+    document.getElementById('openSuggestionModalBtn').addEventListener('click', () => {
+      document.getElementById('suggestionModal').style.display = 'grid';
+    });
+    document.getElementById('closeSuggestionModalBtn').addEventListener('click', () => {
+      document.getElementById('suggestionModal').style.display = 'none';
+      document.getElementById('suggestionInput').value = '';
+      document.getElementById('suggestionStatus').textContent = '';
+    });
+
+    document.getElementById('openBugModalBtn').addEventListener('click', () => {
+      document.getElementById('bugModal').style.display = 'grid';
+    });
+    document.getElementById('closeBugModalBtn').addEventListener('click', () => {
+      document.getElementById('bugModal').style.display = 'none';
+      document.getElementById('bugInput').value = '';
+      document.getElementById('bugStatus').textContent = '';
+    });
+
+    // Verstuur Suggestie naar Discord
+    document.getElementById('sendSuggestionBtn').addEventListener('click', async () => {
+      const text = document.getElementById('suggestionInput').value.trim();
+      const statusEl = document.getElementById('suggestionStatus');
+      if (!text) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Vul een suggestie in!";
+        return;
+      }
+
+      try {
+        await fetch(SUGGESTION_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: `💡 **Nieuwe Suggestie:**\n${text}` })
+        });
+        statusEl.style.color = "var(--success)";
+        statusEl.textContent = "Verzonden naar Discord! Bedankt!";
+        setTimeout(() => {
+          document.getElementById('suggestionModal').style.display = 'none';
+          document.getElementById('suggestionInput').value = '';
+          statusEl.textContent = '';
+        }, 1500);
+      } catch(e) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Fout bij verzenden.";
+      }
+    });
+
+    // Verstuur Bug Report naar Discord
+    document.getElementById('sendBugBtn').addEventListener('click', async () => {
+      const text = document.getElementById('bugInput').value.trim();
+      const statusEl = document.getElementById('bugStatus');
+      if (!text) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Beschrijf de bug!";
+        return;
+      }
+
+      try {
+        await fetch(BUG_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content: `🐛 **Nieuwe Bug Melding:**\n${text}` })
+        });
+        statusEl.style.color = "var(--success)";
+        statusEl.textContent = "Bug succesvol gemeld!";
+        setTimeout(() => {
+          document.getElementById('bugModal').style.display = 'none';
+          document.getElementById('bugInput').value = '';
+          statusEl.textContent = '';
+        }, 1500);
+      } catch(e) {
+        statusEl.style.color = "#ef4444";
+        statusEl.textContent = "Fout bij verzenden.";
+      }
+    });
 
     function showStudentSection(sectionId) {
       document.querySelectorAll('.student-section').forEach(sec => sec.classList.remove('active'));
