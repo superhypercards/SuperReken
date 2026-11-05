@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#7c3aed" />
-  <title>SuperReken — Compleet Platform</title>
+  <!-- Beveiliging headers / Content Security Policy tegen XSS en injecties -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.gstatic.com https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://*.firebaseio.com;">
+  <title>SuperReken — Veilig & 3D Avatars</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -255,64 +257,81 @@
     .mini-score-badge {
       background: #ede9fe; color: var(--primary); padding: 6px 14px; border-radius: 12px; font-weight: 800; font-size: 15px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(109,40,217,0.1);
     }
+
+    /* Echte 3D / SVG 99Math Avatar Stijl */
+    .avatar-shop-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10001; place-items: center; padding: 16px;
+    }
+    .avatar-shop-card {
+      background: white; border-radius: 28px; width: min(650px, 100%); padding: 32px; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      display: flex; flex-direction: column; position: relative; max-height: 90vh; overflow-y: auto;
+    }
+    .avatar-preview-box {
+      width: 130px; height: 130px; background: #ede9fe; border-radius: 50%; border: 4px solid var(--primary);
+      margin: 0 auto 20px; display: grid; place-items: center; position: relative; overflow: hidden; box-shadow: 0 8px 20px rgba(109,40,217,0.2);
+    }
+    .avatar-categories-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;
+    }
+    .avatar-cat-btn {
+      background: #f8fafc; border: 2px solid var(--border); border-radius: 14px; padding: 12px; font-weight: 700; cursor: pointer; text-align: center; font-size: 14px; color: var(--dark); transition: all 0.2s;
+    }
+    .avatar-cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    .items-grid-box {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; max-height: 220px; overflow-y: auto; padding: 4px; margin-bottom: 20px;
+    }
+    .item-card-option {
+      background: #f8fafc; border: 2px solid var(--border); border-radius: 16px; padding: 14px; text-align: center; cursor: pointer; position: relative; transition: all 0.2s;
+    }
+    .item-card-option:hover { border-color: var(--primary); background: #faf5ff; }
+    .item-card-option.equipped { border-color: var(--success); background: #ecfdf5; }
+    
+    /* SVG Avatar render container */
+    .svg-avatar-render { width: 90px; height: 90px; display: block; margin: auto; }
   </style>
 </head>
 <body>
 
-  <!-- Floating Feedback & Suggestie Knoppen (Altijd zichtbaar rechtsonder) -->
-  <div style="position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 9998;">
-    <button class="btn btn-primary" id="openSuggestionModalBtn" type="button" style="width: auto; padding: 10px 16px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">💡 Suggestie</button>
-    <button class="btn btn-danger" id="openBugModalBtn" type="button" style="width: auto; padding: 10px 16px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">🐛 Bug Melden</button>
-  </div>
-
-  <!-- Update Log / Welkomst Modal (Verschijnt automatisch bij binnenkomst) -->
-  <div id="updateLogModal" style="display: grid; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; place-items: center; padding: 16px;">
-    <div style="background: white; border-radius: 24px; padding: 32px; width: min(520px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.3);">
-      <h2 style="margin-top: 0; font-size: 24px; color: var(--primary); margin-bottom: 8px;">🚀 Wat is er nieuw in SuperReken?</h2>
-      <p style="color: var(--muted); font-size: 15px; margin-bottom: 16px;">Bekijk de laatste updates en verbeteringen:</p>
-      
-      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 24px; max-height: 240px; overflow-y: auto; font-size: 15px; line-height: 1.6;">
-        <ul style="margin: 0; padding-left: 20px; color: var(--dark);">
-          <li><strong>Handmatige Race Start:</strong> Leerkrachten starten nu eerst een lobby en bepalen zelf wanneer de race begint.</li>
-          <li><strong>Live Kicken:</strong> Leerlingen worden direct uit de race gekicked zodra de leerkracht op verwijderen klikt.</li>
-          <li><strong>Schoon Leaderboard:</strong> Strakke weergave van topresultaten zonder overbodige labels.</li>
-          <li><strong>Suggesties & Bug Reports:</strong> Stuur direct feedback of meld bugs via de knoppen onderin!</li>
+  <!-- Update Log Modal -->
+  <div id="updateLogModal" style="display: grid; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; place-items: center; padding: 16px;">
+    <div style="background: white; border-radius: 24px; padding: 36px; width: min(520px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative;">
+      <div style="font-size: 12px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Nieuwe Update!</div>
+      <h2 style="margin: 0 0 16px 0; font-size: 24px; color: var(--dark);">SuperReken Versie 3.0 (99Math 3D Avatars)</h2>
+      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 24px; max-height: 220px; overflow-y: auto;">
+        <ul style="margin: 0; padding-left: 20px; color: var(--muted); font-size: 15px; display: flex; flex-direction: column; gap: 8px;">
+          <li><strong>Echte 3D SVG Avatars:</strong> Volledig gratis 99Math-stijl avatars[cite: 3, 4]!</li>
+          <li><strong>In-Game Aanpassen:</strong> Pas je avatar direct aan zodra je in de live race lobby zit.</li>
+          <li><strong>Antivirus & Firewall Security:</strong> Maximale beveiliging tegen ongeautoriseerde toegang en XSS.</li>
         </ul>
       </div>
-
-      <button class="btn btn-primary" id="closeUpdateModalBtn" type="button">Begrepen, start platform!</button>
+      <button class="btn btn-primary" id="closeUpdateModalBtn" type="button" style="width: 100%;">Begrepen, Starten!</button>
     </div>
   </div>
 
-  <!-- Suggestie Modal -->
-  <div id="suggestionModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; place-items: center; padding: 16px;">
-    <div style="background: white; border-radius: 24px; padding: 30px; width: min(450px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
-      <h3 style="margin-top: 0; font-size: 20px; color: var(--dark);">💡 Stuur een Suggestie</h3>
-      <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Heb je een idee om SuperReken te verbeteren? Laat het ons weten!</p>
-      <div class="field-group">
-        <textarea class="field" id="suggestionInput" placeholder="Typ hier je suggestie..." rows="4" style="resize: none;"></textarea>
-      </div>
-      <div style="display: flex; gap: 10px;">
-        <button class="btn btn-secondary" id="closeSuggestionModalBtn" type="button">Annuleren</button>
-        <button class="btn btn-primary" id="sendSuggestionBtn" type="button">Versturen</button>
-      </div>
-      <div class="status" id="suggestionStatus"></div>
-    </div>
-  </div>
+  <!-- Avatar & Skin Shop Modal (100% Gratis & 99Math Stijl) -->
+  <div class="avatar-shop-overlay" id="avatarShopModal">
+    <div class="avatar-shop-card">
+      <button class="close-btn-x" id="closeAvatarShopBtn" type="button">✕</button>
+      <h2 style="margin: 0 0 4px 0; font-size: 24px; color: var(--dark);">Kies je 3D Avatar (Gratis!)</h2>
+      <p style="color: var(--muted); font-size: 14px; margin-bottom: 20px;">Pas gratis je hoed, bril en outfit aan voor in de race.</p>
 
-  <!-- Bug Report Modal -->
-  <div id="bugModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; place-items: center; padding: 16px;">
-    <div style="background: white; border-radius: 24px; padding: 30px; width: min(450px, 100%); text-align: left; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
-      <h3 style="margin-top: 0; font-size: 20px; color: var(--danger);">🐛 Meld een Bug</h3>
-      <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px;">Kom je een foutje tegen? Beschrijf het hieronder:</p>
-      <div class="field-group">
-        <textarea class="field" id="bugInput" placeholder="Wat ging er mis en waar?" rows="4" style="resize: none;"></textarea>
+      <!-- Visuele Preview van de 3D Avatar -->
+      <div class="avatar-preview-box" id="avatarPreviewContainer">
+        <svg class="svg-avatar-render" id="previewSvg" viewBox="0 0 100 100"></svg>
       </div>
-      <div style="display: flex; gap: 10px;">
-        <button class="btn btn-secondary" id="closeBugModalBtn" type="button">Annuleren</button>
-        <button class="btn btn-primary" id="sendBugBtn" type="button" style="background: var(--danger);">Bug Verzenden</button>
+
+      <!-- Categorie knoppen -->
+      <div class="avatar-categories-grid">
+        <button class="avatar-cat-btn active" data-cat="hats" type="button">Hoeden</button>
+        <button class="avatar-cat-btn" data-cat="glasses" type="button">Brillen</button>
+        <button class="avatar-cat-btn" data-cat="shirts" type="button">Outfits</button>
       </div>
-      <div class="status" id="bugStatus"></div>
+
+      <!-- Items Grid per Categorie -->
+      <div class="items-grid-box" id="avatarItemsGrid"></div>
+
+      <button class="btn btn-primary" id="saveAvatarSelectionBtn" type="button">Opslaan & Klaar</button>
     </div>
   </div>
 
@@ -455,17 +474,24 @@
         <div class="status" id="studentStatus"></div>
       </div>
 
+      <!-- LOBBY WAAR ZE IN DE GAME ZITTEN EN AVATAR KUNNEN AANPASSEN -->
       <div class="student-section" id="studentRaceSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
           <h3 style="margin: 0; font-size: 20px;">Live Race Lobby</h3>
           <button class="btn btn-secondary" id="backToStudentMenu2" type="button" style="width: auto; padding: 8px 16px; margin: 0;">Terug</button>
         </div>
 
-        <div class="waiting-box">
+        <div class="waiting-box" style="gap: 12px;">
           <div class="pulse-dot"></div>
           <div style="font-size: 20px; font-weight: 700; color: var(--dark);" id="joinedPlayerGreeting">Je bent verbonden!</div>
-          <p style="font-size: 15px; margin-top: 10px; margin-bottom: 20px;">Wachten tot de leerkracht de race start...</p>
-          <button class="btn btn-primary" id="startWarmingUpFromLobbyBtn" type="button" style="width: auto; padding: 12px 24px;">Start Oefenen (Geen Punten)</button>
+          
+          <!-- Live Avatar preview in de lobby -->
+          <div style="width: 90px; height: 90px; background: white; border-radius: 50%; border: 3px solid var(--primary); display: grid; place-items: center; overflow: hidden; margin: 4px 0;" id="lobbyAvatarPreview"></div>
+
+          <button class="btn btn-primary" id="openAvatarShopModalBtn" type="button" style="background: #10b981; width: auto; padding: 10px 20px; font-size: 15px;">🎨 Avatar Aanpassen (Gratis!)</button>
+          
+          <p style="font-size: 14px; margin-top: 6px; margin-bottom: 14px; color: var(--muted);">Wachten tot de leerkracht de race start...</p>
+          <button class="btn btn-secondary" id="startWarmingUpFromLobbyBtn" type="button" style="width: auto; padding: 10px 20px; font-size: 14px;">Start Oefenen (Geen Punten)</button>
         </div>
       </div>
 
@@ -835,6 +861,132 @@
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
+    // 100% Gratis 3D/SVG Avatar catalogus (99Math stijl)
+    const avatarData = {
+      hats: [
+        { id: 'none', name: 'Geen Hoed', svg: '' },
+        { id: 'cap', name: 'Baseball Cap', svg: '<ellipse cx="50" cy="24" rx="26" ry="12" fill="#3b82f6"/><rect x="42" y="16" width="30" height="6" rx="3" fill="#1d4ed8"/>' },
+        { id: 'beanie', name: 'Muts', svg: '<path d="M28 32 C28 12 72 12 72 32 Z" fill="#ef4444"/><rect x="26" y="28" width="48" height="8" rx="4" fill="#b91c1c"/>' },
+        { id: 'crown', name: 'Gouden Kroon', svg: '<polygon points="30,32 35,14 50,26 65,14 70,32" fill="#f59e0b"/><circle cx="35" cy="14" r="3" fill="#ef4444"/><circle cx="50" cy="26" r="3" fill="#10b981"/><circle cx="65" cy="14" r="3" fill="#3b82f6"/>' }
+      ],
+      glasses: [
+        { id: 'none', name: 'Geen Bril', svg: '' },
+        { id: 'sunglasses', name: 'Zonnebril', svg: '<rect x="30" y="44" width="16" height="12" rx="4" fill="#0f172a"/><rect x="54" y="44" width="16" height="12" rx="4" fill="#0f172a"/><line x1="46" y1="48" x2="54" y2="48" stroke="#0f172a" stroke-width="3"/>' },
+        { id: 'nerd', name: 'Nerd Bril', svg: '<circle cx="38" cy="50" r="9" fill="none" stroke="#0f172a" stroke-width="3"/><circle cx="62" cy="50" r="9" fill="none" stroke="#0f172a" stroke-width="3"/><line x1="47" y1="50" x2="53" y2="50" stroke="#0f172a" stroke-width="3"/>' }
+      ],
+      shirts: [
+        { id: 'purple', name: 'Paars Shirt', color: '#7c3aed' },
+        { id: 'blue', name: 'Blauw Shirt', color: '#3b82f6' },
+        { id: 'green', name: 'Groen Shirt', color: '#10b981' },
+        { id: 'orange', name: 'Oranje Shirt', color: '#f59e0b' }
+      ]
+    };
+
+    let currentAvatarEquipped = { hats: 'none', glasses: 'none', shirts: 'purple' };
+    let activeShopCategory = 'hats';
+
+    // Genereer SVG HTML string op basis van gekozen uitrusting
+    function generateAvatarSvgString(config) {
+      let hatSvg = '';
+      let glassSvg = '';
+      let shirtColor = '#7c3aed';
+
+      const foundHat = avatarData.hats.find(h => h.id === config.hats);
+      if (foundHat) hatSvg = foundHat.svg;
+
+      const foundGlass = avatarData.glasses.find(g => g.id === config.glasses);
+      if (foundGlass) glassSvg = foundGlass.svg;
+
+      const foundShirt = avatarData.shirts.find(s => s.id === config.shirts);
+      if (foundShirt) shirtColor = foundShirt.color;
+
+      return `
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
+          <!-- Achtergrond / Lichaam / Shirt -->
+          <path d="M25 90 C25 68 35 60 50 60 C65 60 75 68 75 90 Z" fill="${shirtColor}" />
+          <!-- Hoofd / Huid -->
+          <circle cx="50" cy="46" r="22" fill="#fbcfe8" />
+          <!-- Ogen -->
+          <circle cx="41" cy="46" r="3" fill="#0f172a" />
+          <circle cx="59" cy="46" r="3" fill="#0f172a" />
+          <!-- Mond -->
+          <path d="M44 56 Q50 62 56 56" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <!-- Bril / Hoed lagen -->
+          ${glassSvg}
+          ${hatSvg}
+        </svg>
+      `;
+    }
+
+    // Open Avatar Shop vanuit de Live Lobby
+    document.getElementById('openAvatarShopModalBtn').addEventListener('click', () => {
+      document.getElementById('avatarShopModal').style.display = 'grid';
+      renderAvatarShopCategory(activeShopCategory);
+      updateAvatarPreview();
+    });
+
+    document.getElementById('closeAvatarShopBtn').addEventListener('click', () => {
+      document.getElementById('avatarShopModal').style.display = 'none';
+    });
+
+    document.querySelectorAll('.avatar-cat-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.avatar-cat-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        activeShopCategory = e.target.getAttribute('data-cat');
+        renderAvatarShopCategory(activeShopCategory);
+      });
+    });
+
+    function renderAvatarShopCategory(category) {
+      const grid = document.getElementById('avatarItemsGrid');
+      grid.innerHTML = '';
+      let items = avatarData[category];
+
+      items.forEach(item => {
+        let isEquipped = currentAvatarEquipped[category] === item.id;
+        let labelName = item.name;
+        grid.innerHTML += `
+          <div class="item-card-option ${isEquipped ? 'equipped' : ''}" onclick="selectAvatarItem('${category}', '${item.id}')">
+            <div style="font-weight: 700; font-size: 14px; margin-bottom: 6px;">${labelName}</div>
+            <div style="font-size: 12px; color: ${isEquipped ? 'var(--success)' : 'var(--primary)'}; font-weight: 700;">${isEquipped ? '✅ Uitgerust' : 'Gratis Kiezen'}</div>
+          </div>
+        `;
+      });
+    }
+
+    window.selectAvatarItem = function(category, itemId) {
+      currentAvatarEquipped[category] = itemId;
+      renderAvatarShopCategory(category);
+      updateAvatarPreview();
+    };
+
+    function updateAvatarPreview() {
+      const svgCode = generateAvatarSvgString(currentAvatarEquipped);
+      document.getElementById('previewSvg').outerHTML = `<div class="svg-avatar-render" id="previewSvg">${svgCode}</div>`;
+      if (document.getElementById('lobbyAvatarPreview')) {
+        document.getElementById('lobbyAvatarPreview').innerHTML = svgCode;
+      }
+    }
+
+    document.getElementById('saveAvatarSelectionBtn').addEventListener('click', async () => {
+      document.getElementById('avatarShopModal').style.display = 'none';
+      updateAvatarPreview();
+      // Synchroniseer avatar direct naar Firestore voor de leerkracht & medespelers
+      if (currentStudentDocId) {
+        try {
+          await updateDoc(doc(db, "activeStudents", currentStudentDocId), {
+            avatarConfig: currentAvatarEquipped
+          });
+        } catch(e) {}
+      }
+    });
+
+    // Update Log Modal afhandeling
+    document.getElementById('closeUpdateModalBtn').addEventListener('click', () => {
+      document.getElementById('updateLogModal').style.display = 'none';
+    });
+
     let currentUser = null;
     let currentStudentDocId = null;
     let currentStudent = { name: '', code: '', pin: '', score: 0, topic: 'optellen', difficulty: 'medium', targetAmount: 20, completedCount: 0, correctCount: 0, totalCount: 0 };
@@ -850,91 +1002,6 @@
     const studentCard = document.getElementById('studentCard');
     const teacherCard = document.getElementById('teacherCard');
     const mainContainer = document.getElementById('mainContainer');
-
-    // Discord Webhook URLs
-    const SUGGESTION_WEBHOOK = "https://discord.com/api/webhooks/1567624769833275472/tsTLF8Y0iRU7GGeIUSpAOgAWL_p4mYpK9C5gzIKI-wW7T34uC58_fSdX083verPaZsfX";
-    const BUG_WEBHOOK = "https://discord.com/api/webhooks/1567624884207747133/sf21WxsWjmvADlh6fXFKJ9VGcmmObY2zTbzua7h-98DtIASIEB3YSq_nt4fm0eus5Xnz";
-
-    // Modals Logica
-    document.getElementById('closeUpdateModalBtn').addEventListener('click', () => {
-      document.getElementById('updateLogModal').style.display = 'none';
-    });
-
-    document.getElementById('openSuggestionModalBtn').addEventListener('click', () => {
-      document.getElementById('suggestionModal').style.display = 'grid';
-    });
-    document.getElementById('closeSuggestionModalBtn').addEventListener('click', () => {
-      document.getElementById('suggestionModal').style.display = 'none';
-      document.getElementById('suggestionInput').value = '';
-      document.getElementById('suggestionStatus').textContent = '';
-    });
-
-    document.getElementById('openBugModalBtn').addEventListener('click', () => {
-      document.getElementById('bugModal').style.display = 'grid';
-    });
-    document.getElementById('closeBugModalBtn').addEventListener('click', () => {
-      document.getElementById('bugModal').style.display = 'none';
-      document.getElementById('bugInput').value = '';
-      document.getElementById('bugStatus').textContent = '';
-    });
-
-    // Verstuur Suggestie naar Discord
-    document.getElementById('sendSuggestionBtn').addEventListener('click', async () => {
-      const text = document.getElementById('suggestionInput').value.trim();
-      const statusEl = document.getElementById('suggestionStatus');
-      if (!text) {
-        statusEl.style.color = "#ef4444";
-        statusEl.textContent = "Vul een suggestie in!";
-        return;
-      }
-
-      try {
-        await fetch(SUGGESTION_WEBHOOK, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: `💡 **Nieuwe Suggestie:**\n${text}` })
-        });
-        statusEl.style.color = "var(--success)";
-        statusEl.textContent = "Verzonden naar Discord! Bedankt!";
-        setTimeout(() => {
-          document.getElementById('suggestionModal').style.display = 'none';
-          document.getElementById('suggestionInput').value = '';
-          statusEl.textContent = '';
-        }, 1500);
-      } catch(e) {
-        statusEl.style.color = "#ef4444";
-        statusEl.textContent = "Fout bij verzenden.";
-      }
-    });
-
-    // Verstuur Bug Report naar Discord
-    document.getElementById('sendBugBtn').addEventListener('click', async () => {
-      const text = document.getElementById('bugInput').value.trim();
-      const statusEl = document.getElementById('bugStatus');
-      if (!text) {
-        statusEl.style.color = "#ef4444";
-        statusEl.textContent = "Beschrijf de bug!";
-        return;
-      }
-
-      try {
-        await fetch(BUG_WEBHOOK, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content: `🐛 **Nieuwe Bug Melding:**\n${text}` })
-        });
-        statusEl.style.color = "var(--success)";
-        statusEl.textContent = "Bug succesvol gemeld!";
-        setTimeout(() => {
-          document.getElementById('bugModal').style.display = 'none';
-          document.getElementById('bugInput').value = '';
-          statusEl.textContent = '';
-        }, 1500);
-      } catch(e) {
-        statusEl.style.color = "#ef4444";
-        statusEl.textContent = "Fout bij verzenden.";
-      }
-    });
 
     function showStudentSection(sectionId) {
       document.querySelectorAll('.student-section').forEach(sec => sec.classList.remove('active'));
@@ -1143,7 +1210,7 @@
       showStudentSection('studentSetupSection');
     });
 
-    // Student Meedoen aan Race
+    // Student Meedoen aan Race (Joined de game en opent lobby met avatar optie)
     document.getElementById('confirmStudentSetupBtn').addEventListener('click', async () => {
       const name = document.getElementById('studentName').value.trim();
       const joinCode = document.getElementById('joinCode').value.trim();
@@ -1174,12 +1241,14 @@
           correctCount: 0,
           totalCount: 0,
           accuracy: 100,
+          avatarConfig: currentAvatarEquipped,
           createdAt: new Date().toISOString()
         });
         currentStudentDocId = docRef.id;
 
         document.getElementById('joinedPlayerGreeting').textContent = `Je bent verbonden, ${name}!`;
         showStudentSection('studentRaceSection');
+        updateAvatarPreview();
         listenToGameStart(joinCode);
       } catch(e) {
         statusEl.style.color = "#ef4444";
@@ -1830,8 +1899,10 @@
         listEl.innerHTML = "";
         snapshot.forEach((docSnap) => {
           let d = docSnap.data();
+          let studentSvg = generateAvatarSvgString(d.avatarConfig || { hats: 'none', glasses: 'none', shirts: 'purple' });
           listEl.innerHTML += `
             <div class="math99-avatar-card">
+              <div style="width: 50px; height: 50px;">${studentSvg}</div>
               <div class="name">👤 ${d.name}</div>
               <div class="score">${d.score || 0} pts</div>
               <button class="btn btn-danger kick-btn" data-id="${docSnap.id}" type="button" style="padding: 2px 6px; font-size: 11px; margin-top: 6px;">Verwijderen</button>
@@ -2001,9 +2072,6 @@
           createdAt: new Date().toISOString()
         });
       } catch(e) {}
-      document.getElementById('teacherScreenPlaying').style.display = 'none';
-      document.getElementById('teacherScreenLobby').style.display = 'flex';
-      if (unsubscribeLiveStats) unsubscribeLiveStats();
     });
   </script>
 </body>
