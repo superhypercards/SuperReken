@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#7c3aed" />
-  <!-- Beveiliging headers / Content Security Policy tegen XSS en injecties -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.gstatic.com https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://*.firebaseio.com;">
+  <!-- Aangepaste Content Security Policy zodat Firebase Auth & Google Sign-In werken op GitHub Pages -->
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://*.firebaseio.com https://*.googleapis.com https://*.gstatic.com https://accounts.google.com; style-src * 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src * 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://*.firebaseio.com https://accounts.google.com;">
   <title>SuperReken — Veilig & 3D Avatars</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -258,7 +258,6 @@
       background: #ede9fe; color: var(--primary); padding: 6px 14px; border-radius: 12px; font-weight: 800; font-size: 15px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(109,40,217,0.1);
     }
 
-    /* Echte 3D / SVG 99Math Avatar Stijl */
     .avatar-shop-overlay {
       display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10001; place-items: center; padding: 16px;
     }
@@ -287,7 +286,6 @@
     .item-card-option:hover { border-color: var(--primary); background: #faf5ff; }
     .item-card-option.equipped { border-color: var(--success); background: #ecfdf5; }
     
-    /* SVG Avatar render container */
     .svg-avatar-render { width: 90px; height: 90px; display: block; margin: auto; }
   </style>
 </head>
@@ -309,26 +307,23 @@
     </div>
   </div>
 
-  <!-- Avatar & Skin Shop Modal (100% Gratis & 99Math Stijl) -->
+  <!-- Avatar & Skin Shop Modal -->
   <div class="avatar-shop-overlay" id="avatarShopModal">
     <div class="avatar-shop-card">
       <button class="close-btn-x" id="closeAvatarShopBtn" type="button">✕</button>
       <h2 style="margin: 0 0 4px 0; font-size: 24px; color: var(--dark);">Kies je 3D Avatar (Gratis!)</h2>
       <p style="color: var(--muted); font-size: 14px; margin-bottom: 20px;">Pas gratis je hoed, bril en outfit aan voor in de race.</p>
 
-      <!-- Visuele Preview van de 3D Avatar -->
       <div class="avatar-preview-box" id="avatarPreviewContainer">
         <svg class="svg-avatar-render" id="previewSvg" viewBox="0 0 100 100"></svg>
       </div>
 
-      <!-- Categorie knoppen -->
       <div class="avatar-categories-grid">
         <button class="avatar-cat-btn active" data-cat="hats" type="button">Hoeden</button>
         <button class="avatar-cat-btn" data-cat="glasses" type="button">Brillen</button>
         <button class="avatar-cat-btn" data-cat="shirts" type="button">Outfits</button>
       </div>
 
-      <!-- Items Grid per Categorie -->
       <div class="items-grid-box" id="avatarItemsGrid"></div>
 
       <button class="btn btn-primary" id="saveAvatarSelectionBtn" type="button">Opslaan & Klaar</button>
@@ -337,7 +332,6 @@
 
   <div class="container" id="mainContainer">
     
-    <!-- Selectiescherm -->
     <div class="selection-screen" id="selectionScreen">
       <h1>SuperReken Platform</h1>
       
@@ -359,7 +353,6 @@
     <!-- STUDENT DASHBOARD -->
     <div class="form-card" id="studentCard">
       
-      <!-- Hoofdmenu Student -->
       <div class="student-section active" id="studentMenuSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
           <div class="form-header" style="margin: 0;">
@@ -381,7 +374,6 @@
         </div>
       </div>
 
-      <!-- Keuzemenu: Account Maken of Inloggen -->
       <div class="student-section" id="studentAuthChoiceSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h3 style="margin: 0; font-size: 20px;">Taken & Klas</h3>
@@ -401,7 +393,6 @@
         </div>
       </div>
 
-      <!-- Registratiescherm -->
       <div class="student-section" id="studentRegisterSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h3 style="margin: 0; font-size: 20px;">Nieuw Leerling Account Maken</h3>
@@ -423,7 +414,6 @@
         <div class="status" id="regStatus"></div>
       </div>
 
-      <!-- Inlogscherm -->
       <div class="student-section" id="studentLoginSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h3 style="margin: 0; font-size: 20px;">Inloggen op je Account</h3>
@@ -445,7 +435,6 @@
         <div class="status" id="loginStatus"></div>
       </div>
 
-      <!-- Overzicht Taken -->
       <div class="student-section" id="studentTaskSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h3 style="margin: 0; font-size: 20px;" id="studentTaskHeaderTitle">Openstaande Taken</h3>
@@ -474,7 +463,6 @@
         <div class="status" id="studentStatus"></div>
       </div>
 
-      <!-- LOBBY WAAR ZE IN DE GAME ZITTEN EN AVATAR KUNNEN AANPASSEN -->
       <div class="student-section" id="studentRaceSection">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
           <h3 style="margin: 0; font-size: 20px;">Live Race Lobby</h3>
@@ -485,7 +473,6 @@
           <div class="pulse-dot"></div>
           <div style="font-size: 20px; font-weight: 700; color: var(--dark);" id="joinedPlayerGreeting">Je bent verbonden!</div>
           
-          <!-- Live Avatar preview in de lobby -->
           <div style="width: 90px; height: 90px; background: white; border-radius: 50%; border: 3px solid var(--primary); display: grid; place-items: center; overflow: hidden; margin: 4px 0;" id="lobbyAvatarPreview"></div>
 
           <button class="btn btn-primary" id="openAvatarShopModalBtn" type="button" style="background: #10b981; width: auto; padding: 10px 20px; font-size: 15px;">🎨 Avatar Aanpassen (Gratis!)</button>
@@ -495,7 +482,6 @@
         </div>
       </div>
 
-      <!-- Oefenscherm (Voor Warming-up én Live Race) -->
       <div class="student-section" id="studentOefenScherm">
         <button class="close-btn-x" id="closePracticeXBtn" title="Sluiten & Terug naar Wachtscherm">✕</button>
         
@@ -539,7 +525,7 @@
 
     </div>
 
-    <!-- LEERKRACHT INLOG & DASHBOARD -->
+    <!-- LEERKRACHT DASHBOARD -->
     <div class="form-card" id="teacherCard">
       <div id="teacherLoginSection" style="max-width: 600px; margin: 0 auto; width: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -591,7 +577,6 @@
           </div>
         </div>
 
-        <!-- KLASSEN & KINDEREN TAB -->
         <div class="tab-content" id="teacherTabKlassen">
           <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
@@ -611,7 +596,6 @@
           </div>
         </div>
 
-        <!-- TAKEN TAB -->
         <div class="tab-content" id="teacherTabTaken">
           <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
@@ -700,7 +684,6 @@
           <div class="status" id="taskAssignStatus"></div>
         </div>
 
-        <!-- RAPPORTEN TAB -->
         <div class="tab-content" id="teacherTabRapporten">
           <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           <div class="form-header">
@@ -725,7 +708,6 @@
           </div>
         </div>
 
-        <!-- LIVE RACE TAB -->
         <div class="tab-content" id="teacherTabRace">
           <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
           
@@ -780,7 +762,6 @@
             </div>
           </div>
 
-          <!-- Leerkracht Scherm Tijdens / Na de Ronde -->
           <div id="teacherScreenPlaying" style="display: none; flex-direction: column; flex: 1; padding: 20px; background: #f8fafc; border-radius: 20px; border: 2px solid var(--border);">
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: white; padding: 14px 20px; border-radius: 16px; border: 1px solid var(--border);">
@@ -806,7 +787,6 @@
 
               <div class="dashboard-section-title" id="leaderboardTitleHeader">Leaderboard Top 5:</div>
               
-              <!-- Leaderboard Kaarten voor Ronde 1, 2 en 3 -->
               <div class="leaderboard-grid-cards" id="teacherLeaderboardCards"></div>
 
               <div class="class-list" id="teacherTopFiveList" style="background: white; max-height: none;"></div>
@@ -830,7 +810,6 @@
 
   </div>
 
-  <!-- Keuzemenu Modal -->
   <div id="accountChoiceModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 9999; place-items: center; padding: 16px;">
     <div style="background: white; border-radius: 24px; padding: 30px; width: min(450px, 100%); text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.25);">
       <h2 style="margin-top: 0; font-size: 24px; color: var(--dark);">Kies je rol of account</h2>
@@ -840,7 +819,6 @@
     </div>
   </div>
 
-  <!-- Firebase & Application Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
@@ -861,7 +839,6 @@
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
 
-    // 100% Gratis 3D/SVG Avatar catalogus (99Math stijl)
     const avatarData = {
       hats: [
         { id: 'none', name: 'Geen Hoed', svg: '' },
@@ -885,7 +862,6 @@
     let currentAvatarEquipped = { hats: 'none', glasses: 'none', shirts: 'purple' };
     let activeShopCategory = 'hats';
 
-    // Genereer SVG HTML string op basis van gekozen uitrusting
     function generateAvatarSvgString(config) {
       let hatSvg = '';
       let glassSvg = '';
@@ -902,23 +878,17 @@
 
       return `
         <svg viewBox="0 0 100 100" width="100%" height="100%">
-          <!-- Achtergrond / Lichaam / Shirt -->
           <path d="M25 90 C25 68 35 60 50 60 C65 60 75 68 75 90 Z" fill="${shirtColor}" />
-          <!-- Hoofd / Huid -->
           <circle cx="50" cy="46" r="22" fill="#fbcfe8" />
-          <!-- Ogen -->
           <circle cx="41" cy="46" r="3" fill="#0f172a" />
           <circle cx="59" cy="46" r="3" fill="#0f172a" />
-          <!-- Mond -->
           <path d="M44 56 Q50 62 56 56" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round" />
-          <!-- Bril / Hoed lagen -->
           ${glassSvg}
           ${hatSvg}
         </svg>
       `;
     }
 
-    // Open Avatar Shop vanuit de Live Lobby
     document.getElementById('openAvatarShopModalBtn').addEventListener('click', () => {
       document.getElementById('avatarShopModal').style.display = 'grid';
       renderAvatarShopCategory(activeShopCategory);
@@ -972,7 +942,6 @@
     document.getElementById('saveAvatarSelectionBtn').addEventListener('click', async () => {
       document.getElementById('avatarShopModal').style.display = 'none';
       updateAvatarPreview();
-      // Synchroniseer avatar direct naar Firestore voor de leerkracht & medespelers
       if (currentStudentDocId) {
         try {
           await updateDoc(doc(db, "activeStudents", currentStudentDocId), {
@@ -982,7 +951,6 @@
       }
     });
 
-    // Update Log Modal afhandeling
     document.getElementById('closeUpdateModalBtn').addEventListener('click', () => {
       document.getElementById('updateLogModal').style.display = 'none';
     });
@@ -991,7 +959,7 @@
     let currentStudentDocId = null;
     let currentStudent = { name: '', code: '', pin: '', score: 0, topic: 'optellen', difficulty: 'medium', targetAmount: 20, completedCount: 0, correctCount: 0, totalCount: 0 };
     let currentMathProblem = { question: '', answer: '', topic: 'optellen' };
-    let activeStudentMode = 'task'; // 'task', 'warmup', 'race'
+    let activeStudentMode = 'task';
     let isSubmitting = false;
     let unsubscribeActiveStudents = null;
     let unsubscribeGameStatus = null;
@@ -1104,7 +1072,6 @@
       });
     });
 
-    // Student Menu
     document.getElementById('chooseTasksBtn').addEventListener('click', () => {
       activeStudentMode = 'task';
       showStudentSection('studentAuthChoiceSection');
@@ -1116,7 +1083,6 @@
     document.getElementById('backToChoiceFromRegister').addEventListener('click', () => showStudentSection('studentAuthChoiceSection'));
     document.getElementById('backToChoiceFromLogin').addEventListener('click', () => showStudentSection('studentAuthChoiceSection'));
 
-    // Account Maken
     document.getElementById('confirmRegisterBtn').addEventListener('click', async () => {
       const name = document.getElementById('regStudentName').value.trim();
       const code = document.getElementById('regClassCode').value.trim();
@@ -1160,7 +1126,6 @@
       }
     });
 
-    // Inloggen
     document.getElementById('confirmLoginBtn').addEventListener('click', async () => {
       const name = document.getElementById('loginStudentName').value.trim();
       const code = document.getElementById('loginClassCode').value.trim();
@@ -1210,7 +1175,6 @@
       showStudentSection('studentSetupSection');
     });
 
-    // Student Meedoen aan Race (Joined de game en opent lobby met avatar optie)
     document.getElementById('confirmStudentSetupBtn').addEventListener('click', async () => {
       const name = document.getElementById('studentName').value.trim();
       const joinCode = document.getElementById('joinCode').value.trim();
@@ -1256,7 +1220,6 @@
       }
     });
 
-    // Warming-up (Oefenen ZONDER Punten / Minpunten)
     document.getElementById('startWarmingUpFromLobbyBtn').addEventListener('click', () => {
       activeStudentMode = 'warmup';
       showStudentSection('studentOefenScherm');
@@ -1270,7 +1233,6 @@
       showStudentSection('studentRaceSection');
     });
 
-    // Luister naar Race Start & Gekickte Status
     function listenToGameStart(raceCode) {
       if (unsubscribeGameStatus) unsubscribeGameStatus();
       
@@ -1516,11 +1478,10 @@
         currentUser = result.user;
         openTeacherDashboard(currentUser);
       } catch (error) {
-        document.getElementById("teacherStatus").textContent = "Inloggen met Google mislukt.";
+        document.getElementById("teacherStatus").textContent = "Inloggen met Google mislukt: " + error.message;
       }
     });
 
-    // Dashboard Navigatie
     document.querySelectorAll('.menu-card-btn').forEach(card => {
       card.addEventListener('click', () => {
         const targetTab = card.getAttribute('data-opentab');
