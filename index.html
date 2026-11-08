@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#7c3aed" />
   <!-- Aangepaste Content Security Policy zodat Firebase Auth & Google Sign-In werken op GitHub Pages -->
   <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: https://*.firebaseio.com https://*.googleapis.com https://*.gstatic.com https://accounts.google.com; style-src * 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src * 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://*.firebaseio.com https://accounts.google.com;">
-  <title>SuperReken</title>
+  <title>SuperReken — Veilig & 3D Avatars</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -374,6 +374,52 @@
     .w-tier.rdy { border-color: #f59e0b; background: #fffbeb; cursor: pointer; animation: wGlow 1s infinite alternate; }
     .w-tier.ok { opacity: .5; border-color: #10b981; } .w-tier.lock { opacity: .7; }
     @media (prefers-reduced-motion: reduce) { .w-egg.rdy, .w-tier.rdy { animation: none; } }
+    /* UI v4 */
+    .w-pill { background: linear-gradient(180deg, rgba(76,29,149,.88), rgba(30,27,75,.88)); border: 1px solid rgba(255,255,255,.18); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+    .w-pill.bump { animation: wBump .35s; } @keyframes wBump { 50% { transform: scale(1.18); } }
+    #wLvl { background: linear-gradient(#fde68a, #f59e0b); color: #422006; border-radius: 12px; padding: 3px 9px; }
+    .w-bar { height: 12px; border: 1px solid rgba(255,255,255,.25); }
+    #wRight { right: auto; left: 50%; bottom: 14px; transform: translateX(-50%); flex-direction: row; flex-wrap: wrap; justify-content: center; max-width: 96vw; gap: 8px; padding: 8px 10px; background: rgba(30,27,75,.55); backdrop-filter: blur(8px); border-radius: 22px; }
+    #wRight button { background: rgba(255,255,255,.14); color: #fff; box-shadow: none; border: 1px solid rgba(255,255,255,.22); padding: 10px 14px; transition: transform .15s, background .15s; }
+    #wRight button:hover { background: rgba(255,255,255,.28); transform: translateY(-2px); }
+    #wPassBtn, #wPetsBtn { background: linear-gradient(#fbbf24, #f59e0b) !important; color: #422006 !important; }
+    #wHint { bottom: 96px; }
+    .w-card { animation: wCardIn .28s cubic-bezier(.2,1.4,.4,1); }
+    @keyframes wCardIn { from { opacity: 0; transform: translateY(24px) scale(.94); } }
+    #gQ.okfx { animation: wOk .4s; } #gQ.badfx { animation: wBad .4s; }
+    @keyframes wOk { 40% { transform: scale(1.15); color: #86efac; } }
+    @keyframes wBad { 20%, 60% { transform: translateX(-10px); color: #fca5a5; } 40%, 80% { transform: translateX(10px); } }
+    .w-float { position: absolute; left: 50%; top: 46%; transform: translateX(-50%); font-weight: 800; font-size: 28px; color: #fde68a; text-shadow: 0 3px 0 #92400e; z-index: 25; pointer-events: none; animation: wFloat .9s ease-out forwards; }
+    @keyframes wFloat { to { transform: translate(-50%, -90px); opacity: 0; } }
+    .w-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; width: min(560px, 100%); }
+    .w-ob { font: 800 30px 'Plus Jakarta Sans', sans-serif; padding: 18px 8px; border: 0; border-radius: 20px; background: #fff; color: #4c1d95; box-shadow: 0 6px 0 #c4b5fd; cursor: pointer; }
+    .w-ob:active { transform: translateY(4px); box-shadow: 0 2px 0 #c4b5fd; }
+    .trk { position: relative; height: 52px; background: #334155; border-radius: 26px; margin: 10px 0; overflow: hidden; }
+    .trk span { position: absolute; top: 6px; left: 0; font-size: 32px; transition: left .35s ease-out; } .trk b { position: absolute; right: 12px; top: 8px; font-size: 30px; }
+    .w-game { display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; padding: 12px; border-radius: 16px; border: 2px solid #e2e8f0; background: #f8fafc; font-family: inherit; cursor: pointer; margin-bottom: 8px; color: #0f172a; transition: transform .15s, border-color .15s; }
+    .w-game:hover:not(:disabled) { border-color: #6d28d9; background: #f5f3ff; transform: translateY(-2px); }
+    .w-game:disabled { opacity: .55; cursor: not-allowed; }
+    .w-game .gi { font-size: 34px; } .w-game b { display: block; font-size: 16px; } .w-game small { display: block; color: #64748b; font-weight: 600; font-size: 12px; line-height: 1.3; }
+    .w-game em { margin-left: auto; font-style: normal; font-weight: 800; color: #6d28d9; font-size: 13px; }
+    @media (prefers-reduced-motion: reduce) { .w-card, .w-float, .w-pill.bump, #gQ.okfx, #gQ.badfx { animation: none; } }
+    #wMap { position: absolute; top: 12px; right: 12px; width: 130px; height: 130px; border-radius: 50%; border: 3px solid rgba(255,255,255,.7); box-shadow: 0 6px 20px rgba(0,0,0,.35); background: #6fcf86; pointer-events: none; }
+    #wHud { right: 160px; }
+    .fuse { width: min(360px, 80%); height: 12px; background: rgba(255,255,255,.2); border-radius: 8px; overflow: hidden; margin: 6px auto; }
+    .fuse i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #f87171, #fbbf24); }
+    @keyframes wFuse { from { width: 100%; } to { width: 0; } }
+    #wAcc { position: fixed; inset: 0; z-index: 5100; display: none; align-items: center; justify-content: center; background: rgba(30,27,75,.7); padding: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .w-del { margin-left: auto; padding: 6px 8px; border-radius: 10px; font-size: 18px; } .w-del:hover { background: #fee2e2; }
+    .w-tabs { display: flex; gap: 6px; margin: 10px 0; }
+    .w-tab { flex: 1; border: 2px solid #e2e8f0; background: #f8fafc; border-radius: 12px; padding: 6px 2px; font-size: 20px; cursor: pointer; font-family: inherit; }
+    .w-tab small { display: block; font-size: 10px; font-weight: 700; color: #475569; } .w-tab.on { border-color: #6d28d9; background: #ede9fe; }
+    .w-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; max-height: 38vh; overflow-y: auto; padding: 2px; }
+    .w-item { border: 2px solid #e2e8f0; background: #f8fafc; border-radius: 14px; padding: 10px 6px; text-align: center; cursor: pointer; font-family: inherit; color: #0f172a; }
+    .w-item b { display: block; font-size: 13px; } .w-item small { font-weight: 800; color: #6d28d9; font-size: 12px; }
+    .w-item.on { border-color: #6d28d9; background: #f5f3ff; } .w-item.own small { color: #059669; }
+    .w-mbp { margin-left: auto; margin-right: 8px; font-weight: 800; background: #ede9fe; color: #5b21b6; border-radius: 12px; padding: 4px 10px; }
+    #wModal.shop { background: transparent; align-items: flex-end; } #wModal.shop .w-card { animation: none; width: min(400px, 100%); max-height: 52vh; }
+    @media (min-width: 700px) { #wModal.shop { align-items: center; justify-content: flex-end; } #wModal.shop .w-card { max-height: 88vh; } .w-items { max-height: 46vh; } }
+    #wShopBtn { background: linear-gradient(#a78bfa, #7c3aed) !important; color: #fff !important; }
   </style>
 </head>
 <body>
@@ -914,6 +960,7 @@
   <!-- 3D WERELD -->
   <div id="worldRoot">
     <canvas id="worldCanvas"></canvas>
+    <canvas id="wMap" width="150" height="150"></canvas>
     <div id="wLoad">Wereld laden…</div>
     <div id="wHud">
       <div class="w-pill" id="wName"></div>
@@ -921,13 +968,18 @@
       <div class="w-pill">🪙 <b id="wCoins">0</b></div>
       <div class="w-pill">Ⓜ️ <b id="wMb">0</b></div>
       <div class="w-pill" id="wSave">☁️</div>
+      <div class="w-pill" id="wDaily">🎯 0/20</div>
+      <div class="w-pill" id="wOnline">👥 1 online</div>
     </div>
     <div id="wRight">
+      <button type="button" id="wShopBtn">🛍️ M-Shop</button>
       <button type="button" id="wPassBtn">🎫 Game Pass</button>
       <button type="button" id="wPetsBtn">🥚 Eieren &amp; huisdieren</button>
       <button type="button" id="wAvatarBtn">🎨 Avatar</button>
+      <button type="button" id="wJump">🦘 Spring</button>
       <button type="button" id="wRotL">⟲</button>
       <button type="button" id="wRotR">⟳</button>
+      <button type="button" id="wSwitch">🔁 Wissel speler</button>
       <button type="button" id="wExitBtn">🚪 Verlaten</button>
     </div>
     <div id="wHint">Tik of sleep om te lopen (of WASD / pijltjes). Loop in een portaal om te spelen!</div>
@@ -1233,7 +1285,7 @@
         statusEl.style.color = "var(--success)";
         statusEl.textContent = "Account aangemaakt!";
         setTimeout(() => {
-          if (window.__afterAuth === 'world') { window.__afterAuth = null; openWorld(); return; }
+          wRememberAccount(); if (window.__afterAuth === 'world') { window.__afterAuth = null; openWorld(); return; }
           showStudentSection('studentTaskSection');
           document.getElementById('studentTaskHeaderTitle').textContent = `Taken voor Klas ${code}`;
           loadStudentAssignedTasks(code);
@@ -1275,7 +1327,7 @@
         statusEl.style.color = "var(--success)";
         statusEl.textContent = "Succesvol ingelogd!";
         setTimeout(() => {
-          if (window.__afterAuth === 'world') { window.__afterAuth = null; openWorld(); return; }
+          wRememberAccount(); if (window.__afterAuth === 'world') { window.__afterAuth = null; openWorld(); return; }
           showStudentSection('studentTaskSection');
           document.getElementById('studentTaskHeaderTitle').textContent = `Taken voor Klas ${code}`;
           loadStudentAssignedTasks(code);
@@ -2156,7 +2208,7 @@
 
     /* ================= 3D WERELD + EIEREN + SPELLEN ================= */
     const wEl = id => document.getElementById(id);
-    const WLD = { ready: false, running: false, p: null, keys: {}, target: null, camAng: 0, zones: [], discs: [], t: 0, pos: null, afterAuth: null };
+    const WLD = { tryOn: {}, rm: {}, rd: {}, ready: false, running: false, p: null, keys: {}, target: null, camAng: 0, zones: [], discs: [], t: 0, pos: null, afterAuth: null };
     const GM = { on: false };
     const SPECIES = [
       { id: 'slijm', n: 'Slijmpje', c: 0x6ee7a0, r: 'Gewoon', w: 40, p: 1 },
@@ -2166,10 +2218,21 @@
       { id: 'draak', n: 'Nachtdraakje', c: 0x7c3aed, r: 'Episch', w: 5, p: 4, horns: 1, wings: 1 },
       { id: 'goud', n: 'Gouden Kuiken', c: 0xfacc15, r: 'Legendarisch', w: 1, p: 8, wings: 1, beak: 1 }
     ];
+    const GAMES = {
+      battle: { n: 'Monsterstrijd', i: '👾', d: 'Typ het antwoord en versla monsters. Je huisdier helpt mee!' },
+      sprint: { n: 'Sprint', i: '🏎️', d: 'Kies het goede antwoord. 10 goede antwoorden en je bent bij de finish!' },
+      race: { n: 'Ballonnenknal', i: '🎈', d: 'Tik de ballon met het juiste antwoord. 60 seconden, een fout kost 3 seconden.' },
+      duel: { n: 'Waar of niet waar', i: '⚡', d: 'Klopt de som? Beslis snel. 45 seconden, een fout kost 2 seconden.' },
+      practice: { n: 'Memory', i: '🧠', d: 'Zoek de som en het antwoord die bij elkaar horen. Zonder klok.' },
+      bomb: { n: 'Bommen ontmantelen', i: '💣', d: 'Typ het antwoord voordat de lont op is. Je hebt drie levens!' },
+      groter: { n: 'Welke is groter?', i: '⚖️', d: 'Twee sommen: tik die met de grootste uitkomst. 45 seconden.' },
+      rij: { n: 'Getallenrij', i: '🔢', d: 'Welk getal komt er als volgende? (De som-keuze telt hier niet.)' },
+      vul: { n: 'Mysterie-som', i: '🕵️', d: 'Welk getal ontbreekt? Typ het antwoord.' }
+    };
     const PORTALS = [
-      { id: 'battle', name: 'Monsterstrijd', icon: '👾', color: 0xa855f7, x: -13, z: -19, desc: 'Typ het antwoord om het monster te raken. Je huisdier helpt mee! Drie hartjes, dan is het voorbij.' },
-      { id: 'race', name: 'Ballonnenknal', icon: '🎈', color: 0x22d3ee, x: 13, z: -19, desc: 'Ballonnen met antwoorden zweven omhoog. Tik de juiste ballon voordat hij weg is! 60 seconden, een fout kost 3 seconden.' },
-      { id: 'practice', name: 'Memory-veld', icon: '🧠', color: 0x4ade80, x: 0, z: -27, desc: 'Draai kaarten om en zoek elke som met het bijbehorende antwoord. Rustig puzzelen zonder klok!' }
+      { id: 'arena', name: 'Arena', icon: '⚔️', color: 0xa855f7, x: -13, z: -19, games: ['battle', 'sprint', 'bomb'] },
+      { id: 'lucht', name: 'Luchtfeest', icon: '🎈', color: 0x22d3ee, x: 13, z: -19, games: ['race', 'duel', 'groter'] },
+      { id: 'tuin', name: 'Puzzeltuin', icon: '🧩', color: 0x4ade80, x: 0, z: -27, games: ['practice', 'vul', 'rij'] }
     ];
     const OPS = [{ id: 'add', n: 'Optellen', i: '➕' }, { id: 'sub', n: 'Aftrekken', i: '➖' }, { id: 'mul', n: 'Tafels', i: '✖️' }, { id: 'div', n: 'Delen', i: '➗' }];
     const hex = n => '#' + n.toString(16).padStart(6, '0');
@@ -2177,16 +2240,16 @@
     /* ---------- Opslag van voortgang (Firestore + lokaal) ---------- */
     const wKey = () => 'sr_world_' + (currentStudent.code + '_' + currentStudent.name).toLowerCase().replace(/[^a-z0-9_]/g, '-');
     function wNewProfile() {
-      return { xp: 0, level: 1, coins: 20, mb: 0, pass: 0, claimed: [], eggs: [{ prog: 0, need: 15 }], pets: [], activePet: null, stats: {}, bestRace: 0, battlesWon: 0, totalCorrect: 0, totalAnswered: 0, bestStreak: 0, prefs: { ops: ['add', 'sub'], lvl: 1 }, avatar: { hats: 'none', glasses: 'none', shirts: 'purple' }, updatedAt: 0 };
+      return { xp: 0, level: 1, coins: 20, mb: 0, owned: [], pass: 0, claimed: [], eggs: [{ prog: 0, need: 15 }], pets: [], activePet: null, stats: {}, bestRace: 0, bestDuel: 0, bestSprint: 0, last: null, run: 0, battlesWon: 0, totalCorrect: 0, totalAnswered: 0, bestStreak: 0, prefs: { ops: ['add', 'sub'], lvl: 1 }, avatar: { hats: 'none', glasses: 'none', shirts: 'purple' }, updatedAt: 0 };
     }
     async function wLoadProfile() {
       const key = wKey(); let local = null, remote = null;
       try { local = JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) {}
       try { const s = await getDoc(doc(db, 'playerProfiles', key)); if (s.exists()) remote = s.data(); } catch (e) {}
       const best = [local, remote].filter(Boolean).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0))[0];
-      WLD.p = Object.assign(wNewProfile(), best || {});
+      WLD.p = Object.assign(wNewProfile(), best || {}); delete WLD.p.x; delete WLD.p.z; delete WLD.p.t;
       WLD.key = key;
-      Object.assign(currentAvatarEquipped, WLD.p.avatar);
+      ['wh', 'wf', 'wr', 'wb', 'ws', 'wa'].forEach(k => currentAvatarEquipped[k] = ''); Object.assign(currentAvatarEquipped, WLD.p.avatar);
     }
     function wSave(now) {
       const p = WLD.p; if (!p) return;
@@ -2195,11 +2258,11 @@
       wEl('wSave').textContent = '⏳ opslaan…';
       clearTimeout(WLD.saveT);
       WLD.saveT = setTimeout(async () => {
-        try { await setDoc(doc(db, 'playerProfiles', WLD.key), p); wEl('wSave').textContent = '☁️ opgeslagen'; }
+        try { await setDoc(doc(db, 'playerProfiles', WLD.key), p, { merge: true }); wEl('wSave').textContent = '☁️ opgeslagen'; }
         catch (e) { wEl('wSave').textContent = '📱 lokaal opgeslagen'; }
       }, now ? 0 : 1500);
     }
-    window.addEventListener('pagehide', () => { if (WLD.p) wSave(true); });
+    window.addEventListener('pagehide', () => { if (WLD.p) wSave(true); if (WLD.running) wNetStop(); });
 
     /* ---------- HUD, beloningen, eieren ---------- */
     const wNeed = l => 40 + l * 20;
@@ -2209,7 +2272,7 @@
       wEl('wLvl').textContent = 'Lv ' + p.level;
       wEl('wXpBar').style.width = Math.min(100, p.xp / n * 100) + '%';
       wEl('wXpTxt').textContent = p.xp + '/' + n + ' XP';
-      wEl('wCoins').textContent = p.coins; wEl('wMb').textContent = p.mb;
+      wBump('wCoins', p.coins); wBump('wMb', p.mb); wEl('wDaily').textContent = '🎯 ' + Math.min(wDaily().n, DAILY) + '/' + DAILY;
       const cl = wClaimable(); wEl('wPassBtn').textContent = '🎫 Game Pass' + (cl ? ' ❗' + cl : '');
       wEl('wPetsBtn').textContent = '🥚 Eieren & huisdieren' + (p.eggs.some(e => e.ready) ? ' ❗' : '');
     }
@@ -2219,12 +2282,13 @@
     }
     function wReward(streak) {
       const p = WLD.p, xp = 5 + Math.min(streak, 10), coins = 1 + (streak > 0 && streak % 5 === 0 ? 2 : 0);
-      p.xp += xp; p.coins += coins;
+      p.xp += xp; p.coins += coins; if (p.totalCorrect % 20 === 0) p.mb++;
       while (p.xp >= wNeed(p.level)) { p.xp -= wNeed(p.level); p.level++; p.coins += 10; p.mb += 3; wToast('🎉 Level ' + p.level + '! +10 🪙 +3 Ⓜ️', 3000); }
       const e = p.eggs.find(x => !x.ready);
       if (e && ++e.prog >= e.need) { e.ready = true; wToast('🥚 Een ei is klaar! Open hem bij de kwekerij of in je eierenlijst', 4000); }
       const o = wTierOpen(); p.pass = (p.pass || 0) + 1 + (streak >= 5 ? 1 : 0); if (wTierOpen() > o) wToast('🎫 Nieuwe Game Pass-beloning!', 2500);
-      wHud(); return { xp, coins };
+      const dl = wDaily(); if (++dl.n >= DAILY && !dl.done) { dl.done = true; p.mb += 5; wToast('🎯 Dagdoel gehaald! +5 Ⓜ️', 3000); }
+      wFloat('+' + xp + ' XP'); wHud(); return { xp, coins };
     }
     const RAR = { Gewoon: '#cbd5e1', Zeldzaam: '#60a5fa', Episch: '#c084fc', Legendarisch: '#fbbf24' };
     function wHatch(i) {
@@ -2273,14 +2337,15 @@
 
     /* ---------- Vensters (portaalkeuze, huisdieren, samenvatting) ---------- */
     const wLocked = () => wEl('wModal').style.display === 'flex' || GM.on;
-    function wShow(html) { const m = wEl('wModal'); m.innerHTML = html; m.style.display = 'flex'; WLD.target = null; }
-    function wHide() { wEl('wModal').style.display = 'none'; }
+    function wShow(html) { const m = wEl('wModal'); m.innerHTML = html; m.style.display = 'flex'; m.classList.remove('shop'); WLD.shop = false; WLD.target = null; }
+    function wHide() { const m = wEl('wModal'); m.style.display = 'none'; m.classList.remove('shop'); WLD.shop = false; if (Object.keys(WLD.tryOn).length) { WLD.tryOn = {}; wBuildPlayer(); } }
     function wOpenPicker(pt) {
-      const pr = WLD.p.prefs; WLD.pt = pt;
-      wShow(`<div class="w-card"><div class="w-h"><h2>${pt.icon} ${pt.name}</h2><button class="w-x" data-close>✕</button></div><p>${pt.desc}</p>
-        <h3>Welke sommen wil je?</h3><div class="w-chips">${OPS.map(o => `<button class="w-chip-btn ${pr.ops.includes(o.id) ? 'on' : ''}" data-op="${o.id}">${o.i} ${o.n}</button>`).join('')}</div>
-        <h3>Niveau</h3><div class="w-chips">${['Makkelijk', 'Normaal', 'Moeilijk'].map((n, i) => `<button class="w-chip-btn ${pr.lvl === i + 1 ? 'on' : ''}" data-lv="${i + 1}">${n}</button>`).join('')}</div>
-        <button class="w-btn big" data-go="${pt.id}">Start!</button></div>`);
+      const p = WLD.p, pr = p.prefs; WLD.pt = pt;
+      wShow(`<div class="w-card"><div class="w-h"><h2>${pt.icon} ${pt.name}</h2><button class="w-x" data-close>✕</button></div>
+        <h3>1. Welke sommen?</h3><div class="w-chips">${OPS.map(o => `<button class="w-chip-btn ${pr.ops.includes(o.id) ? 'on' : ''}" data-op="${o.id}">${o.i} ${o.n}</button>`).join('')}</div>
+        <h3>2. Niveau</h3><div class="w-chips">${['Makkelijk', 'Normaal', 'Moeilijk'].map((n, i) => `<button class="w-chip-btn ${pr.lvl === i + 1 ? 'on' : ''}" data-lv="${i + 1}">${n}</button>`).join('')}</div>
+        <h3>3. Kies je spel</h3>${pt.games.map(id => { const G = GAMES[id], blk = p.last === id && p.run >= 3; return `<button class="w-game" data-go="${id}" ${blk ? 'disabled' : ''}><span class="gi">${G.i}</span><span><b>${G.n}</b><small>${blk ? 'Al 3x achter elkaar gespeeld. Speel eerst een ander spel!' : G.d}</small></span><em>${p.last === id ? p.run : 0}/3</em></button>`; }).join('')}
+        <p class="w-note">Je mag hetzelfde spel maximaal 3x achter elkaar spelen.</p></div>`);
     }
     function wOpenPets() {
       const p = WLD.p, inc = p.eggs.findIndex(x => !x.ready);
@@ -2293,7 +2358,7 @@
         ${OPS.map(o => { const s = p.stats[o.id] || { c: 0, t: 0 }; return `<div class="w-stat"><span>${o.i} ${o.n}</span><div class="w-bar"><i style="width:${s.t ? s.c / s.t * 100 : 0}%"></i></div><span>${s.t ? Math.round(s.c / s.t * 100) + '%' : '-'}</span></div>`; }).join('')}</div>`);
     }
     wEl('wModal').addEventListener('click', e => {
-      const t = e.target.closest('[data-close],[data-op],[data-lv],[data-go],[data-buy],[data-buyg],[data-open],[data-claim],[data-claimall],[data-pet],[data-again]');
+      const t = e.target.closest('[data-close],[data-op],[data-lv],[data-go],[data-buy],[data-buyg],[data-open],[data-claim],[data-claimall],[data-slot],[data-item],[data-buyi],[data-wear],[data-clear],[data-pet],[data-again]');
       if (e.target === wEl('wModal') || (t && 'close' in t.dataset)) return wHide();
       if (!t) return;
       const p = WLD.p, d = t.dataset;
@@ -2305,6 +2370,11 @@
       else if (d.claimall !== undefined) { for (let n = 1; n <= wTierOpen(); n++) wClaim(n); wHud(); wSave(); wOpenPass(); }
       else if (d.open !== undefined) { wHide(); wHatch(+d.open); }
       else if (d.buyg !== undefined && p.mb >= 20) { p.mb -= 20; p.eggs.push({ prog: 0, need: 15, gold: true }); wHud(); wSave(); wOpenPets(); }
+      else if (d.slot) { WLD.tryOn = {}; WLD.sel = null; wBuildPlayer(); wOpenShop(d.slot); }
+      else if (d.item) { WLD.sel = d.item; WLD.tryOn = { [WLD.shopSlot]: d.item }; wBuildPlayer(); wOpenShop(WLD.shopSlot); }
+      else if (d.buyi) { const it = ITEMS.find(x => x.id === d.buyi); if (it && !p.owned.includes(it.id) && p.mb >= it.c) { p.mb -= it.c; p.owned.push(it.id); currentAvatarEquipped[it.s] = it.id; WLD.tryOn = {}; wBuildPlayer(); wHud(); wSave(); wToast('✨ ' + it.n + ' gekocht!', 2000); wOpenShop(it.s); } }
+      else if (d.wear) { const it = ITEMS.find(x => x.id === d.wear); if (it && p.owned.includes(it.id)) { currentAvatarEquipped[it.s] = currentAvatarEquipped[it.s] === it.id ? '' : it.id; WLD.tryOn = {}; wBuildPlayer(); wSave(); wOpenShop(it.s); } }
+      else if (d.clear) { currentAvatarEquipped[d.clear] = ''; WLD.tryOn = {}; wBuildPlayer(); wSave(); wOpenShop(d.clear); }
       else if (d.pet !== undefined) { p.activePet = +d.pet; wBuildPet(); wSave(); wOpenPets(); }
     });
     wEl('wPetsBtn').onclick = wOpenPets;
@@ -2312,7 +2382,7 @@
     wEl('wRotL').onclick = () => WLD.camAng -= .5;
     wEl('wRotR').onclick = () => WLD.camAng += .5;
     wEl('saveAvatarSelectionBtn').addEventListener('click', () => { if (WLD.running) { wBuildPlayer(); wSave(); } });
-    wEl('wExitBtn').onclick = () => { WLD.running = false; wSave(true); wHide(); wEl('worldRoot').style.display = 'none'; showStudentSection('studentMenuSection'); };
+    wEl('wExitBtn').onclick = () => { WLD.running = false; wNetStop(); wSave(true); wHide(); wEl('worldRoot').style.display = 'none'; showStudentSection('studentMenuSection'); };
 
     /* ---------- Sommen ---------- */
     const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
@@ -2323,17 +2393,22 @@
       else if (op === 'sub') { a = rnd(5, mx); b = rnd(1, a); q = `${a} − ${b}`; ans = a - b; }
       else if (op === 'mul') { a = rnd(2, [0, 5, 10, 12][L]); b = rnd(L === 3 ? 6 : 1, [0, 10, 10, 20][L]); q = `${a} × ${b}`; ans = a * b; }
       else { b = rnd(2, [0, 5, 10, 12][L]); ans = rnd(1, [0, 10, 10, 15][L]); a = b * ans; q = `${a} ÷ ${b}`; }
-      return { op, q, a: ans };
+      return { op, q, a: ans, x: a, y: b, s: { add: '+', sub: '−', mul: '×', div: '÷' }[op] };
     }
 
     /* ---------- Spel ---------- */
     const wMonHp = () => 5 + GM.round * 2;
     const MONS = ['👾', '👹', '🐲', '👻', '🦖', '🤖'];
     function wStartGame(mode) {
-      const pr = WLD.p.prefs;
+      const pr = WLD.p.prefs, pp = WLD.p;
+      if (pp.last === mode && pp.run >= 3) { wToast('Je speelde dit spel al 3x achter elkaar. Kies eerst een ander spel!', 3000); return; }
+      pp.run = pp.last === mode ? pp.run + 1 : 1; pp.last = mode;
       Object.assign(GM, { on: true, mode, ops: [...pr.ops], lvl: pr.lvl, hp: 3, round: 1, streak: 0, correct: 0, total: 0, lock: false, time: 60 });
       if (mode === 'race') return wStartBalloons();
       if (mode === 'practice') return wStartMemory();
+      if (mode === 'sprint') return wStartSprint();
+      if (mode === 'duel') return wStartDuel();
+      if (mode === 'groter') return wStartGroter();
       GM.mMax = GM.mHp = wMonHp();
       const g = wEl('wGame');
       g.innerHTML = `<div class="w-gtop"><span id="gHearts"></span><span id="gInfo"></span><button class="w-x" id="gQuit" title="Stoppen">✕</button></div><div id="gStage"></div><div id="gQ"></div><input id="gA" inputmode="numeric" autocomplete="off" placeholder="?"><button class="w-btn" id="gGo">OK</button><div id="gFb"></div>`;
@@ -2345,18 +2420,31 @@
     }
     function wNext() {
       GM.q = wQuestion(); GM.lock = false;
-      wEl('gQ').textContent = GM.q.q + ' = ?';
+      if (GM.mode === 'vul') GM.q = { ...GM.q, q: `${GM.q.x} ${GM.q.s} ? = ${GM.q.a}`, a: GM.q.y };
+      if (GM.mode === 'rij') { const L = GM.lvl, d = rnd(2, [0, 5, 10, 25][L]), a0 = rnd(1, [0, 10, 30, 100][L]); GM.q = { op: 'add', q: [0, 1, 2, 3].map(i => a0 + d * i).join(', ') + ', ?', a: a0 + d * 4 }; }
+      wEl('gQ').textContent = GM.q.q + (GM.mode === 'vul' || GM.mode === 'rij' ? '' : ' = ?');
+      clearTimeout(GM.qt);
+      if (GM.mode === 'bomb') {
+        if (!wEl('gFuse')) wEl('gQ').insertAdjacentHTML('beforebegin', '<div class="fuse" id="gFuse"><i></i></div>');
+        const f = wEl('gFuse').firstChild, sec = [0, 10, 8, 6][GM.lvl]; f.style.animation = 'none'; void f.offsetWidth; f.style.animation = `wFuse ${sec}s linear forwards`;
+        GM.qt = setTimeout(() => {
+          if (!GM.on || GM.lock) return; GM.lock = true; GM.streak = 0; wEl('gFb').style.color = '#fca5a5'; wEl('gFb').textContent = '💥 Te laat! Antwoord: ' + GM.q.a; wFx('badfx');
+          if (--GM.hp <= 0) { wGameHud(); return void setTimeout(wEnd, 1000); }
+          wGameHud(); setTimeout(() => { if (GM.on) wNext(); }, 1000);
+        }, sec * 1000);
+      }
       const a = wEl('gA'); a.value = ''; a.focus(); wEl('gFb').textContent = '';
       wGameHud();
     }
     function wGameHud() {
       if (!GM.on) return;
-      wEl('gHearts').textContent = GM.mode === 'battle' ? '❤️'.repeat(Math.max(0, GM.hp)) + '🖤'.repeat(3 - Math.max(0, GM.hp)) : '🔥 ' + GM.streak;
-      wEl('gInfo').textContent = GM.mode === 'race' ? '⏱️ ' + GM.time + 's · ✅ ' + GM.correct : GM.mode === 'battle' ? 'Monster ' + GM.round : '✅ ' + GM.correct + '/' + GM.total;
+      wEl('gHearts').textContent = GM.mode === 'battle' || GM.mode === 'bomb' ? '❤️'.repeat(Math.max(0, GM.hp)) + '🖤'.repeat(3 - Math.max(0, GM.hp)) : '🔥 ' + GM.streak;
+      wEl('gInfo').textContent = GM.mode === 'race' || GM.mode === 'duel' || GM.mode === 'groter' ? '⏱️ ' + GM.time + 's · ✅ ' + GM.correct : GM.mode === 'sprint' ? '⏱️ ' + GM.sec + 's · ' + GM.pos + '/10' : GM.mode === 'battle' ? 'Monster ' + GM.round : '✅ ' + GM.correct + '/' + GM.total;
       const s = wEl('gStage'); if (!s) return;
+      if (GM.mode === 'sprint') { if (!wEl('gCar')) s.innerHTML = '<div class="trk"><span id="gCar">🏎️</span><b>🏁</b></div>'; wEl('gCar').style.left = GM.pos * 8.4 + '%'; return; }
       s.innerHTML = GM.mode === 'battle'
         ? `<div class="mon" id="gMon">${MONS[(GM.round - 1) % 6]}</div><div class="hp"><i style="width:${Math.max(0, GM.mHp / GM.mMax * 100)}%"></i></div><small>Schade per goed antwoord: ${wDmg()}${wPetPower() ? ' (huisdier +' + wPetPower() + ')' : ''}</small>`
-        : `<div class="mon">${GM.mode === 'race' ? '🏁' : '🌱'}</div>`;
+        : `<div class="mon">${{ race: '🏁', duel: '⚡', vul: '🕵️', bomb: '💣', rij: '🔢', groter: '⚖️' }[GM.mode] || '🌱'}</div>`;
     }
     const wDmg = () => 1 + wPetPower() + Math.floor(WLD.p.level / 5);
     function wAnswer() {
@@ -2368,29 +2456,245 @@
       const fb = wEl('gFb');
       if (ok) {
         st.c++; p.totalCorrect++; GM.correct++; GM.streak++; p.bestStreak = Math.max(p.bestStreak, GM.streak);
-        const r = wReward(GM.streak); fb.style.color = '#86efac'; fb.textContent = `Goed! +${r.xp} XP +${r.coins} 🪙`;
+        const r = wReward(GM.streak); fb.style.color = '#86efac'; fb.textContent = `Goed! +${r.xp} XP +${r.coins} 🪙`; wFx('okfx');
         if (GM.mode === 'battle') {
           GM.mHp -= wDmg(); const m = wEl('gMon'); if (m) { m.classList.add('hit'); setTimeout(() => m.classList.remove('hit'), 150); }
           if (GM.mHp <= 0) { const b = 5 + GM.round; p.coins += b; p.xp += 10; p.battlesWon++; wToast('💥 Monster verslagen! +' + b + ' 🪙', 2000); GM.round++; GM.mMax = GM.mHp = wMonHp(); wHud(); }
         }
       } else {
-        GM.streak = 0; fb.style.color = '#fca5a5'; fb.textContent = 'Net niet! Het antwoord was ' + GM.q.a;
-        if (GM.mode === 'battle' && --GM.hp <= 0) { wGameHud(); wSave(); return void setTimeout(wEnd, 1200); }
+        GM.streak = 0; fb.style.color = '#fca5a5'; fb.textContent = 'Net niet! Het antwoord was ' + GM.q.a; wFx('badfx');
+        if ((GM.mode === 'battle' || GM.mode === 'bomb') && --GM.hp <= 0) { wGameHud(); wSave(); return void setTimeout(wEnd, 1200); }
       }
       wSave(); wGameHud();
       setTimeout(() => { if (GM.on) wNext(); }, ok ? 350 : 1100);
     }
     function wEnd() {
       if (!GM.on) return;
-      GM.on = false; clearInterval(GM.timer); wEl('wGame').style.display = 'none';
+      GM.on = false; clearInterval(GM.timer); clearTimeout(GM.qt); wEl('wGame').style.display = 'none';
       const p = WLD.p, acc = GM.total ? Math.round(GM.correct / GM.total * 100) : 0;
       if (GM.mode === 'race') p.bestRace = Math.max(p.bestRace, GM.correct);
+      if (GM.mode === 'duel') p.bestDuel = Math.max(p.bestDuel || 0, GM.correct);
+      const third = GM.mode === 'battle' ? [GM.round - 1, 'monsters verslagen'] : GM.mode === 'race' ? [p.bestRace, 'record ballonnen'] : GM.mode === 'duel' ? [p.bestDuel, 'record duel'] : GM.mode === 'sprint' ? [GM.sprintT ? GM.sprintT + 's' : '-', 'jouw tijd (record ' + (p.bestSprint || '-') + 's)'] : GM.mode === 'vul' || GM.mode === 'rij' ? [p.bestStreak, 'beste reeks'] : GM.mode === 'bomb' || GM.mode === 'groter' ? [GM.correct, GM.mode === 'bomb' ? 'bommen ontmanteld' : 'goed in 45s'] : [GM.round - 1, 'borden klaar'];
       wSave(true); wHud();
-      wShow(`<div class="w-card"><h2>${GM.mode === 'battle' && GM.hp <= 0 ? '💔 Het monster wint deze keer' : '🏆 Goed gedaan!'}</h2>
-        <div class="w-sum"><div><b>${GM.correct}</b>goed</div><div><b>${acc}%</b>nauwkeurig</div><div><b>${GM.mode === 'battle' ? GM.round - 1 : GM.mode === 'race' ? p.bestRace : GM.round - 1}</b>${GM.mode === 'battle' ? 'monsters verslagen' : GM.mode === 'race' ? 'jouw record' : 'borden klaar'}</div><div><b>${p.coins}</b>munten</div></div>
-        <button class="w-btn big" data-again="${GM.mode}">Nog een keer</button><button class="w-btn big alt" data-close>Terug naar de wereld</button></div>`);
+      wShow(`<div class="w-card"><h2>${(GM.mode === 'battle' || GM.mode === 'bomb') && GM.hp <= 0 ? (GM.mode === 'bomb' ? '💥 Boem! De bom ging af' : '💔 Het monster wint deze keer') : '🏆 Goed gedaan!'}</h2>
+        <div class="w-sum"><div><b>${GM.correct}</b>goed</div><div><b>${acc}%</b>nauwkeurig</div><div><b>${third[0]}</b>${third[1]}</div><div><b>${p.coins}</b>munten</div></div>
+        <button class="w-btn big" data-again="${GM.mode}" ${p.last === GM.mode && p.run >= 3 ? 'disabled' : ''}>${p.last === GM.mode && p.run >= 3 ? 'Kies eerst een ander spel (3x gespeeld)' : 'Nog een keer'}</button><button class="w-btn big alt" data-close>Terug naar de wereld</button></div>`);
     }
 
+
+
+    /* ---------- Spel 4 en 5: Sprint, Waar of niet waar + effecten ---------- */
+    function wFx(c) { const q = wEl('gQ'); if (!q) return; q.classList.remove('okfx', 'badfx'); void q.offsetWidth; q.classList.add(c); }
+    function wFloat(t) { const f = document.createElement('div'); f.className = 'w-float'; f.textContent = t; wEl('worldRoot').appendChild(f); setTimeout(() => f.remove(), 900); }
+    function wBump(id, v) { const el = wEl(id); if (el.textContent !== String(v)) { el.textContent = v; const pl = el.parentElement; pl.classList.remove('bump'); void pl.offsetWidth; pl.classList.add('bump'); } }
+    function wJump() { if (!WLD.py) WLD.vy = 7.5; }
+    wEl('wJump').onclick = wJump;
+    function wJudge(ok, ans) {
+      const p = WLD.p, st = wStat(GM.q.op), fb = wEl('gFb'); st.t++; p.totalAnswered++; GM.total++;
+      if (ok) { st.c++; p.totalCorrect++; GM.correct++; GM.streak++; p.bestStreak = Math.max(p.bestStreak, GM.streak); const r = wReward(GM.streak); fb.style.color = '#86efac'; fb.textContent = `Goed! +${r.xp} XP +${r.coins} 🪙`; }
+      else { GM.streak = 0; fb.style.color = '#fca5a5'; fb.textContent = 'Fout! Het antwoord was ' + ans; }
+      wFx(ok ? 'okfx' : 'badfx'); wSave(); return ok;
+    }
+    function wStartSprint() {
+      GM.t0 = Date.now(); GM.pos = 0; GM.sec = 0;
+      wEl('wGame').innerHTML = wTop + '<div id="gStage"></div><div id="gQ"></div><div id="gOpts" class="w-opts"></div><div id="gFb">Kies het goede antwoord. 10 goede antwoorden = finish!</div>';
+      wEl('wGame').style.display = 'flex'; wEl('gQuit').onclick = wEnd;
+      GM.timer = setInterval(() => { GM.sec = Math.round((Date.now() - GM.t0) / 1000); wGameHud(); }, 500);
+      wSprintQ();
+    }
+    function wSprintQ() {
+      GM.q = wQuestion(); GM.lock = false; wEl('gQ').textContent = GM.q.q + ' = ?';
+      const set = new Set([GM.q.a]); let n = 0; while (set.size < 3 && n++ < 60) { const d = GM.q.a + rnd(-5, 5); if (d >= 0) set.add(d); }
+      const o = wEl('gOpts'); o.innerHTML = '';
+      [...set].sort(() => Math.random() - .5).forEach(v => { const b = document.createElement('button'); b.className = 'w-ob'; b.textContent = v; b.onclick = () => wSprintPick(v); o.appendChild(b); });
+      wGameHud();
+    }
+    function wSprintPick(v) {
+      if (!GM.on || GM.lock) return; GM.lock = true;
+      if (wJudge(v === GM.q.a, GM.q.a)) {
+        GM.pos++;
+        if (GM.pos >= 10) { GM.sprintT = Math.round((Date.now() - GM.t0) / 1000); const p = WLD.p; p.bestSprint = p.bestSprint ? Math.min(p.bestSprint, GM.sprintT) : GM.sprintT; wGameHud(); return void setTimeout(wEnd, 500); }
+      } else GM.pos = Math.max(0, GM.pos - 1);
+      wGameHud(); setTimeout(() => { if (GM.on) wSprintQ(); }, 450);
+    }
+    function wStartDuel() {
+      GM.end = Date.now() + 45000; GM.time = 45;
+      wEl('wGame').innerHTML = wTop + '<div id="gStage"></div><div id="gQ"></div><div id="gOpts" class="w-opts"><button class="w-ob" data-v="1">✅ Klopt</button><button class="w-ob" data-v="0">❌ Klopt niet</button></div><div id="gFb">Klopt de som? Beslis snel!</div>';
+      wEl('wGame').style.display = 'flex'; wEl('gQuit').onclick = wEnd;
+      wEl('gOpts').querySelectorAll('button').forEach(b => b.onclick = () => wDuelPick(b.dataset.v === '1'));
+      GM.timer = setInterval(() => { GM.time = Math.max(0, Math.ceil((GM.end - Date.now()) / 1000)); wGameHud(); if (GM.time <= 0) wEnd(); }, 250);
+      wDuelQ();
+    }
+    function wDuelQ() {
+      GM.q = wQuestion(); let s = Math.random() < .5 ? GM.q.a : GM.q.a + rnd(1, 4) * (Math.random() < .5 ? 1 : -1); if (s < 0) s = GM.q.a + 1;
+      GM.shown = s; wEl('gQ').textContent = GM.q.q + ' = ' + s; wGameHud();
+    }
+    function wDuelPick(yes) { if (!GM.on) return; if (!wJudge(yes === (GM.shown === GM.q.a), GM.q.a)) GM.end -= 2000; wDuelQ(); }
+
+
+    /* ---------- Spel 9: Welke is groter? ---------- */
+    function wStartGroter() {
+      GM.end = Date.now() + 45000; GM.time = 45;
+      wEl('wGame').innerHTML = wTop + '<div id="gStage"></div><div id="gQ">Welke is groter?</div><div id="gOpts" class="w-opts"></div><div id="gFb">Tik de som met de grootste uitkomst!</div>';
+      wEl('wGame').style.display = 'flex'; wEl('gQuit').onclick = wEnd;
+      GM.timer = setInterval(() => { GM.time = Math.max(0, Math.ceil((GM.end - Date.now()) / 1000)); wGameHud(); if (GM.time <= 0) wEnd(); }, 250);
+      wGroterQ();
+    }
+    function wGroterQ() {
+      const a = wQuestion(); let b = wQuestion(), n = 0; while (b.a === a.a && n++ < 50) b = wQuestion();
+      GM.q = a.a > b.a ? a : b; const o = wEl('gOpts'); o.innerHTML = '';
+      [a, b].forEach(x => { const bt = document.createElement('button'); bt.className = 'w-ob'; bt.textContent = x.q; bt.onclick = () => wGroterPick(x); o.appendChild(bt); });
+      wGameHud();
+    }
+    function wGroterPick(x) { if (!GM.on) return; const win = GM.q; if (!wJudge(x === win, win.q + ' = ' + win.a)) GM.end -= 2000; wGroterQ(); }
+
+    /* ---------- Multiplayer (zelfde klas) + minimap ---------- */
+    let wLastPush = 0, wLastX = 1e9, wLastZ = 1e9;
+    function wNetStart() {
+      wLastX = 1e9; WLD.rd = {};
+      WLD.netErr = false;
+      try { WLD.unsub = onSnapshot(query(collection(db, 'playerProfiles'), where('classCode', '==', currentStudent.code)), snap => { const m = {}; snap.forEach(d => { const v = d.data(); if (d.id !== WLD.key && v.t && v.x != null) m[d.id] = v; }); WLD.rd = m; }, wNetFail); } catch (e) { wNetFail(e); }
+      WLD.netT = setInterval(wNetPush, 700);
+    }
+    function wNetPush() {
+      if (!WLD.running) return;
+      const n = Date.now(), p = WLD.p, pos = WLD.pos;
+      if (Math.hypot(pos.x - wLastX, pos.z - wLastZ) < .05 && n - wLastPush < 8000) return;
+      wLastX = pos.x; wLastZ = pos.z; wLastPush = n;
+      setDoc(doc(db, 'playerProfiles', WLD.key), { name: currentStudent.name, classCode: currentStudent.code, x: +pos.x.toFixed(2), z: +pos.z.toFixed(2), avatar: { ...currentAvatarEquipped }, level: p.level, t: n }, { merge: true }).catch(wNetFail);
+    }
+    function wNetStop() {
+      clearInterval(WLD.netT); if (WLD.unsub) WLD.unsub(); WLD.unsub = null;
+      setDoc(doc(db, 'playerProfiles', WLD.key), { t: 0 }, { merge: true }).catch(() => {});
+      Object.values(WLD.rm).forEach(r => WLD.s.remove(r.g)); WLD.rm = {}; WLD.rd = {};
+    }
+    function wNetUpdate(dt) {
+      const now = Date.now(), ids = Object.keys(WLD.rd).filter(id => now - (WLD.rd[id].t || 0) < 40000);
+      Object.keys(WLD.rm).forEach(id => { if (!ids.includes(id)) { WLD.s.remove(WLD.rm[id].g); delete WLD.rm[id]; } });
+      ids.forEach(id => {
+        const d = WLD.rd[id], sig = JSON.stringify(d.avatar); let r = WLD.rm[id];
+        if (!r || r.sig !== sig) {
+          if (r) WLD.s.remove(r.g);
+          const g = wMakeChar(d.avatar || {}); g.position.set(d.x, 0, d.z);
+          const lb = wLabel(d.name + ' · Lv ' + (d.level || 1), 3.6, 0, 0, '#fde68a'); lb.scale.set(4.4, 1.1, 1); g.add(lb); lb.position.set(0, 3.6, 0);
+          WLD.s.add(g); r = WLD.rm[id] = { g, sig };
+        }
+        const g = r.g, dx = d.x - g.position.x, dz = d.z - g.position.z, dist = Math.hypot(dx, dz), mv = dist > .08;
+        if (mv) { const st = Math.min(dist, 7 * dt); g.position.x += dx / dist * st; g.position.z += dz / dist * st; let a = Math.atan2(dx, dz) - g.rotation.y; a = Math.atan2(Math.sin(a), Math.cos(a)); g.rotation.y += a * Math.min(1, dt * 10); }
+        const sw = mv ? Math.sin(WLD.t * 14) * .9 : 0, u = g.userData; u.legs[0].rotation.x = sw; u.legs[1].rotation.x = -sw; u.arms[0].rotation.x = -sw; u.arms[1].rotation.x = sw; if (u.aura) u.aura.rotation.y += dt * 1.5;
+      });
+      if (!WLD.netErr) wEl('wOnline').textContent = '👥 ' + (ids.length + 1) + ' online';
+    }
+    function wDrawMap() {
+      const g = wEl('wMap').getContext('2d'), R = 75, sc = R / 34, dot = (x, z, r, c) => { g.fillStyle = c; g.beginPath(); g.arc(R + x * sc, R + z * sc, r, 0, 6.283); g.fill(); };
+      g.clearRect(0, 0, 150, 150); g.save(); g.beginPath(); g.arc(R, R, R, 0, 6.283); g.clip();
+      g.fillStyle = '#6fcf86'; g.fillRect(0, 0, 150, 150); dot(0, 0, 7 * sc, '#e7e0cf');
+      g.fillStyle = '#38bdf8'; g.beginPath(); g.ellipse(R + 20 * sc, R + 8 * sc, 5.2 * sc, 4 * sc, 0, 0, 6.283); g.fill();
+      dot(-23, 7, 5, '#fef3c7'); PORTALS.forEach(pt => dot(pt.x, pt.z, 6, hex(pt.color)));
+      Object.values(WLD.rm).forEach(r => dot(r.g.position.x, r.g.position.z, 4, '#fbbf24'));
+      dot(WLD.pos.x, WLD.pos.z, 6, '#7c3aed'); dot(WLD.pos.x, WLD.pos.z, 3.5, '#fff'); g.restore();
+    }
+    const DAILY = 20;
+    function wDaily() { const p = WLD.p, d = new Date().toISOString().slice(0, 10); if (!p.daily || p.daily.d !== d) p.daily = { d, n: 0, done: false }; return p.daily; }
+
+
+    /* ---------- Onthouden accounts + speler kiezen ---------- */
+    function wNetFail(e) { console.warn(e); if (WLD.netErr) return; WLD.netErr = true; wEl('wOnline').textContent = '⚠️ geen toegang'; wToast('⚠️ Multiplayer: zet de Firestore-regels voor "playerProfiles" open', 7000); }
+    const wEsc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    function wAccounts() { try { return JSON.parse(localStorage.getItem('sr_accounts') || '[]'); } catch (e) { return []; } }
+    function wRememberAccount() {
+      const c = currentStudent; if (!(c && c.name && c.code && c.pin)) return;
+      const a = wAccounts().filter(x => !(x.name === c.name && x.code === c.code)); a.unshift({ name: c.name, code: c.code, pin: c.pin });
+      try { localStorage.setItem('sr_accounts', JSON.stringify(a.slice(0, 8))); } catch (e) {}
+    }
+    function wShowAccounts() {
+      const a = wAccounts(); let o = wEl('wAcc');
+      if (!o) {
+        o = document.createElement('div'); o.id = 'wAcc'; document.body.appendChild(o);
+        o.onclick = e => {
+          const t = e.target.closest('[data-pl],[data-new],[data-del],[data-x]'); if (!t) return; const d = t.dataset;
+          if (d.pl !== undefined) { Object.assign(currentStudent, wAccounts()[+d.pl]); o.style.display = 'none'; openWorld(); }
+          else if (d.new !== undefined) { o.style.display = 'none'; window.__afterAuth = 'world'; showStudentSection('studentAuthChoiceSection'); }
+          else if (d.del !== undefined) { const l = wAccounts(); l.splice(+d.del, 1); localStorage.setItem('sr_accounts', JSON.stringify(l)); wShowAccounts(); }
+          else o.style.display = 'none';
+        };
+      }
+      o.style.display = 'flex';
+      o.innerHTML = `<div class="w-card"><div class="w-h"><h2>👥 Wie speelt er?</h2><button class="w-x" data-x>✕</button></div><p>Kies je speler. Je hoeft niet opnieuw in te loggen.</p>${a.map((x, i) => `<button class="w-game" data-pl="${i}"><span class="gi">🧑‍🎓</span><span><b>${wEsc(x.name)}</b><small>Klas ${wEsc(x.code)}</small></span><span class="w-del" data-del="${i}" title="Vergeet deze speler">🗑️</span></button>`).join('')}<button class="w-btn big alt" data-new>➕ Ander account</button></div>`;
+    }
+    wEl('wSwitch').onclick = () => { wEl('wExitBtn').onclick(); wShowAccounts(); };
+
+
+    /* ---------- M-Shop: accessoires ---------- */
+    const SLOTS = [['wh', 'Hoofd', '🎩'], ['wf', 'Gezicht', '🕶️'], ['wr', 'Haar', '💇'], ['wb', 'Rug', '🪽'], ['ws', 'Voeten', '👟'], ['wa', 'Aura', '✨']];
+    const SH = { c: d => new THREE.CylinderGeometry(d[0], d[1], d[2], 14), s: d => new THREE.SphereGeometry(d[0], 14, 10), h: d => new THREE.SphereGeometry(d[0], 14, 8, 0, 6.283, 0, 1.57), k: d => new THREE.ConeGeometry(d[0], d[1], 14), b: d => new THREE.BoxGeometry(d[0], d[1], d[2]), t: d => new THREE.TorusGeometry(d[0], d[1], 8, 24, d[2] || 6.283) };
+    const I = (s, id, n, c, p, col) => ({ s, id, n, c, p, col });
+    const cape = c => [['b', [.9, 1.3, .08], c, [0, -.15, -.5], [.12, 0, 0]], ['s', [.12], 0xf8fafc, [-.32, .55, -.32]], ['s', [.12], 0xf8fafc, [.32, .55, -.32]]];
+    const wings = c => [['s', [.4], c, [-.5, .3, -.45], [0, .5, .5], [.35, 1.5, .12]], ['s', [.4], c, [.5, .3, -.45], [0, -.5, -.5], [.35, 1.5, .12]], ['s', [.3], c, [-.45, -.2, -.42], [0, .5, .8], [.3, 1.1, .1]], ['s', [.3], c, [.45, -.2, -.42], [0, -.5, -.8], [.3, 1.1, .1]]];
+    const aura = c => [['t', [.9, .05], c, [0, .08, 0], [1.57, 0, 0]], ['t', [.65, .03], c, [0, .08, 0], [1.57, 0, 0]], ['s', [.1], c, [.9, .5, 0]], ['s', [.1], c, [-.45, 1, .78]], ['s', [.1], c, [-.45, 1.5, -.78]]];
+    const EA = (id, n, c, x, y, z) => [['b', [.4, .02, .02], 0x1f2937, [x, y, z], [0, 0, .2]]];
+    const ITEMS = [
+      I('wh', 'tophat', 'Hoge hoed', 8, [['c', [.38, .38, .7], 0x111827, [0, .95, 0]], ['c', [.62, .62, .06], 0x111827, [0, .6, 0]], ['c', [.39, .39, .1], 0xdc2626, [0, .72, 0]]]),
+      I('wh', 'cowboy', 'Cowboyhoed', 8, [['c', [.7, .7, .06], 0x92602f, [0, .58, 0]], ['c', [.36, .42, .32], 0xb7793d, [0, .78, 0]]]),
+      I('wh', 'wizard', 'Tovenaarshoed', 12, [['c', [.7, .7, .06], 0x4c1d95, [0, .55, 0]], ['k', [.5, 1.3], 0x6d28d9, [0, 1.25, 0]], ['s', [.09], 0xfacc15, [0, 1.92, 0]]]),
+      I('wh', 'pirate', 'Piratenhoed', 12, [['h', [.58], 0x111827, [0, .4, 0]], ['s', [.1], 0xf8fafc, [0, .62, .52]]]),
+      I('wh', 'halo', 'Engelenkrans', 20, [['t', [.4, .06], 0xfde047, [0, .95, 0], [1.57, 0, 0]]]),
+      I('wh', 'devil', 'Duivelshoorns', 15, [['k', [.1, .45], 0xef4444, [-.3, .7, 0], [0, 0, .3]], ['k', [.1, .45], 0xef4444, [.3, .7, 0], [0, 0, -.3]]]),
+      I('wh', 'bunny', 'Konijnenoren', 10, [['s', [.15], 0xffffff, [-.2, 1.05, 0], null, [1, 3.4, .5]], ['s', [.15], 0xffffff, [.2, 1.05, 0], null, [1, 3.4, .5]]]),
+      I('wh', 'catears', 'Kattenoren', 6, [['k', [.17, .4], 0x1f2937, [-.33, .62, 0], [0, 0, .3]], ['k', [.17, .4], 0x1f2937, [.33, .62, 0], [0, 0, -.3]]]),
+      I('wh', 'phones', 'Koptelefoon', 10, [['t', [.56, .06, 3.14], 0x1f2937, [0, .02, 0]], ['c', [.17, .17, .12], 0xef4444, [-.56, 0, 0], [0, 0, 1.57]], ['c', [.17, .17, .12], 0xef4444, [.56, 0, 0], [0, 0, 1.57]]]),
+      I('wh', 'helmet', 'Ridderhelm', 10, [['h', [.6], 0x94a3b8, [0, .06, 0]], ['b', [.12, .5, .7], 0xfacc15, [0, .55, 0]]]),
+      I('wh', 'flowers', 'Bloemenkrans', 8, [['t', [.52, .06], 0x22c55e, [0, .28, 0], [1.57, 0, 0]], ['s', [.11], 0xf472b6, [.52, .3, 0]], ['s', [.11], 0xfacc15, [-.52, .3, 0]], ['s', [.11], 0xffffff, [0, .3, .52]], ['s', [.11], 0xf472b6, [0, .3, -.52]]]),
+      I('wh', 'chef', 'Koksmuts', 6, [['c', [.4, .38, .3], 0xffffff, [0, .65, 0]], ['s', [.5], 0xffffff, [0, .95, 0], null, [1, .7, 1]]]),
+      I('wh', 'party', 'Feesthoedje', 5, [['k', [.35, .9], 0xec4899, [0, .95, 0]], ['s', [.09], 0xfacc15, [0, 1.42, 0]]]),
+      I('wh', 'viking', 'Vikinghelm', 14, [['h', [.6], 0x94a3b8, [0, .06, 0]], ['k', [.12, .6], 0xfef3c7, [-.58, .45, 0], [0, 0, .9]], ['k', [.12, .6], 0xfef3c7, [.58, .45, 0], [0, 0, -.9]]]),
+      I('wh', 'crown2', 'Diamanten kroon', 30, [['c', [.42, .46, .3], 0xfacc15, [0, .6, 0]], ['k', [.1, .3], 0xfacc15, [0, .9, .38]], ['k', [.1, .3], 0xfacc15, [-.34, .9, -.2]], ['k', [.1, .3], 0xfacc15, [.34, .9, -.2]], ['s', [.08], 0x38bdf8, [0, .6, .46]]]),
+      I('wh', 'prop', 'Propellerpet', 8, [['h', [.56], 0x3b82f6, [0, .1, 0]], ['c', [.03, .03, .2], 0x111827, [0, .68, 0]], ['b', [.9, .03, .12], 0xef4444, [0, .8, 0]]]),
+      I('wf', 'heartg', 'Hartjesbril', 10, [['s', [.14], 0xf43f5e, [-.2, .05, .52], null, [1.2, 1.1, .4]], ['s', [.14], 0xf43f5e, [.2, .05, .52], null, [1.2, 1.1, .4]], ['b', [.12, .04, .04], 0xf43f5e, [0, .08, .54]]]),
+      I('wf', 'starg', 'Sterrenbril', 10, [['b', [.22, .22, .05], 0xfacc15, [-.2, .05, .54], [0, 0, .785]], ['b', [.22, .22, .05], 0xfacc15, [.2, .05, .54], [0, 0, .785]]]),
+      I('wf', 'gog', 'Skibril', 12, [['t', [.16, .05], 0xf97316, [-.2, .05, .54]], ['t', [.16, .05], 0xf97316, [.2, .05, .54]], ['s', [.14], 0x7dd3fc, [-.2, .05, .55], null, [1, 1, .3]], ['s', [.14], 0x7dd3fc, [.2, .05, .55], null, [1, 1, .3]]]),
+      I('wf', 'mous', 'Snor', 6, [['b', [.4, .07, .08], 0x5b3a29, [0, -.15, .5]], ['s', [.07], 0x5b3a29, [-.21, -.12, .5]], ['s', [.07], 0x5b3a29, [.21, -.12, .5]]]),
+      I('wf', 'beard', 'Baard', 10, [['b', [.6, .4, .3], 0x5b3a29, [0, -.4, .34]], ['s', [.28], 0x5b3a29, [0, -.55, .3], null, [1, .8, .8]]]),
+      I('wf', 'nose', 'Clownneus', 4, [['s', [.13], 0xef4444, [0, -.02, .55]]]),
+      I('wf', 'mask', 'Superheldenmasker', 8, [['b', [.95, .2, .12], 0x111827, [0, .06, .5]]]),
+      I('wf', 'patch', 'Piratenooglapje', 6, [['s', [.13], 0x111827, [.18, .04, .53], null, [1, 1, .3]], ['b', [1.05, .04, .1], 0x111827, [0, .24, .44], [0, 0, .2]]]),
+      I('wf', 'vr', 'VR-bril', 15, [['b', [.95, .38, .35], 0x1f2937, [0, .05, .42]], ['b', [.7, .22, .05], 0x38bdf8, [0, .05, .6]]]),
+      I('wf', 'monocle', 'Monocle', 8, [['t', [.14, .025], 0xfacc15, [.2, .04, .55]], ['s', [.12], 0xbae6fd, [.2, .04, .55], null, [1, 1, .2]]]),
+      I('wf', 'whisk', 'Kattensnorharen', 6, [['b', [.4, .02, .02], 0x1f2937, [-.45, -.05, .5], [0, 0, .2]], ['b', [.4, .02, .02], 0x1f2937, [.45, -.05, .5], [0, 0, -.2]], ['b', [.4, .02, .02], 0x1f2937, [-.45, -.12, .5], [0, 0, -.2]], ['b', [.4, .02, .02], 0x1f2937, [.45, -.12, .5], [0, 0, .2]], ['s', [.05], 0xf9a8d4, [0, -.02, .55]]]),
+      I('wb', 'cape_r', 'Rode cape', 10, cape(0xdc2626)), I('wb', 'cape_b', 'Blauwe cape', 10, cape(0x2563eb)), I('wb', 'cape_p', 'Paarse cape', 12, cape(0x7c3aed)), I('wb', 'cape_g', 'Gouden cape', 25, cape(0xfacc15)),
+      I('wb', 'w_angel', 'Engelenvleugels', 20, wings(0xffffff)), I('wb', 'w_bat', 'Vleermuisvleugels', 20, wings(0x1f2937)), I('wb', 'w_fairy', 'Feeënvleugels', 18, wings(0xf9a8d4)), I('wb', 'w_dragon', 'Drakenvleugels', 25, wings(0x16a34a)),
+      I('wb', 'pack', 'Rugzak', 8, [['b', [.7, .8, .3], 0xf59e0b, [0, 0, -.5]], ['b', [.5, .3, .1], 0xb45309, [0, -.1, -.7]]]),
+      I('wb', 'jet', 'Jetpack', 20, [['c', [.15, .15, .8], 0x94a3b8, [-.2, 0, -.5]], ['c', [.15, .15, .8], 0x94a3b8, [.2, 0, -.5]], ['k', [.12, .4], 0xf97316, [-.2, -.6, -.5], [3.14, 0, 0]], ['k', [.12, .4], 0xf97316, [.2, -.6, -.5], [3.14, 0, 0]]]),
+      I('wb', 'shell', 'Schildpadschild', 14, [['s', [.55], 0x16a34a, [0, 0, -.45], null, [1, 1.1, .5]]]),
+      I('wb', 'tail', 'Vossenstaart', 10, [['s', [.2], 0xf97316, [0, -.6, -.6], [.6, 0, 0], [1, 1, 3]], ['s', [.12], 0xffffff, [0, -.95, -.9]]]),
+      I('ws', 's_red', 'Rode schoenen', 4, [], 0xef4444), I('ws', 's_blue', 'Blauwe schoenen', 4, [], 0x2563eb), I('ws', 's_pink', 'Roze schoenen', 4, [], 0xf472b6), I('ws', 's_green', 'Neongroene schoenen', 6, [], 0x4ade80),
+      I('ws', 's_white', 'Witte sneakers', 6, [], 0xf8fafc), I('ws', 's_purple', 'Paarse schoenen', 6, [], 0x7c3aed), I('ws', 's_gold', 'Gouden schoenen', 12, [], 0xfacc15),
+      I('wa', 'a_gold', 'Gouden aura', 20, aura(0xfacc15)), I('wa', 'a_fire', 'Vuuraura', 20, aura(0xf97316)), I('wa', 'a_ice', 'Ijsaura', 18, aura(0x22d3ee)),
+      I('wa', 'a_love', 'Liefdesaura', 18, aura(0xf472b6)), I('wa', 'a_dark', 'Duisternisaura', 22, aura(0xa855f7)), I('wa', 'a_nature', 'Natuuraura', 16, aura(0x4ade80))
+    ];
+    const HS = { short: [], long: [['b', [1, 1.1, .3], [0, -.45, -.42]], ['b', [.15, .9, .5], [-.53, -.3, -.1]], ['b', [.15, .9, .5], [.53, -.3, -.1]]], pony: [['s', [.17], [0, .25, -.62]], ['s', [.17], [0, -.2, -.72], [1, 2.4, 1]]], afro: [['s', [.8], [0, .2, -.08]]], mohawk: [-.3, -.15, 0, .15, .3].map(z => ['k', [.1, .4], [0, .62, z]]), bun: [['s', [.23], [0, .68, -.12]]] };
+    [['long', 0xfacc15, 'Blond lang', 8], ['short', 0xfacc15, 'Blond kort', 6], ['pony', 0xef4444, 'Rode staart', 8], ['afro', 0x111827, 'Zwarte afro', 10], ['mohawk', 0x22c55e, 'Groene hanenkam', 10], ['bun', 0xec4899, 'Roze knotje', 8],
+      ['long', 0x3b82f6, 'Blauw lang', 10], ['afro', 0xa855f7, 'Paarse afro', 12], ['mohawk', 0xef4444, 'Rode hanenkam', 10], ['long', 0xf9fafb, 'Wit lang', 10], ['pony', 0x3b82f6, 'Blauwe staart', 8], ['short', 0xef4444, 'Rood kort', 6]]
+      .forEach(([st, col, n, c], i) => ITEMS.push(I('wr', 'hair' + i, n, c, [['h', [.57], col, [0, .04, -.05]], ...HS[st].map(x => [x[0], x[1], col, x[2], null, x[3]])])));
+    function wAddItem(g, it) {
+      const base = it.s === 'wb' ? 1.08 : it.s === 'wa' ? 0 : 1.95, par = it.s === 'wa' ? new THREE.Group() : g;
+      it.p.forEach(([t, d, c, pos, rot, scl]) => {
+        const m = new THREE.Mesh(SH[t](d), it.s === 'wa' ? new THREE.MeshBasicMaterial({ color: c }) : new THREE.MeshLambertMaterial({ color: c }));
+        m.position.set(pos[0], pos[1] + base, pos[2]); if (rot) m.rotation.set(rot[0], rot[1], rot[2]); if (scl) m.scale.set(scl[0], scl[1], scl[2]); m.castShadow = it.s !== 'wa'; par.add(m);
+      });
+      if (it.s === 'wa') { g.add(par); g.userData.aura = par; }
+    }
+    function wOpenShop(slot) {
+      const p = WLD.p, eq = currentAvatarEquipped; slot = slot || WLD.shopSlot || 'wh'; WLD.shopSlot = slot; p.owned = p.owned || [];
+      const old = wEl('wModal').querySelector('.w-items'), top = old ? old.scrollTop : 0, sel = ITEMS.find(x => x.id === WLD.sel && x.s === slot);
+      const act = sel ? (p.owned.includes(sel.id) ? `<button class="w-btn big" data-wear="${sel.id}">${eq[slot] === sel.id ? 'Uitdoen' : 'Dragen'}: ${sel.n}</button>` : `<button class="w-btn big" data-buyi="${sel.id}" ${p.mb < sel.c ? 'disabled' : ''}>Koop ${sel.n} voor ${sel.c} Ⓜ️${p.mb < sel.c ? ' (te weinig)' : ''}</button>`) : '<p class="w-note">Tik op een item om het te passen!</p>';
+      wShow(`<div class="w-card"><div class="w-h"><h2>🛍️ M-Shop</h2><span class="w-mbp">Ⓜ️ ${p.mb}</span><button class="w-x" data-close>✕</button></div>
+        <div class="w-tabs">${SLOTS.map(([k, n, i]) => `<button class="w-tab ${k === slot ? 'on' : ''}" data-slot="${k}">${i}<small>${n}</small></button>`).join('')}</div>
+        <div class="w-items">${ITEMS.filter(x => x.s === slot).map(it => { const own = p.owned.includes(it.id); return `<button class="w-item ${WLD.sel === it.id ? 'on' : ''} ${own ? 'own' : ''}" data-item="${it.id}"><b>${it.n}</b><small>${own ? (eq[slot] === it.id ? '✓ aan' : 'van jou') : it.c + ' Ⓜ️'}</small></button>`; }).join('')}</div>
+        ${act}${eq[slot] ? `<button class="w-btn big alt" data-clear="${slot}">Niets dragen</button>` : ''}<p class="w-note">Ⓜ️ verdien je met levels, het Game Pass, het dagdoel en elke 20 goede antwoorden.</p></div>`);
+      wEl('wModal').classList.add('shop'); WLD.shop = true; const nw = wEl('wModal').querySelector('.w-items'); if (nw) nw.scrollTop = top;
+    }
+    wEl('wShopBtn').onclick = () => wOpenShop();
 
     /* ---------- Spel 2: Ballonnenknal ---------- */
     const wTop = '<div class="w-gtop"><span id="gHearts"></span><span id="gInfo"></span><button class="w-x" id="gQuit" title="Stoppen">✕</button></div>';
@@ -2467,8 +2771,8 @@
       const s = WLD.s = new THREE.Scene(); s.background = new THREE.Color(0x8fd8ff); s.fog = new THREE.Fog(0x8fd8ff, 50, 120);
       WLD.cam = new THREE.PerspectiveCamera(55, 1, .1, 200); WLD.clock = new THREE.Clock();
       WLD.ray = new THREE.Raycaster(); WLD.plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-      WLD.pos = new THREE.Vector3(0, 0, 10);
-      s.add(new THREE.HemisphereLight(0xffffff, 0x88c070, .95));
+      WLD.pos = new THREE.Vector3(0, 0, 10); WLD.py = 0; WLD.vy = 0;
+      WLD.hemi = new THREE.HemisphereLight(0xffffff, 0x88c070, .95); WLD.dusk = new THREE.Color(0xff9e7a); s.add(WLD.hemi);
       const sun = new THREE.DirectionalLight(0xfff2cc, .9); sun.position.set(20, 35, 15); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024);
       const sc = sun.shadow.camera; sc.left = sc.bottom = -40; sc.right = sc.top = 40; sc.far = 100; s.add(sun);
       const M = c => new THREE.MeshLambertMaterial({ color: c });
@@ -2483,7 +2787,7 @@
       for (let i = 0; i < 34; i++) {
         const an = rd() * 6.283, rad = 27 + rd() * 5, x = Math.cos(an) * rad, z = Math.sin(an) * rad;
         if (PORTALS.some(p => Math.hypot(p.x - x, p.z - z) < 7)) continue;
-        const sc2 = .8 + rd() * .7, g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(sc2); s.add(g);
+        const sc2 = .8 + rd() * .7, g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(sc2); s.add(g); (WLD.trees = WLD.trees || []).push(g);
         add(new THREE.CylinderGeometry(.3, .4, 2, 8), M(0x92602f), 0, 1, 0, 1, g);
         add(new THREE.ConeGeometry(1.7, 3, 8), M(0x2f9e5b), 0, 3.4, 0, 1, g); add(new THREE.ConeGeometry(1.3, 2.4, 8), M(0x38b36a), 0, 4.9, 0, 1, g);
       }
@@ -2506,8 +2810,9 @@
         const g = new THREE.Group(); g.position.set(pt.x, 0, pt.z); g.rotation.y = Math.atan2(-pt.x, -pt.z); s.add(g);
         add(new THREE.CylinderGeometry(3.2, 3.4, .3, 32), M(0xcbd5e1), 0, .15, 0, 0, g);
         const ring = add(new THREE.TorusGeometry(2.2, .28, 16, 48), new THREE.MeshLambertMaterial({ color: pt.color, emissive: pt.color, emissiveIntensity: .5 }), 0, 2.5, 0, 1, g);
-        const disc = new THREE.Mesh(new THREE.CircleGeometry(2.1, 48), new THREE.MeshBasicMaterial({ map: wSwirl(hex(pt.color)), transparent: true, opacity: .9, side: THREE.DoubleSide })); disc.position.y = 2.5; g.add(disc); WLD.discs.push(disc);
+        const disc = new THREE.Mesh(new THREE.CircleGeometry(2.1, 48), new THREE.MeshBasicMaterial({ map: wSwirl(hex(pt.color)), transparent: true, opacity: .9, side: THREE.DoubleSide })); disc.position.y = 2.5; g.add(disc); WLD.discs.push(disc); (WLD.rings = WLD.rings || []).push(ring);
         const li = new THREE.PointLight(pt.color, 1.3, 14); li.position.set(0, 3, 1); g.add(li);
+        [-2.7, 2.7].forEach(px => { add(new THREE.CylinderGeometry(.35, .45, 3.4, 8), M(0xcbd5e1), px, 1.7, 0, 1, g); const cr = add(new THREE.OctahedronGeometry(.45), new THREE.MeshLambertMaterial({ color: pt.color, emissive: pt.color, emissiveIntensity: .6 }), px, 4, 0, 0, g); (WLD.crys = WLD.crys || []).push(cr); });
         wLabel(pt.icon + ' ' + pt.name, 5.8, pt.x, pt.z, '#fff');
         WLD.zones.push({ x: pt.x, z: pt.z, r: 2.6, act: () => wOpenPicker(pt) });
       });
@@ -2530,12 +2835,52 @@
         add(new THREE.ConeGeometry(r * .8, r * 1.4, 14), M(0x8b5e3c), 0, -r * .95, 0, 0, g).rotation.x = Math.PI;
         add(new THREE.ConeGeometry(1, 2.4, 8), M(0x2f9e5b), 0, 1.5, 0, 0, g); WLD.clouds.add(g);
       }
+      [0xef4444, 0xf97316, 0xfacc15, 0x22c55e, 0x3b82f6, 0x8b5cf6].forEach((c, i) => { const a = new THREE.Mesh(new THREE.TorusGeometry(26 - i * .9, .45, 6, 48, Math.PI), new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: .75, fog: false })); a.position.set(0, -2, -48); s.add(a); });
+      // ===== wereld v5 =====
+      const free = (x, z, m) => !PORTALS.some(p => { const t = Math.max(0, Math.min(1, (x * p.x + z * p.z) / (p.x * p.x + p.z * p.z))); return Math.hypot(x - t * p.x, z - t * p.z) < 2.4 + m || Math.hypot(p.x - x, p.z - z) < 4 + m; }) && !WLD.obs.some(o => Math.hypot(o.x - x, o.z - z) < o.r + m) && Math.hypot(x, z) > 7.5 + m;
+      const cot = (x, z, c) => {
+        const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = Math.atan2(-x, -z); s.add(g);
+        add(new THREE.BoxGeometry(3.2, 2.2, 2.8), M(0xfff1d6), 0, 1.1, 0, 1, g);
+        add(new THREE.ConeGeometry(2.8, 1.6, 4), M(c), 0, 3, 0, 1, g).rotation.y = Math.PI / 4;
+        add(new THREE.BoxGeometry(.7, 1.2, .1), M(0x92602f), 0, .6, 1.43, 0, g);
+        [-1, 1].forEach(sx => add(new THREE.BoxGeometry(.6, .6, .1), M(0x7dd3fc), sx * 1, 1.3, 1.43, 0, g));
+        add(new THREE.BoxGeometry(.5, 1.2, .5), M(0xa8a29e), 1, 3.3, -.4, 1, g); WLD.obs.push({ x, z, r: 2.4 });
+      };
+      cot(-17, -6, 0xdc2626); cot(17, -6, 0x2563eb); cot(-16, 15, 0xf59e0b); cot(17, 17, 0x7c3aed);
+      for (let i = 0; i < 8; i++) { const an = i * .785 + .39, x = Math.cos(an) * 9.5, z = Math.sin(an) * 9.5; add(new THREE.CylinderGeometry(.08, .1, 2.6, 6), M(0x475569), x, 1.3, z, 1); add(new THREE.SphereGeometry(.26, 10, 8), new THREE.MeshBasicMaterial({ color: 0xfff1a8 }), x, 2.7, z); }
+      for (let i = 0, n = 0; i < 60 && n < 16; i++) {
+        const an = rd() * 6.283, rad = 11 + rd() * 18, x = Math.cos(an) * rad, z = Math.sin(an) * rad; if (!free(x, z, 1.6)) continue; n++;
+        const g = new THREE.Group(), k = .8 + rd() * .6; g.position.set(x, 0, z); g.scale.setScalar(k); s.add(g); WLD.trees.push(g);
+        add(new THREE.CylinderGeometry(.25, .35, 1.8, 8), M(0x92602f), 0, .9, 0, 1, g);
+        [[0, 2.7, 0, 1.4], [.8, 2.3, .3, 1], [-.7, 2.4, -.3, 1.05]].forEach(([a, b, c, r]) => add(new THREE.SphereGeometry(r, 12, 10), M([0x4ade80, 0x22c55e, 0x86efac][(i + (a > 0 ? 1 : 0)) % 3]), a, b, c, 1, g));
+      }
+      for (let i = 0, n = 0; i < 120 && n < 36; i++) {
+        const an = rd() * 6.283, rad = 9 + rd() * 22, x = Math.cos(an) * rad, z = Math.sin(an) * rad; if (!free(x, z, .8)) continue; n++;
+        if (n % 3 === 0) { add(new THREE.CylinderGeometry(.1, .13, .4, 6), M(0xfef3c7), x, .2, z); add(new THREE.SphereGeometry(.32, 10, 8, 0, 6.283, 0, 1.57), M(0xef4444), x, .4, z); }
+        else if (n % 3 === 1) { const r = add(new THREE.DodecahedronGeometry(.4 + rd() * .5), M(0x94a3b8), x, .25, z, 1); r.scale.y = .7; r.rotation.y = rd() * 3; }
+        else { add(new THREE.SphereGeometry(.6, 10, 8), M(0x2f9e5b), x, .4, z, 1); add(new THREE.SphereGeometry(.45, 10, 8), M(0x38b36a), x + .5, .3, z + .2, 1); }
+      }
+      for (let i = 0; i < 7; i++) { const an = i * .9 + .2, h = add(new THREE.SphereGeometry(3 + rd() * 2.5, 16, 10, 0, 6.283, 0, 1.57), M(0x6fcf86), Math.cos(an) * 28, -.1, Math.sin(an) * 28); h.scale.y = .45; }
+      for (let i = 0; i < 8; i++) { const an = rd() * 6.283, d = 8 + rd() * 14; add(new THREE.ConeGeometry(2 + rd() * 2, 6 + rd() * 6, 6), M(0x6b4a2f), Math.cos(an) * d, -8 - rd() * 3, Math.sin(an) * d).rotation.x = Math.PI; }
+      const ra = Math.atan2(8, 20), rv = add(new THREE.BoxGeometry(1.6, .05, 8), new THREE.MeshLambertMaterial({ color: 0x38bdf8 }), Math.cos(ra) * 30, .045, Math.sin(ra) * 30); rv.rotation.y = Math.PI / 2 - ra;
+      WLD.fall = add(new THREE.BoxGeometry(1.6, 9, .3), new THREE.MeshLambertMaterial({ color: 0xbae6fd, transparent: true, opacity: .6 }), Math.cos(ra) * 34, -3.5, Math.sin(ra) * 34); WLD.fall.rotation.y = Math.PI / 2 - ra;
+      const hb = WLD.hab = new THREE.Group(); s.add(hb);
+      add(new THREE.SphereGeometry(2.2, 16, 12), M(0xef4444), 0, 3.2, 0, 0, hb).scale.y = 1.2;
+      add(new THREE.TorusGeometry(2.15, .3, 8, 24), M(0xfacc15), 0, 3.2, 0, 0, hb).rotation.x = Math.PI / 2;
+      add(new THREE.BoxGeometry(1.1, .8, 1.1), M(0x92602f), 0, .2, 0, 0, hb);
+      [-.45, .45].forEach(x => add(new THREE.CylinderGeometry(.03, .03, 2.2, 4), M(0x334155), x, 1.4, 0, 0, hb));
+      const stl = new THREE.Group(); stl.position.set(11, 0, 11); stl.rotation.y = Math.atan2(-11, -11); s.add(stl);
+      add(new THREE.BoxGeometry(3.4, 1.1, 1.2), M(0x92602f), 0, .55, 0, 1, stl);
+      [-1.5, 1.5].forEach(x => add(new THREE.CylinderGeometry(.08, .08, 2.6, 6), M(0x92602f), x, 1.3, .5, 1, stl));
+      for (let i = 0; i < 6; i++) add(new THREE.BoxGeometry(.6, .08, 1.7), M(i % 2 ? 0xffffff : 0xef4444), -1.5 + i * .6 + .3, 2.65, .2, 1, stl).rotation.x = .25;
+      add(new THREE.SphereGeometry(.22, 10, 8), M(0x7c3aed), -.8, 1.3, 0, 0, stl); add(new THREE.SphereGeometry(.22, 10, 8), M(0xfacc15), .8, 1.3, 0, 0, stl);
+      wLabel('🛍️ M-Shop', 4.6, 11, 11, '#fde68a'); WLD.obs.push({ x: 11, z: 11, r: 1.8 }); WLD.zones.push({ x: 9.2, z: 9.2, r: 2.2, act: () => wOpenShop() });
       // besturing
       const pick = e => { if (wLocked()) return; const rc = cv.getBoundingClientRect(), m = new THREE.Vector2((e.clientX - rc.left) / rc.width * 2 - 1, -((e.clientY - rc.top) / rc.height * 2 - 1)), pt = new THREE.Vector3(); WLD.ray.setFromCamera(m, WLD.cam); if (WLD.ray.ray.intersectPlane(WLD.plane, pt)) WLD.target = pt; };
       cv.addEventListener('pointerdown', e => { WLD.drag = true; pick(e); });
       cv.addEventListener('pointermove', e => { if (WLD.drag) pick(e); });
       window.addEventListener('pointerup', () => WLD.drag = false);
-      window.addEventListener('keydown', e => { if (!WLD.running) return; const k = e.key.toLowerCase(); if (k === 'escape') wHide(); if (!wLocked()) { WLD.keys[k] = true; if (k.startsWith('arrow')) e.preventDefault(); } });
+      window.addEventListener('keydown', e => { if (!WLD.running) return; const k = e.key.toLowerCase(); if (k === 'escape') wHide(); if (k === ' ' && !wLocked()) { wJump(); e.preventDefault(); } if (!wLocked()) { WLD.keys[k] = true; if (k.startsWith('arrow')) e.preventDefault(); } });
       window.addEventListener('keyup', e => { WLD.keys[e.key.toLowerCase()] = false; });
       const rs = () => { r.setSize(innerWidth, innerHeight, false); WLD.cam.aspect = innerWidth / innerHeight; WLD.cam.updateProjectionMatrix(); };
       window.addEventListener('resize', rs); rs();
@@ -2547,7 +2892,7 @@
       g.font = '800 52px "Plus Jakarta Sans", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineWidth = 12; g.lineJoin = 'round';
       g.strokeStyle = 'rgba(30,27,75,.9)'; g.strokeText(txt, 256, 64); g.fillStyle = col; g.fillText(txt, 256, 64);
       const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthTest: false }));
-      sp.scale.set(8, 2, 1); sp.position.set(x, y, z); sp.renderOrder = 5; WLD.s.add(sp);
+      sp.scale.set(8, 2, 1); sp.position.set(x, y, z); sp.renderOrder = 5; WLD.s.add(sp); return sp;
     }
     function wSwirl(col) {
       const c = document.createElement('canvas'); c.width = c.height = 256; const g = c.getContext('2d');
@@ -2556,22 +2901,28 @@
       for (let k = 0; k < 5; k++) { g.beginPath(); for (let t = 0; t < 60; t++) { const a = k * 1.256 + t * .09, rr = 10 + t * 1.9; g[t ? 'lineTo' : 'moveTo'](128 + Math.cos(a) * rr, 128 + Math.sin(a) * rr); } g.stroke(); }
       return new THREE.CanvasTexture(c);
     }
-    function wBuildPlayer() {
-      if (WLD.player) WLD.s.remove(WLD.player);
-      const a = currentAvatarEquipped, sh = avatarData.shirts.find(x => x.id === a.shirts), g = new THREE.Group(), sc = sh ? sh.color : '#7c3aed', H = 1.95, SK = 0xfbcfe8;
+    function wMakeChar(a) {
+      const sh = avatarData.shirts.find(x => x.id === a.shirts), g = new THREE.Group(), sc = sh ? sh.color : '#7c3aed', H = 1.95, SK = 0xfbcfe8, it = id => ITEMS.find(x => x.id === id);
+      const shoe = it(a.ws) && it(a.ws).col || 0x1e293b;
       const part = (geo, c, x, y, z, par) => { const m = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: c })); m.position.set(x, y, z); m.castShadow = true; (par || g).add(m); return m; };
-      const limb = (x, y, r, len, c, shoe) => {
+      const limb = (x, y, r, len, c, leg) => {
         const p = new THREE.Group(); p.position.set(x, y, 0); g.add(p);
         part(new THREE.CylinderGeometry(r, r * .9, len, 10), c, 0, -len / 2, 0, p);
-        if (shoe) part(new THREE.SphereGeometry(.2, 10, 8), 0x1e293b, 0, -len, .08, p).scale.set(1, .6, 1.4); else part(new THREE.SphereGeometry(r * 1.1, 10, 8), SK, 0, -len, 0, p);
+        if (leg) { part(new THREE.SphereGeometry(.21, 12, 8), shoe, 0, -len, .08, p).scale.set(1, .65, 1.45); part(new THREE.BoxGeometry(.36, .07, .56), 0xf8fafc, 0, -len - .09, .1, p); }
+        else { part(new THREE.CylinderGeometry(r * 1.05, r * 1.05, .08, 10), 0xf8fafc, 0, -len + .12, 0, p); part(new THREE.SphereGeometry(r * 1.15, 12, 8), SK, 0, -len, 0, p); }
         return p;
       };
       g.userData.legs = [limb(-.22, .62, .17, .62, 0x334155, 1), limb(.22, .62, .17, .62, 0x334155, 1)];
-      g.userData.arms = [limb(-.58, 1.45, .12, .65, sc), limb(.58, 1.45, .12, .65, sc)];
-      part(new THREE.CylinderGeometry(.42, .5, .9, 16), sc, 0, 1.08, 0);
-      part(new THREE.CylinderGeometry(.51, .51, .1, 16), 0xfacc15, 0, .7, 0);
-      part(new THREE.SphereGeometry(.52, 24, 18), SK, 0, H, 0).scale.set(1, .95, 1);
-      part(new THREE.SphereGeometry(.55, 16, 12, 0, 6.283, 0, 1.8), 0x5b3a29, 0, H + .04, -.05);
+      g.userData.arms = [limb(-.6, 1.45, .12, .65, sc), limb(.6, 1.45, .12, .65, sc)];
+      part(new THREE.CylinderGeometry(.42, .5, .9, 20), sc, 0, 1.08, 0);
+      [-1, 1].forEach(s => part(new THREE.SphereGeometry(.17, 12, 8), sc, s * .5, 1.45, 0));
+      part(new THREE.TorusGeometry(.3, .05, 8, 20), 0xffffff, 0, 1.52, 0).rotation.x = Math.PI / 2;
+      part(new THREE.CylinderGeometry(.51, .51, .1, 20), 0x1e293b, 0, .7, 0); part(new THREE.BoxGeometry(.14, .12, .06), 0xfacc15, 0, .7, .5);
+      part(new THREE.CylinderGeometry(.14, .16, .2, 10), SK, 0, 1.58, 0);
+      part(new THREE.SphereGeometry(.52, 28, 20), SK, 0, H, 0).scale.set(1, .95, 1);
+      [-1, 1].forEach(s => { part(new THREE.SphereGeometry(.1, 10, 8), SK, s * .5, H, 0).scale.set(.6, 1, .8); part(new THREE.BoxGeometry(.17, .04, .04), 0x4a2f1f, s * .18, H + .2, .47).rotation.z = s * -.15; });
+      part(new THREE.SphereGeometry(.06, 8, 8), 0xf5b5c8, 0, H - .03, .52);
+      if (it(a.wr)) wAddItem(g, it(a.wr)); else part(new THREE.SphereGeometry(.55, 20, 14, 0, 6.283, 0, 1.8), 0x5b3a29, 0, H + .04, -.05);
       [-.18, .18].forEach(x => {
         part(new THREE.SphereGeometry(.1, 10, 8), 0xffffff, x, H + .03, .43);
         part(new THREE.SphereGeometry(.055, 8, 8), 0x0f172a, x, H + .03, .51);
@@ -2579,12 +2930,21 @@
         part(new THREE.SphereGeometry(.07, 8, 6), 0xf9a8d4, x * 1.6, H - .1, .43).scale.set(1, .6, .4);
       });
       part(new THREE.TorusGeometry(.13, .025, 6, 12, Math.PI), 0x9f1239, 0, H - .08, .5).rotation.z = Math.PI;
-      if (a.hats === 'cap') { part(new THREE.SphereGeometry(.56, 16, 10, 0, 6.283, 0, 1.57), 0x3b82f6, 0, H + .1, 0); part(new THREE.BoxGeometry(.7, .06, .5), 0x1d4ed8, 0, H + .12, .5); }
-      if (a.hats === 'beanie') { part(new THREE.SphereGeometry(.57, 16, 10, 0, 6.283, 0, 1.7), 0xef4444, 0, H + .12, 0); part(new THREE.SphereGeometry(.12, 8, 8), 0xffffff, 0, H + .68, 0); }
-      if (a.hats === 'crown') { part(new THREE.CylinderGeometry(.4, .45, .3, 8), 0xf59e0b, 0, H + .55, 0); for (let i = 0; i < 5; i++) { const an = i * 1.2566; part(new THREE.ConeGeometry(.1, .3, 6), 0xfbbf24, Math.cos(an) * .38, H + .8, Math.sin(an) * .38); } }
-      if (a.glasses === 'sunglasses') part(new THREE.BoxGeometry(.8, .16, .1), 0x0f172a, 0, H + .05, .54);
-      if (a.glasses === 'nerd') [-.2, .2].forEach(x => part(new THREE.TorusGeometry(.14, .03, 8, 16), 0x0f172a, x, H + .05, .55));
-      g.position.copy(WLD.pos); WLD.s.add(g); WLD.player = g;
+      if (!a.wh) {
+        if (a.hats === 'cap') { part(new THREE.SphereGeometry(.56, 16, 10, 0, 6.283, 0, 1.57), 0x3b82f6, 0, H + .1, 0); part(new THREE.BoxGeometry(.7, .06, .5), 0x1d4ed8, 0, H + .12, .5); }
+        if (a.hats === 'beanie') { part(new THREE.SphereGeometry(.57, 16, 10, 0, 6.283, 0, 1.7), 0xef4444, 0, H + .12, 0); part(new THREE.SphereGeometry(.12, 8, 8), 0xffffff, 0, H + .68, 0); }
+        if (a.hats === 'crown') { part(new THREE.CylinderGeometry(.4, .45, .3, 8), 0xf59e0b, 0, H + .55, 0); for (let i = 0; i < 5; i++) { const an = i * 1.2566; part(new THREE.ConeGeometry(.1, .3, 6), 0xfbbf24, Math.cos(an) * .38, H + .8, Math.sin(an) * .38); } }
+      }
+      if (!a.wf) {
+        if (a.glasses === 'sunglasses') part(new THREE.BoxGeometry(.8, .16, .1), 0x0f172a, 0, H + .05, .54);
+        if (a.glasses === 'nerd') [-.2, .2].forEach(x => part(new THREE.TorusGeometry(.14, .03, 8, 16), 0x0f172a, x, H + .05, .55));
+      }
+      ['wh', 'wf', 'wb', 'wa'].forEach(k => { if (it(a[k])) wAddItem(g, it(a[k])); });
+      return g;
+    }
+    function wBuildPlayer() {
+      if (WLD.player) WLD.s.remove(WLD.player);
+      const g = wMakeChar({ ...currentAvatarEquipped, ...WLD.tryOn }); g.position.copy(WLD.pos); WLD.s.add(g); WLD.player = g;
     }
     function wBuildPet() {
       if (WLD.pet) { WLD.s.remove(WLD.pet); WLD.pet = null; }
@@ -2606,6 +2966,12 @@
       if (sp.ears) [-.34, .34].forEach(x => part(new THREE.ConeGeometry(.13, .38, 8), sp.c, x, .95, 0));
       if (sp.wings) [-.55, .55].forEach(x => { const w = part(new THREE.BoxGeometry(.5, .05, .32), sp.c, x, .55, -.05); w.rotation.z = x > 0 ? .5 : -.5; });
       if (sp.beak) part(new THREE.ConeGeometry(.08, .2, 8), 0xf97316, 0, .52, .52).rotation.x = Math.PI / 2;
+      if (sp.id === 'slijm') [[-.35, .1, .2], [.3, .08, .3], [0, .07, .45]].forEach(q => part(new THREE.SphereGeometry(.14, 8, 6), lt, q[0], q[1], q[2], 1, .5, 1));
+      if (sp.id === 'vlam') [[0, 1, 0, .1, .4], [-.15, .92, 0, .08, .3], [.15, .92, 0, .08, .3]].forEach(q => part(new THREE.ConeGeometry(q[3], q[4], 8), 0xfbbf24, q[0], q[1], q[2]));
+      if (sp.id === 'wolk') [[-.35, .85, 0], [.35, .85, 0], [0, .98, .05]].forEach(q => part(new THREE.SphereGeometry(.26, 10, 8), lt, q[0], q[1], q[2]));
+      if (sp.id === 'pomp') { part(new THREE.CylinderGeometry(.05, .07, .2, 6), 0x166534, 0, 1, 0); [.8, -.8].forEach(r => { part(new THREE.TorusGeometry(.5, .03, 6, 20), 0xd97706, 0, .5, 0, 1, .9, 1).rotation.y = r; }); }
+      if (sp.id === 'draak') { [[.95, -.2], [.8, -.4], [.6, -.52]].forEach(q => part(new THREE.ConeGeometry(.07, .25, 6), 0x4c1d95, 0, q[0], q[1])); part(new THREE.ConeGeometry(.12, .5, 8), sp.c, 0, .25, -.7).rotation.x = -1.2; }
+      if (sp.id === 'goud') part(new THREE.TorusGeometry(.3, .03, 6, 20), 0xfde047, 0, 1.15, 0).rotation.x = Math.PI / 2;
       g.position.set(WLD.pos.x + 1.4, 0, WLD.pos.z + 1.4); WLD.s.add(g); WLD.pet = g;
     }
     function wUpdate(dt) {
@@ -2625,9 +2991,10 @@
           let d = Math.atan2(dir.x, dir.z) - pl.rotation.y; d = Math.atan2(Math.sin(d), Math.cos(d)); pl.rotation.y += d * Math.min(1, dt * 12);
         }
       }
-      pl.position.set(pos.x, moving ? Math.abs(Math.sin(t * 14)) * .14 : Math.sin(t * 2) * .02, pos.z);
+      if (WLD.vy || WLD.py) { WLD.vy -= 20 * dt; WLD.py = Math.max(0, WLD.py + WLD.vy * dt); if (!WLD.py && WLD.vy < 0) WLD.vy = 0; }
+      pl.position.set(pos.x, (moving ? Math.abs(Math.sin(t * 14)) * .14 : Math.sin(t * 2) * .02) + WLD.py, pos.z);
       const sw = moving ? Math.sin(t * 14) * .9 : 0, ud = pl.userData;
-      ud.legs[0].rotation.x = sw; ud.legs[1].rotation.x = -sw; ud.arms[0].rotation.x = -sw; ud.arms[1].rotation.x = sw;
+      ud.legs[0].rotation.x = sw; ud.legs[1].rotation.x = -sw; ud.arms[0].rotation.x = -sw; ud.arms[1].rotation.x = sw; if (ud.aura) ud.aura.rotation.y += dt * 1.5;
       const pet = WLD.pet;
       if (pet) {
         const dx = pos.x - pet.position.x, dz = pos.z - pet.position.z, dist = Math.hypot(dx, dz);
@@ -2637,11 +3004,16 @@
       }
       WLD.egg.position.y = 2.6 + Math.sin(t * 2) * .15; WLD.egg.rotation.y += dt * .8;
       WLD.discs.forEach(d => d.rotation.z += dt * 1.5);
+      const dk = (Math.sin(t * .03) + 1) / 2; WLD.s.background.setHex(0x8fd8ff).lerp(WLD.dusk, dk * .55); WLD.s.fog.color.copy(WLD.s.background); WLD.hemi.intensity = .95 - dk * .25; WLD.ff.material.opacity = .35 + dk * .65;
+      WLD.trees.forEach((g, i) => g.rotation.z = Math.sin(t * 1.3 + i) * .025); WLD.rings.forEach((r, i) => r.scale.setScalar(1 + Math.sin(t * 2 + i) * .03)); WLD.crys.forEach((c, i) => { c.rotation.y += dt * 1.5; c.position.y = 4 + Math.sin(t * 2 + i) * .15; });
       WLD.blades.rotation.z += dt * 1.2; WLD.ff.rotation.y += dt * .04; WLD.ff.position.y = Math.sin(t) * .3; WLD.pond.material.opacity = .8 + Math.sin(t * 2) * .07;
+      WLD.fall.material.opacity = .55 + Math.sin(t * 5) * .12; WLD.hab.position.set(Math.cos(t * .08) * 40, 20 + Math.sin(t * .7), Math.sin(t * .08) * 40); WLD.hab.rotation.y = t * .2;
+      wNetUpdate(dt); if ((WLD.fc = (WLD.fc || 0) + 1) % 5 === 0) wDrawMap();
       WLD.egg.scale.setScalar(WLD.p.eggs.some(e => e.ready) ? 1.12 + Math.sin(t * 6) * .05 : 1);
       WLD.clouds.rotation.y += dt * .01;
-      const tp = new THREE.Vector3(pos.x + Math.sin(ca) * 11, 9, pos.z + Math.cos(ca) * 11);
-      WLD.cam.position.lerp(tp, 1 - Math.pow(.001, dt)); WLD.cam.lookAt(pos.x, 1.5, pos.z);
+      if (WLD.shop) WLD.camAng += dt * .5;
+      const sd = WLD.shop ? 5.5 : 11, sy = WLD.shop ? 2.6 : 9, tp = new THREE.Vector3(pos.x + Math.sin(WLD.camAng) * sd, sy, pos.z + Math.cos(WLD.camAng) * sd);
+      WLD.cam.position.lerp(tp, 1 - Math.pow(.001, dt)); WLD.cam.lookAt(pos.x, WLD.shop ? 1.4 : 1.5, pos.z);
       WLD.zones.forEach(z => { const d = Math.hypot(pos.x - z.x, pos.z - z.z); if (d < z.r) { if (!z.in && !wLocked()) { z.in = true; z.act(); } } else z.in = false; });
     }
     function wLoop() {
@@ -2657,12 +3029,12 @@
       WLD.zones.forEach(z => z.in = true);
       wBuildPlayer(); wBuildPet(); wHud(); wSave();
       wEl('wLoad').style.display = 'none'; wEl('wHint').style.opacity = 1;
-      WLD.running = true; WLD.clock.getDelta(); wLoop();
+      WLD.running = true; WLD.clock.getDelta(); wLoop(); wNetStart();
     }
     wEl('chooseWorldBtn').addEventListener('click', () => {
-      let s = null; try { s = JSON.parse(localStorage.getItem('superreken_state') || 'null'); } catch (e) {}
-      if (currentStudent.name && currentStudent.code && currentStudent.pin) openWorld();
-      else if (s && s.name && s.code && s.pin) { Object.assign(currentStudent, s); openWorld(); }
+      wRememberAccount(); const a = wAccounts();
+      if (a.length > 1) wShowAccounts();
+      else if (a.length === 1) { Object.assign(currentStudent, a[0]); openWorld(); }
       else { window.__afterAuth = 'world'; showStudentSection('studentAuthChoiceSection'); }
     });
     wEl('chooseTasksBtn').addEventListener('click', () => { window.__afterAuth = null; });
