@@ -420,6 +420,63 @@
     #wModal.shop { background: transparent; align-items: flex-end; } #wModal.shop .w-card { animation: none; width: min(400px, 100%); max-height: 52vh; }
     @media (min-width: 700px) { #wModal.shop { align-items: center; justify-content: flex-end; } #wModal.shop .w-card { max-height: 88vh; } .w-items { max-height: 46vh; } }
     #wShopBtn { background: linear-gradient(#a78bfa, #7c3aed) !important; color: #fff !important; }
+    .w-em { grid-template-columns: repeat(3, 1fr); max-height: 50vh; } .w-eic { display: block; font-size: 30px; line-height: 1.2; font-weight: 800; color: #5b21b6; }
+    #wQuick { position: absolute; left: 12px; bottom: 112px; display: flex; flex-direction: column; gap: 8px; }
+    #wQuick button { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,.45); background: rgba(30,27,75,.7); color: #fff; font: 800 20px 'Plus Jakarta Sans', sans-serif; cursor: pointer; backdrop-filter: blur(6px); transition: transform .15s; }
+    #wQuick button:hover { transform: scale(1.12); } #wQuick button:active { transform: scale(.92); }
+    #wEmoBtn { background: linear-gradient(#f9a8d4, #ec4899) !important; color: #fff !important; }
+    /* Game Pass */
+    .w-card.pass { width: min(780px, 100%); background: linear-gradient(160deg, #1e1b4b 0%, #4c1d95 60%, #7c2d92 100%); color: #fff; border: 2px solid rgba(251,191,36,.55); }
+    .w-card.pass h2 { color: #fde68a; } .w-card.pass p { color: #e9d5ff; } .pass .w-x, .emo .w-x { background: rgba(255,255,255,.15); color: #fff; }
+    .w-ptop { display: flex; align-items: center; gap: 14px; margin: 12px 0; }
+    .w-badge { width: 66px; height: 66px; border-radius: 50%; background: linear-gradient(#fde68a, #f59e0b); color: #422006; display: grid; place-items: center; font: 800 28px 'Plus Jakarta Sans', sans-serif; box-shadow: 0 0 26px rgba(251,191,36,.6); flex-shrink: 0; }
+    .w-pbar { height: 18px; border-radius: 10px; background: rgba(255,255,255,.15); overflow: hidden; } .w-pbar i { display: block; height: 100%; background: linear-gradient(90deg, #fbbf24, #f97316); box-shadow: 0 0 14px #fbbf24; transition: width .4s; }
+    .w-track { display: flex; gap: 12px; overflow-x: auto; padding: 18px 4px 14px; scroll-snap-type: x proximity; }
+    .w-t2 { flex: 0 0 96px; scroll-snap-align: start; position: relative; border-radius: 18px; padding: 14px 6px 10px; text-align: center; background: rgba(255,255,255,.1); border: 2px solid rgba(255,255,255,.2); font: 700 12px 'Plus Jakarta Sans', sans-serif; color: #fff; cursor: default; }
+    .w-t2 .n { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #fbbf24; color: #422006; border-radius: 10px; padding: 0 9px; font-size: 11px; font-weight: 800; }
+    .w-t2 .ic { display: block; font-size: 34px; margin: 4px 0; }
+    .w-t2.rdy { background: linear-gradient(#fde68a, #f59e0b); color: #422006; border-color: #fff; cursor: pointer; animation: wGlow 1s infinite alternate; } .w-t2.ok { opacity: .45; } .w-t2.lock { opacity: .85; }
+    /* Kwekerij */
+    .w-card.nest { width: min(640px, 100%); background: linear-gradient(180deg, #fff7ed, #fed7aa); color: #431407; } .nest h3 { color: #c2410c; } .nest p { color: #7c2d12; } .nest .w-mbp { background: #fff; color: #9a3412; }
+    .w-hero { display: flex; align-items: center; gap: 16px; background: rgba(255,255,255,.7); border-radius: 22px; padding: 14px; margin: 10px 0; }
+    .w-ringp { --p: 0; width: 96px; height: 96px; border-radius: 50%; background: conic-gradient(#f97316 calc(var(--p) * 1%), #fde7cf 0); display: grid; place-items: center; flex-shrink: 0; }
+    .w-ringp span { width: 76px; height: 76px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 42px; }
+    .w-eggs { display: flex; gap: 8px; flex-wrap: wrap; } .w-mini { background: #fff; border: 2px solid #fdba74; border-radius: 14px; padding: 6px 12px; text-align: center; font-size: 26px; font-family: inherit; color: #431407; } .w-mini small { display: block; font-size: 11px; font-weight: 800; }
+    .w-mini.rdy { border-color: #f59e0b; background: #fffbeb; cursor: pointer; animation: wGlow 1s infinite alternate; }
+    .w-pcard { --rc: #cbd5e1; border: 3px solid var(--rc); background: #fff; border-radius: 18px; padding: 10px 6px; text-align: center; cursor: pointer; font-family: inherit; color: #431407; position: relative; }
+    .w-pcard.on { box-shadow: 0 0 0 3px #10b981 inset; } .w-pcard b { display: block; font-size: 13px; } .w-pcard small { display: block; font-size: 11px; font-weight: 700; color: #9a3412; } .w-pcard em { font-style: normal; font-size: 11px; font-weight: 800; color: #059669; }
+    .w-pblob { width: 54px; height: 48px; border-radius: 50%; margin: 0 auto 6px; position: relative; } .w-pblob::before { content: ''; position: absolute; top: 16px; left: 14px; width: 8px; height: 10px; border-radius: 50%; background: #0f172a; box-shadow: 18px 0 #0f172a; }
+    /* Emotes */
+    .w-card.emo { width: min(560px, 100%); background: linear-gradient(160deg, #0f172a, #312e81); color: #fff; } .emo h2 { color: #f9a8d4; } .emo p { color: #c7d2fe; } .emo .w-mbp { background: rgba(255,255,255,.15); color: #fde68a; }
+    .w-eg { grid-template-columns: repeat(4, 1fr); max-height: 52vh; gap: 10px; }
+    .w-et { border: 2px solid rgba(255,255,255,.22); background: rgba(255,255,255,.08); border-radius: 20px; padding: 10px 4px; color: #fff; font-family: inherit; cursor: pointer; text-align: center; transition: transform .15s, background .15s; }
+    .w-et:hover { transform: scale(1.06); background: rgba(255,255,255,.16); } .w-et .e { display: block; font-size: 30px; font-weight: 800; } .w-et b { display: block; font-size: 11px; } .w-et small { display: block; font-size: 11px; font-weight: 800; color: #fde68a; }
+    .w-et.lock { opacity: .6; } .w-et.on { border-color: #f9a8d4; background: rgba(249,168,212,.22); opacity: 1; } .w-et.own { border-color: rgba(134,239,172,.5); }
+    .w-g { margin-top: 10px; font-size: 13px; font-weight: 700; color: #059669; }
+    /* Podium in de race */
+    .pod { display: flex; align-items: flex-end; justify-content: center; gap: 10px; margin: 14px 0; min-height: 240px; width: 100%; }
+    .pod-col { display: flex; flex-direction: column; align-items: center; width: 30%; max-width: 160px; }
+    .pod-who { position: relative; text-align: center; padding-top: 38px; }
+    .pod-av { width: 84px; height: 84px; margin: 0 auto; transform-origin: 50% 90%; }
+    .pod-name { font-weight: 800; font-size: 14px; color: var(--dark); margin: 2px 0 4px; word-break: break-word; }
+    .pod-step { width: 100%; border-radius: 12px 12px 0 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.15); }
+    .pod-step small { font-size: 12px; font-weight: 700; }
+    .p1 .pod-step { height: 120px; background: linear-gradient(#fbbf24, #f59e0b); } .p2 .pod-step { height: 90px; background: linear-gradient(#cbd5e1, #94a3b8); } .p3 .pod-step { height: 64px; background: linear-gradient(#fdba74, #c2410c); }
+    .pod-bub { position: absolute; top: 0; left: 50%; transform: translateX(-50%) scale(0); width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 3px solid #7c3aed; display: grid; place-items: center; font-size: 22px; font-weight: 800; color: #5b21b6; }
+    .pod-bub.on { animation: emBub 3s ease-out forwards; }
+    @keyframes emBub { 0% { transform: translateX(-50%) scale(0); } 10% { transform: translateX(-50%) scale(1.15); } 20%, 85% { transform: translateX(-50%) scale(1); opacity: 1; } 100% { transform: translateX(-50%) scale(1); opacity: 0; } }
+    .pod-emo { flex-wrap: wrap; gap: 8px; justify-content: center; margin: 8px 0 12px; width: 100%; }
+    .pod-emo button { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--primary); background: #fff; font-size: 22px; font-weight: 800; cursor: pointer; }
+    .em-bounce { animation: emBounce .45s ease-in-out infinite; } .em-jump { animation: emJump .5s ease-out infinite; } .em-spin { animation: emSpin .7s linear infinite; }
+    .em-flip { animation: emFlip .9s ease-in-out 3; } .em-shake { animation: emShake .25s linear infinite; } .em-sway { animation: emSway .8s ease-in-out infinite; }
+    .em-float { animation: emFloat 1.4s ease-in-out infinite; } .em-pulse { animation: emPulse .5s ease-in-out infinite; } .em-rocket { animation: emRocket 3s ease-in-out 1; }
+    .em-faint { animation: emFaint 3s ease-in-out 1; } .em-dance { animation: emDance .6s ease-in-out infinite; } .em-rock { animation: emRock .3s ease-in-out infinite; } .em-six7 { animation: emSix7 .36s ease-in-out infinite; }
+    @keyframes emBounce { 50% { transform: translateY(-12px); } } @keyframes emJump { 50% { transform: translateY(-22px) scale(1.05); } } @keyframes emSpin { to { transform: rotate(360deg); } }
+    @keyframes emFlip { 50% { transform: translateY(-30px) rotate(180deg); } 100% { transform: rotate(360deg); } } @keyframes emShake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+    @keyframes emSway { 50% { transform: rotate(10deg); } 0%, 100% { transform: rotate(-10deg); } } @keyframes emFloat { 50% { transform: translateY(-18px); } } @keyframes emPulse { 50% { transform: scale(1.15); } }
+    @keyframes emRocket { 50% { transform: translateY(-70px); } } @keyframes emFaint { 15%, 85% { transform: rotate(85deg) translate(10px, 20px); } 0%, 100% { transform: none; } }
+    @keyframes emDance { 25% { transform: rotate(-12deg) translateY(-8px); } 75% { transform: rotate(12deg) translateY(-8px); } } @keyframes emRock { 50% { transform: rotate(14deg); } 0%, 100% { transform: rotate(-14deg); } }
+    @keyframes emSix7 { 25% { transform: rotate(-8deg) translateY(-6px); } 75% { transform: rotate(8deg) translateY(-6px); } }
   </style>
 </head>
 <body>
@@ -643,6 +700,8 @@
           <h2 style="color: var(--primary); font-size: 28px; margin-bottom: 8px;" id="studentRoundEndTitle">Ronde Voltooid!</h2>
           <p style="font-size: 16px; margin: 6px 0;">Jouw score deze ronde: <span id="finalScoreText" style="font-size: 22px; font-weight: 800;">0</span> punten</p>
           <p style="font-size: 15px; color: var(--muted); margin-bottom: 16px;" id="studentWaitNextRoundText">Wachten tot de leerkracht de volgende ronde start...</p>
+          <div id="studentPodium" style="width: 100%;"></div>
+          <div id="studentEmoBar" class="pod-emo" style="display: none;"></div>
           
           <div style="background: white; border: 1px solid var(--border); border-radius: 14px; padding: 16px; width: 100%; text-align: left; margin-bottom: 16px;">
             <div style="font-weight: 700; font-size: 14px; color: var(--muted); margin-bottom: 8px;">Klasoverzicht na deze ronde:</div>
@@ -924,6 +983,7 @@
 
               <div class="dashboard-section-title" id="leaderboardTitleHeader">Leaderboard Top 5:</div>
               
+              <div id="teacherPodium"></div>
               <div class="leaderboard-grid-cards" id="teacherLeaderboardCards"></div>
 
               <div class="class-list" id="teacherTopFiveList" style="background: white; max-height: none;"></div>
@@ -972,6 +1032,7 @@
       <div class="w-pill" id="wOnline">👥 1 online</div>
     </div>
     <div id="wRight">
+      <button type="button" id="wEmoBtn">😎 Emotes</button>
       <button type="button" id="wShopBtn">🛍️ M-Shop</button>
       <button type="button" id="wPassBtn">🎫 Game Pass</button>
       <button type="button" id="wPetsBtn">🥚 Eieren &amp; huisdieren</button>
@@ -982,6 +1043,7 @@
       <button type="button" id="wSwitch">🔁 Wissel speler</button>
       <button type="button" id="wExitBtn">🚪 Verlaten</button>
     </div>
+    <div id="wQuick"></div>
     <div id="wHint">Tik of sleep om te lopen (of WASD / pijltjes). Loop in een portaal om te spelen!</div>
     <div id="wModal"></div>
     <div id="wGame"></div>
@@ -991,7 +1053,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, query, where, getDocs, getDoc, deleteDoc, doc, updateDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+    import { getFirestore, initializeFirestore, collection, addDoc, query, where, getDocs, getDoc, deleteDoc, doc, updateDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDUYrhKByU7T6m2KOm5hfOAX-NlCzXwQiA",
@@ -1005,7 +1067,7 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app);
+    const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true }); // werkt ook achter schoolfilters/proxy's
     const provider = new GoogleAuthProvider();
 
     const avatarData = {
@@ -1032,6 +1094,7 @@
     let activeShopCategory = 'hats';
 
     function generateAvatarSvgString(config) {
+      const ex = avatarExtra(config);
       let hatSvg = '';
       let glassSvg = '';
       let shirtColor = '#7c3aed';
@@ -1047,13 +1110,15 @@
 
       return `
         <svg viewBox="0 0 100 100" width="100%" height="100%">
+          ${ex.back}
           <path d="M25 90 C25 68 35 60 50 60 C65 60 75 68 75 90 Z" fill="${shirtColor}" />
           <circle cx="50" cy="46" r="22" fill="#fbcfe8" />
           <circle cx="41" cy="46" r="3" fill="#0f172a" />
           <circle cx="59" cy="46" r="3" fill="#0f172a" />
           <path d="M44 56 Q50 62 56 56" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round" />
-          ${glassSvg}
-          ${hatSvg}
+          ${config.wf ? '' : glassSvg}
+          ${config.wh ? '' : hatSvg}
+          ${ex.front}${ex.feet}
         </svg>
       `;
     }
@@ -1101,7 +1166,7 @@
     };
 
     function updateAvatarPreview() {
-      const svgCode = generateAvatarSvgString(currentAvatarEquipped);
+      const svgCode = generateAvatarSvgString(raceAvatar());
       document.getElementById('previewSvg').outerHTML = `<div class="svg-avatar-render" id="previewSvg">${svgCode}</div>`;
       if (document.getElementById('lobbyAvatarPreview')) {
         document.getElementById('lobbyAvatarPreview').innerHTML = svgCode;
@@ -1114,7 +1179,7 @@
       if (currentStudentDocId) {
         try {
           await updateDoc(doc(db, "activeStudents", currentStudentDocId), {
-            avatarConfig: currentAvatarEquipped
+            avatarConfig: raceAvatar()
           });
         } catch(e) {}
       }
@@ -1148,6 +1213,7 @@
     onAuthStateChanged(auth, (user) => {
       if (user) {
         currentUser = user;
+        if (localStorage.getItem('sr_gstudent') === '1') return;
         const savedStudentSession = localStorage.getItem('superreken_state');
         if (savedStudentSession) {
           showAccountChoiceModal(user, JSON.parse(savedStudentSession));
@@ -1369,6 +1435,7 @@
         currentStudent.name = name;
         currentStudent.code = joinCode;
 
+        await wApplyWorldAvatar(name);
         const docRef = await addDoc(collection(db, "activeStudents"), {
           name: currentStudent.name,
           code: currentStudent.code,
@@ -1376,7 +1443,7 @@
           correctCount: 0,
           totalCount: 0,
           accuracy: 100,
-          avatarConfig: currentAvatarEquipped,
+          avatarConfig: raceAvatar(),
           createdAt: new Date().toISOString()
         });
         currentStudentDocId = docRef.id;
@@ -1454,6 +1521,7 @@
     }
 
     async function fetchClassStatsForStudent(raceCode) {
+      racePodiumStart(raceCode);
       try {
         const snap = await getDocs(query(collection(db, "activeStudents"), where("code", "==", raceCode)));
         let totalSommen = 0;
@@ -1645,6 +1713,7 @@
 
     document.getElementById("teacherGoogleBtn").addEventListener('click', async () => {
       try {
+        localStorage.removeItem('sr_gstudent');
         const result = await signInWithPopup(auth, provider);
         currentUser = result.user;
         openTeacherDashboard(currentUser);
@@ -2121,7 +2190,7 @@
           let tot = d.totalCount || 0;
           let cor = d.correctCount || 0;
           let acc = tot > 0 ? Math.round((cor / tot) * 100) : 100;
-          students.push({ ...d, accuracyVal: acc });
+          students.push({ ...d, accuracyVal: acc, id: docSnap.id });
           totalSommenKlas += tot;
           totalGoedKlas += cor;
         });
@@ -2129,6 +2198,7 @@
         const cardsContainer = document.getElementById('teacherLeaderboardCards');
         const headerTitle = document.getElementById('leaderboardTitleHeader');
         cardsContainer.innerHTML = "";
+        racePodiumRender(document.getElementById('teacherPodium'), students.slice(), currentRaceRound);
 
         if (currentRaceRound === 1) {
           headerTitle.textContent = "Ronde 1: Top 5 Meeste Punten";
@@ -2240,14 +2310,14 @@
     /* ---------- Opslag van voortgang (Firestore + lokaal) ---------- */
     const wKey = () => 'sr_world_' + (currentStudent.code + '_' + currentStudent.name).toLowerCase().replace(/[^a-z0-9_]/g, '-');
     function wNewProfile() {
-      return { xp: 0, level: 1, coins: 20, mb: 0, owned: [], pass: 0, claimed: [], eggs: [{ prog: 0, need: 15 }], pets: [], activePet: null, stats: {}, bestRace: 0, bestDuel: 0, bestSprint: 0, last: null, run: 0, battlesWon: 0, totalCorrect: 0, totalAnswered: 0, bestStreak: 0, prefs: { ops: ['add', 'sub'], lvl: 1 }, avatar: { hats: 'none', glasses: 'none', shirts: 'purple' }, updatedAt: 0 };
+      return { xp: 0, level: 1, coins: 20, mb: 0, owned: [], emotes: [], pass: 0, claimed: [], eggs: [{ prog: 0, need: 15 }], pets: [], activePet: null, stats: {}, bestRace: 0, bestDuel: 0, bestSprint: 0, last: null, run: 0, battlesWon: 0, totalCorrect: 0, totalAnswered: 0, bestStreak: 0, prefs: { ops: ['add', 'sub'], lvl: 1 }, avatar: { hats: 'none', glasses: 'none', shirts: 'purple' }, updatedAt: 0 };
     }
     async function wLoadProfile() {
       const key = wKey(); let local = null, remote = null;
       try { local = JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) {}
       try { const s = await getDoc(doc(db, 'playerProfiles', key)); if (s.exists()) remote = s.data(); } catch (e) {}
       const best = [local, remote].filter(Boolean).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0))[0];
-      WLD.p = Object.assign(wNewProfile(), best || {}); delete WLD.p.x; delete WLD.p.z; delete WLD.p.t;
+      WLD.p = Object.assign(wNewProfile(), best || {}); delete WLD.p.x; delete WLD.p.z; delete WLD.p.t; delete WLD.p.emo; delete WLD.p.et;
       WLD.key = key;
       ['wh', 'wf', 'wr', 'wb', 'ws', 'wa'].forEach(k => currentAvatarEquipped[k] = ''); Object.assign(currentAvatarEquipped, WLD.p.avatar);
     }
@@ -2272,7 +2342,7 @@
       wEl('wLvl').textContent = 'Lv ' + p.level;
       wEl('wXpBar').style.width = Math.min(100, p.xp / n * 100) + '%';
       wEl('wXpTxt').textContent = p.xp + '/' + n + ' XP';
-      wBump('wCoins', p.coins); wBump('wMb', p.mb); wEl('wDaily').textContent = '🎯 ' + Math.min(wDaily().n, DAILY) + '/' + DAILY;
+      wQuickRender(); wBump('wCoins', p.coins); wBump('wMb', p.mb); wEl('wDaily').textContent = '🎯 ' + Math.min(wDaily().n, DAILY) + '/' + DAILY;
       const cl = wClaimable(); wEl('wPassBtn').textContent = '🎫 Game Pass' + (cl ? ' ❗' + cl : '');
       wEl('wPetsBtn').textContent = '🥚 Eieren & huisdieren' + (p.eggs.some(e => e.ready) ? ' ❗' : '');
     }
@@ -2326,18 +2396,19 @@
     }
     function wOpenPass() {
       const p = WLD.p, open = wTierOpen(), into = (p.pass || 0) - open * PASS_PTS, c = wClaimable(); let cards = '';
-      for (let n = 1; n <= PASS_N; n++) { const r = wTierReward(n), ok = p.claimed.includes(n), st = ok ? 'ok' : n <= open ? 'rdy' : 'lock'; cards += `<button class="w-tier ${st}" ${st === 'rdy' ? `data-claim="${n}"` : ''}><b>${n}</b><div class="ic">${ok ? '✅' : r.i}</div>${r.l}</button>`; }
-      wShow(`<div class="w-card"><div class="w-h"><h2>🎫 Game Pass</h2><button class="w-x" data-close>✕</button></div>
-        <p>Elk goed antwoord geeft punten (extra bij een reeks van 5). Elke ${PASS_PTS} punten ontgrendelt een beloning: munten, Ⓜ️ M-Bucks en eieren.</p>
-        <div class="w-stat"><span>Tier ${open}/${PASS_N}</span><div class="w-bar"><i style="width:${open >= PASS_N ? 100 : into / PASS_PTS * 100}%"></i></div><span>${open >= PASS_N ? 'klaar' : into + '/' + PASS_PTS}</span></div>
-        ${c ? `<button class="w-btn big" data-claimall>Alles ophalen (${c})</button>` : ''}<h3>Beloningen</h3><div class="w-pass">${cards}</div></div>`);
+      for (let n = 1; n <= PASS_N; n++) { const r = wTierReward(n), ok = p.claimed.includes(n), st = ok ? 'ok' : n <= open ? 'rdy' : 'lock'; cards += `<button class="w-t2 ${st}" ${st === 'rdy' ? `data-claim="${n}"` : ''}><span class="n">${n}</span><span class="ic">${ok ? '✅' : r.i}</span>${r.l}${n % 10 === 0 ? '<br>⭐ Mijlpaal' : ''}</button>`; }
+      wShow(`<div class="w-card pass"><div class="w-h"><h2>🎫 Game Pass</h2><button class="w-x" data-close>✕</button></div>
+        <div class="w-ptop"><div class="w-badge">${open}</div><div style="flex:1"><div style="font-weight:800;margin-bottom:6px">${open >= PASS_N ? 'Pas voltooid! 🏆' : `Nog ${PASS_PTS - into} punten tot tier ${open + 1}`}</div><div class="w-pbar"><i style="width:${open >= PASS_N ? 100 : into / PASS_PTS * 100}%"></i></div></div></div>
+        ${c ? `<button class="w-btn big" data-claimall>🎁 Alles ophalen (${c})</button>` : ''}
+        <div class="w-track">${cards}</div><p class="w-note">Elk goed antwoord geeft punten, extra bij een reeks van 5.</p></div>`);
+      const tr = wEl('wModal').querySelector('.w-track'), cur = tr.querySelector('.rdy') || tr.children[Math.max(0, Math.min(open, PASS_N - 1))]; tr.scrollLeft = Math.max(0, cur.offsetLeft - 60);
     }
     wEl('wPassBtn').onclick = wOpenPass;
     const wPetPower = () => { const p = WLD.p; return p.activePet != null && p.pets[p.activePet] ? SPECIES.find(s => s.id === p.pets[p.activePet].sp).p : 0; };
 
     /* ---------- Vensters (portaalkeuze, huisdieren, samenvatting) ---------- */
     const wLocked = () => wEl('wModal').style.display === 'flex' || GM.on;
-    function wShow(html) { const m = wEl('wModal'); m.innerHTML = html; m.style.display = 'flex'; m.classList.remove('shop'); WLD.shop = false; WLD.target = null; }
+    function wShow(html) { const m = wEl('wModal'); m.innerHTML = html; m.style.display = 'flex'; m.classList.remove('shop'); WLD.shop = false; WLD.target = null; WLD.keys = {}; }
     function wHide() { const m = wEl('wModal'); m.style.display = 'none'; m.classList.remove('shop'); WLD.shop = false; if (Object.keys(WLD.tryOn).length) { WLD.tryOn = {}; wBuildPlayer(); } }
     function wOpenPicker(pt) {
       const p = WLD.p, pr = p.prefs; WLD.pt = pt;
@@ -2348,17 +2419,18 @@
         <p class="w-note">Je mag hetzelfde spel maximaal 3x achter elkaar spelen.</p></div>`);
     }
     function wOpenPets() {
-      const p = WLD.p, inc = p.eggs.findIndex(x => !x.ready);
-      wShow(`<div class="w-card"><div class="w-h"><h2>🥚 Eieren &amp; huisdieren</h2><button class="w-x" data-close>✕</button></div>
-        <h3>Jouw eieren</h3><div class="w-row">${p.eggs.length ? p.eggs.map((e, i) => `<div class="w-egg ${e.ready ? 'rdy' : i === inc ? 'on' : ''}"><div class="e">${e.gold ? '🌟' : '🥚'}</div>${e.ready ? `<button class="w-btn" data-open="${i}" style="padding:6px 10px;font-size:13px">Openen!</button>` : `<div class="w-bar"><i style="width:${e.prog / e.need * 100}%"></i></div><small>${i === inc ? 'broedt ' + e.prog + '/' + e.need : 'wacht'}</small>`}</div>`).join('') : '<p>Je hebt geen eieren. Koop er een!</p>'}</div>
-        <button class="w-btn" data-buy ${p.coins < 30 ? 'disabled' : ''}>Koop een ei: 30 🪙</button> <button class="w-btn" data-buyg ${p.mb < 20 ? 'disabled' : ''}>Gouden ei: 20 Ⓜ️</button>
-        <p class="w-note">Elk goed antwoord laat je eerste ei groeien. Zeldzame huisdieren doen meer schade bij monsters.</p>
-        <h3>Jouw huisdieren (${p.pets.length})</h3>${p.pets.length ? `<div class="w-pets">${p.pets.map((x, i) => { const s = SPECIES.find(q => q.id === x.sp); return `<button class="w-pet ${p.activePet === i ? 'on' : ''}" data-pet="${i}"><div class="dot" style="background:${hex(s.c)}"></div><b>${s.n}</b><small>${s.r} · kracht ${s.p}${p.activePet === i ? ' · actief' : ''}</small></button>`; }).join('')}</div>` : '<p>Nog geen huisdieren. Speel sommen om je ei uit te laten komen!</p>'}
-        <h3>Jouw voortgang</h3><p class="w-note">Level ${p.level} · ${p.totalCorrect} van ${p.totalAnswered} goed · beste reeks ${p.bestStreak} · ${p.battlesWon} monsters verslagen · beste tijdrace ${p.bestRace}</p>
+      const p = WLD.p, inc = p.eggs.findIndex(x => !x.ready), e0 = inc >= 0 ? p.eggs[inc] : null;
+      const hero = e0 ? `<div class="w-ringp" style="--p:${e0.prog / e0.need * 100}"><span>${e0.gold ? '🌟' : '🥚'}</span></div><div><b style="font-size:18px">Broedmachine</b><p>Nog ${e0.need - e0.prog} goede antwoorden tot dit ei klaar is.</p></div>` : `<div class="w-ringp"><span>🪺</span></div><div><b style="font-size:18px">Broedmachine leeg</b><p>${p.eggs.length ? 'Open je klare eieren hieronder!' : 'Koop een ei om te beginnen.'}</p></div>`;
+      wShow(`<div class="w-card nest"><div class="w-h"><h2>🪺 Kwekerij</h2><span class="w-mbp">🪙 ${p.coins} · Ⓜ️ ${p.mb}</span><button class="w-x" data-close>✕</button></div>
+        <div class="w-hero">${hero}</div>
+        <h3>Eieren (${p.eggs.length})</h3><div class="w-eggs">${p.eggs.map((e, i) => e.ready ? `<button class="w-mini rdy" data-open="${i}">${e.gold ? '🌟' : '🥚'}<small>✨ Openen!</small></button>` : `<div class="w-mini">${e.gold ? '🌟' : '🥚'}<small>${i === inc ? e.prog + '/' + e.need : 'wacht'}</small></div>`).join('') || '<p class="w-note">Geen eieren.</p>'}</div>
+        <div class="w-row" style="margin-top:10px"><button class="w-btn" data-buy ${p.coins < 30 ? 'disabled' : ''}>Ei: 30 🪙</button><button class="w-btn" data-buyg ${p.mb < 20 ? 'disabled' : ''}>Gouden ei: 20 Ⓜ️</button></div>
+        <h3>Huisdieren (${p.pets.length})</h3>${p.pets.length ? `<div class="w-pets">${p.pets.map((x, i) => { const s = SPECIES.find(q => q.id === x.sp); return `<button class="w-pcard ${p.activePet === i ? 'on' : ''}" style="--rc:${RAR[s.r]}" data-pet="${i}"><div class="w-pblob" style="background:${hex(s.c)}"></div><b>${s.n}</b><small>${s.r} · kracht ${s.p}</small>${p.activePet === i ? '<em>✓ actief</em>' : ''}</button>`; }).join('')}</div>` : '<p class="w-note">Nog geen huisdieren: laat een ei uitkomen!</p>'}
+        <h3>Voortgang</h3><p class="w-note">Level ${p.level} · ${p.totalCorrect} van ${p.totalAnswered} goed · beste reeks ${p.bestStreak} · ${p.battlesWon} monsters verslagen</p>
         ${OPS.map(o => { const s = p.stats[o.id] || { c: 0, t: 0 }; return `<div class="w-stat"><span>${o.i} ${o.n}</span><div class="w-bar"><i style="width:${s.t ? s.c / s.t * 100 : 0}%"></i></div><span>${s.t ? Math.round(s.c / s.t * 100) + '%' : '-'}</span></div>`; }).join('')}</div>`);
     }
     wEl('wModal').addEventListener('click', e => {
-      const t = e.target.closest('[data-close],[data-op],[data-lv],[data-go],[data-buy],[data-buyg],[data-open],[data-claim],[data-claimall],[data-slot],[data-item],[data-buyi],[data-wear],[data-clear],[data-pet],[data-again]');
+      const t = e.target.closest('[data-close],[data-op],[data-lv],[data-go],[data-buy],[data-buyg],[data-open],[data-claim],[data-claimall],[data-glink],[data-em],[data-buye],[data-slot],[data-item],[data-buyi],[data-wear],[data-clear],[data-pet],[data-again]');
       if (e.target === wEl('wModal') || (t && 'close' in t.dataset)) return wHide();
       if (!t) return;
       const p = WLD.p, d = t.dataset;
@@ -2370,6 +2442,9 @@
       else if (d.claimall !== undefined) { for (let n = 1; n <= wTierOpen(); n++) wClaim(n); wHud(); wSave(); wOpenPass(); }
       else if (d.open !== undefined) { wHide(); wHatch(+d.open); }
       else if (d.buyg !== undefined && p.mb >= 20) { p.mb -= 20; p.eggs.push({ prog: 0, need: 15, gold: true }); wHud(); wSave(); wOpenPets(); }
+      else if (d.glink !== undefined) wGoogleLink();
+      else if (d.em) { const x = EMOTES.find(q => q.id === d.em); if (x && (!x.c || p.emotes.includes(x.id))) { wHide(); wEmote(x.id); } else { WLD.selE = d.em; wOpenEmotes(); } }
+      else if (d.buye) { const x = EMOTES.find(q => q.id === d.buye); if (x && !p.emotes.includes(x.id) && p.mb >= x.c) { p.mb -= x.c; p.emotes.push(x.id); wHud(); wSave(); wHide(); wToast('🎉 ' + x.n + ' gekocht!', 2000); wEmote(x.id); } }
       else if (d.slot) { WLD.tryOn = {}; WLD.sel = null; wBuildPlayer(); wOpenShop(d.slot); }
       else if (d.item) { WLD.sel = d.item; WLD.tryOn = { [WLD.shopSlot]: d.item }; wBuildPlayer(); wOpenShop(WLD.shopSlot); }
       else if (d.buyi) { const it = ITEMS.find(x => x.id === d.buyi); if (it && !p.owned.includes(it.id) && p.mb >= it.c) { p.mb -= it.c; p.owned.push(it.id); currentAvatarEquipped[it.s] = it.id; WLD.tryOn = {}; wBuildPlayer(); wHud(); wSave(); wToast('✨ ' + it.n + ' gekocht!', 2000); wOpenShop(it.s); } }
@@ -2566,22 +2641,24 @@
     function wNetStop() {
       clearInterval(WLD.netT); if (WLD.unsub) WLD.unsub(); WLD.unsub = null;
       setDoc(doc(db, 'playerProfiles', WLD.key), { t: 0 }, { merge: true }).catch(() => {});
-      Object.values(WLD.rm).forEach(r => WLD.s.remove(r.g)); WLD.rm = {}; WLD.rd = {};
+      Object.values(WLD.rm).forEach(r => { wEndEmote(r.g); WLD.s.remove(r.g); }); WLD.rm = {}; WLD.rd = {};
     }
     function wNetUpdate(dt) {
       const now = Date.now(), ids = Object.keys(WLD.rd).filter(id => now - (WLD.rd[id].t || 0) < 40000);
-      Object.keys(WLD.rm).forEach(id => { if (!ids.includes(id)) { WLD.s.remove(WLD.rm[id].g); delete WLD.rm[id]; } });
+      Object.keys(WLD.rm).forEach(id => { if (!ids.includes(id)) { wEndEmote(WLD.rm[id].g); WLD.s.remove(WLD.rm[id].g); delete WLD.rm[id]; } });
       ids.forEach(id => {
         const d = WLD.rd[id], sig = JSON.stringify(d.avatar); let r = WLD.rm[id];
         if (!r || r.sig !== sig) {
-          if (r) WLD.s.remove(r.g);
+          if (r) { wEndEmote(r.g); WLD.s.remove(r.g); }
           const g = wMakeChar(d.avatar || {}); g.position.set(d.x, 0, d.z);
           const lb = wLabel(d.name + ' · Lv ' + (d.level || 1), 3.6, 0, 0, '#fde68a'); lb.scale.set(4.4, 1.1, 1); g.add(lb); lb.position.set(0, 3.6, 0);
-          WLD.s.add(g); r = WLD.rm[id] = { g, sig };
+          WLD.s.add(g); r = WLD.rm[id] = { g, sig, et: d.et };
         }
+        if (d.et && d.et !== r.et) { r.et = d.et; const ed = EMOTES.find(x => x.id === d.emo); if (ed) wPlayEmote(r.g, ed); }
         const g = r.g, dx = d.x - g.position.x, dz = d.z - g.position.z, dist = Math.hypot(dx, dz), mv = dist > .08;
         if (mv) { const st = Math.min(dist, 7 * dt); g.position.x += dx / dist * st; g.position.z += dz / dist * st; let a = Math.atan2(dx, dz) - g.rotation.y; a = Math.atan2(Math.sin(a), Math.cos(a)); g.rotation.y += a * Math.min(1, dt * 10); }
         const sw = mv ? Math.sin(WLD.t * 14) * .9 : 0, u = g.userData; u.legs[0].rotation.x = sw; u.legs[1].rotation.x = -sw; u.arms[0].rotation.x = -sw; u.arms[1].rotation.x = sw; if (u.aura) u.aura.rotation.y += dt * 1.5;
+        if (mv && u.em) wEndEmote(g); const ey = wAnimEmote(g, WLD.t, dt); g.position.y = ey === null ? 0 : ey;
       });
       if (!WLD.netErr) wEl('wOnline').textContent = '👥 ' + (ids.length + 1) + ' online';
     }
@@ -2691,10 +2768,175 @@
       wShow(`<div class="w-card"><div class="w-h"><h2>🛍️ M-Shop</h2><span class="w-mbp">Ⓜ️ ${p.mb}</span><button class="w-x" data-close>✕</button></div>
         <div class="w-tabs">${SLOTS.map(([k, n, i]) => `<button class="w-tab ${k === slot ? 'on' : ''}" data-slot="${k}">${i}<small>${n}</small></button>`).join('')}</div>
         <div class="w-items">${ITEMS.filter(x => x.s === slot).map(it => { const own = p.owned.includes(it.id); return `<button class="w-item ${WLD.sel === it.id ? 'on' : ''} ${own ? 'own' : ''}" data-item="${it.id}"><b>${it.n}</b><small>${own ? (eq[slot] === it.id ? '✓ aan' : 'van jou') : it.c + ' Ⓜ️'}</small></button>`; }).join('')}</div>
-        ${act}${eq[slot] ? `<button class="w-btn big alt" data-clear="${slot}">Niets dragen</button>` : ''}<p class="w-note">Ⓜ️ verdien je met levels, het Game Pass, het dagdoel en elke 20 goede antwoorden.</p></div>`);
+        ${act}${eq[slot] ? `<button class="w-btn big alt" data-clear="${slot}">Niets dragen</button>` : ''}<p class="w-note">Ⓜ️ verdien je met levels, het Game Pass, het dagdoel en elke 20 goede antwoorden.</p><p class="w-note">🏁 Je spullen en emotes zie je ook in de Live Race.</p></div>`);
       wEl('wModal').classList.add('shop'); WLD.shop = true; const nw = wEl('wModal').querySelector('.w-items'); if (nw) nw.scrollTop = top;
     }
     wEl('wShopBtn').onclick = () => wOpenShop();
+
+
+    /* ---------- Emotes ---------- */
+    const E = (id, n, e, c, m, d) => ({ id, n, e, c, m, d });
+    const EMOTES = [
+      E('six7', '67', '67', 0, 'six7', 3.5), E('wave', 'Zwaaien', '👋', 0, 'wave', 2.5), E('cheer', 'Hoera', '🎉', 0, 'cheer', 3), E('laugh', 'Lachen', '😂', 0, 'bounce', 3),
+      E('love', 'Hartjes', '❤️', 0, 'bounce', 3), E('thumbs', 'Duim omhoog', '👍', 0, 'thumb', 2.5), E('think', 'Nadenken', '🤔', 0, 'think', 3), E('clap', 'Klappen', '👏', 0, 'clap', 3),
+      E('sleepy', 'Slapen', '😴', 0, 'sway', 3.5), E('gg', 'GG', 'GG', 0, 'cheer', 3), E('sad', 'Verdrietig', '😢', 0, 'sway', 3),
+      E('dance', 'Dansen', '💃', 4, 'dance', 4), E('spin', 'Draaien', '🌀', 4, 'spin', 3), E('sparkle', 'Glitter', '✨', 5, 'spin', 3), E('flex', 'Spierballen', '💪', 5, 'flex', 3),
+      E('nerd', 'Nerd', '🤓', 5, 'think', 3), E('faint', 'Flauwvallen', '😵', 5, 'faint', 3.5), E('cool', 'Cool', '😎', 6, 'flex', 3), E('robot', 'Robot', '🤖', 6, 'robot', 4),
+      E('rock', 'Rocken', '🤘', 6, 'headbang', 3.5), E('ghost', 'Spook', '👻', 6, 'float', 4), E('flip', 'Salto', '🤸', 8, 'flip', 2.5), E('party', 'Feest', '🥳', 8, 'dance', 4),
+      E('money', 'Rijk', '🤑', 8, 'cheer', 3), E('mind', 'Hoofd ontploft', '🤯', 8, 'bounce', 3), E('alien', 'Alien', '👽', 8, 'float', 4), E('rainbow', 'Regenboog', '🌈', 10, 'float', 4),
+      E('fire', 'Vuur', '🔥', 10, 'headbang', 3.5), E('rocket', 'Raket', '🚀', 12, 'rocket', 3), E('crown', 'Koning', '👑', 15, 'flex', 3.5), E('unicorn', 'Eenhoorn', '🦄', 15, 'dance', 4), E('dragon', 'Draak', '🐲', 20, 'spin', 4)
+    ];
+    function wBubble(g, e) {
+      const u = g.userData, c = document.createElement('canvas'); c.width = c.height = 160; const x = c.getContext('2d'); x.textAlign = 'center'; x.textBaseline = 'middle';
+      x.fillStyle = 'rgba(255,255,255,.95)'; x.beginPath(); x.arc(80, 76, 66, 0, 6.283); x.fill(); x.strokeStyle = '#7c3aed'; x.lineWidth = 6; x.stroke();
+      if (/^[\x20-\x7e]+$/.test(e)) { x.font = '800 70px "Plus Jakarta Sans", sans-serif'; x.fillStyle = '#5b21b6'; x.fillText(e, 80, 80); } else { x.font = '84px sans-serif'; x.fillText(e, 80, 84); }
+      const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthTest: false })); sp.renderOrder = 6; sp.scale.set(.01, .01, 1); sp.position.set(g.position.x, 4.7, g.position.z); WLD.s.add(sp); u.bub = sp;
+    }
+    function wEndEmote(g) {
+      const u = g.userData; u.em = null;
+      if (u.bub) { WLD.s.remove(u.bub); u.bub.material.map.dispose(); u.bub.material.dispose(); u.bub = null; }
+      g.rotation.x = g.rotation.z = 0; g.scale.setScalar(1); (u.arms || []).concat(u.legs || []).forEach(r => { r.rotation.z = 0; });
+    }
+    function wPlayEmote(g, def) { wEndEmote(g); g.userData.em = { def, t0: WLD.t }; if (def.e) wBubble(g, def.e); }
+    function wAnimEmote(g, now, dt) {
+      const u = g.userData, em = u.em; if (!em) return null;
+      const k = now - em.t0, d = em.def, a = u.arms, l = u.legs, S = Math.sin; let y = 0;
+      if (k > d.d) { wEndEmote(g); return null; }
+      a.forEach(r => { r.rotation.z = 0; }); g.rotation.x = g.rotation.z = 0;
+      switch (d.m) {
+        case 'wave': a[1].rotation.z = 2.6 + S(k * 12) * .35; break;
+        case 'cheer': a[0].rotation.z = -2.7; a[1].rotation.z = 2.7; y = Math.abs(S(k * 8)) * .4; break;
+        case 'six7': a[0].rotation.x = -1.4 + S(k * 11) * .9; a[1].rotation.x = -1.4 - S(k * 11) * .9; y = Math.abs(S(k * 11)) * .05; break;
+        case 'bounce': y = Math.abs(S(k * 9)) * .25; g.rotation.z = S(k * 18) * .06; break;
+        case 'think': a[1].rotation.x = -2.3; g.rotation.z = .08; break;
+        case 'thumb': a[1].rotation.x = -1.5 + S(k * 8) * .15; break;
+        case 'clap': a[0].rotation.x = a[1].rotation.x = -1.3; a[0].rotation.z = (S(k * 14) + 1) * .3; a[1].rotation.z = -(S(k * 14) + 1) * .3; break;
+        case 'dance': a[0].rotation.z = -1.5 + S(k * 8) * .8; a[1].rotation.z = 1.5 + S(k * 8 + 3) * .8; l[0].rotation.x = S(k * 8) * .7; l[1].rotation.x = -S(k * 8) * .7; g.rotation.z = S(k * 8) * .12; y = Math.abs(S(k * 8)) * .15; break;
+        case 'spin': g.rotation.y += dt * 12; a[0].rotation.z = -1.3; a[1].rotation.z = 1.3; y = .1; break;
+        case 'flex': a[0].rotation.z = -1.9; a[1].rotation.z = 1.9; a[0].rotation.x = a[1].rotation.x = -.4; g.scale.setScalar(1 + S(k * 8) * .04); break;
+        case 'flip': { const ph = Math.min(1, k / .9); g.rotation.x = -ph * 6.283; y = S(ph * Math.PI) * 2.2; break; }
+        case 'robot': { const q = Math.sign(S(k * 5)); a[0].rotation.x = q * .8; a[1].rotation.x = -q * .8; l[0].rotation.x = -q * .4; l[1].rotation.x = q * .4; break; }
+        case 'headbang': g.rotation.x = S(k * 14) * .25; a[1].rotation.z = 2.4; a[1].rotation.x = -.3; break;
+        case 'faint': { const ph = Math.min(1, k / .5); g.rotation.z = ph * 1.45; y = ph * .3; break; }
+        case 'rocket': { const ph = Math.min(1, k / d.d); y = S(ph * Math.PI) * 3.2; a[0].rotation.z = -2.8; a[1].rotation.z = 2.8; break; }
+        case 'sway': g.rotation.z = S(k * 2) * .12; break;
+        case 'float': y = .8 + S(k * 3) * .2; a[0].rotation.z = -1.2; a[1].rotation.z = 1.2; break;
+      }
+      if (u.bub) { const sc = Math.min(1, k * 6) * 1.7; u.bub.scale.set(sc, sc, 1); u.bub.material.opacity = k > d.d - .4 ? Math.max(0, (d.d - k) / .4) : 1; u.bub.position.set(g.position.x, 4.7 + (['rocket', 'float', 'flip'].includes(d.m) ? y : 0) + S(k * 4) * .08, g.position.z); }
+      return y;
+    }
+    function wEmote(id) {
+      const def = EMOTES.find(x => x.id === id), p = WLD.p; if (!def || !WLD.running || wLocked()) return;
+      if (def.c && !p.emotes.includes(id)) return;
+      wPlayEmote(WLD.player, def); WLD.target = null;
+      setDoc(doc(db, 'playerProfiles', WLD.key), { emo: id, et: Date.now() }, { merge: true }).catch(() => {});
+    }
+    function wQuickRender() {
+      const p = WLD.p, ids = ['six7', ...p.emotes.slice().reverse(), ...EMOTES.filter(x => !x.c).map(x => x.id)].filter((v, i, a) => a.indexOf(v) === i).slice(0, 6);
+      wEl('wQuick').innerHTML = ids.map(id => `<button data-q="${id}" title="${EMOTES.find(x => x.id === id).n}">${EMOTES.find(x => x.id === id).e}</button>`).join('');
+    }
+    wEl('wQuick').onclick = e => { const b = e.target.closest('[data-q]'); if (b) wEmote(b.dataset.q); };
+    function wOpenEmotes() {
+      const p = WLD.p, old = wEl('wModal').querySelector('.w-items'), top = old ? old.scrollTop : 0, usable = x => !x.c || p.emotes.includes(x.id), sel = EMOTES.find(x => x.id === WLD.selE);
+      wShow(`<div class="w-card emo"><div class="w-h"><h2>😎 Emotes</h2><span class="w-mbp">Ⓜ️ ${p.mb}</span><button class="w-x" data-close>✕</button></div>
+        <p class="w-note">Tik om te doen · T opent dit scherm · 1 t/m 9 speelt je emotes · lopen stopt de emote</p>
+        <div class="w-items w-eg">${EMOTES.map(x => `<button class="w-et ${usable(x) ? 'own' : 'lock'} ${WLD.selE === x.id ? 'on' : ''}" data-em="${x.id}"><span class="e">${x.e}</span><b>${x.n}</b><small>${!x.c ? 'GRATIS' : usable(x) ? '✓ van jou' : '🔒 ' + x.c + ' Ⓜ️'}</small></button>`).join('')}</div>
+        ${sel && !usable(sel) ? `<button class="w-btn big" data-buye="${sel.id}" ${p.mb < sel.c ? 'disabled' : ''}>Koop ${sel.n} voor ${sel.c} Ⓜ️${p.mb < sel.c ? ' (te weinig)' : ''}</button>` : ''}</div>`);
+      const nw = wEl('wModal').querySelector('.w-items'); if (nw) nw.scrollTop = top;
+    }
+    wEl('wEmoBtn').onclick = wOpenEmotes;
+
+
+    /* ---------- M-Shop in de race (2D) + Google ---------- */
+    function raceAvatar() { return { ...currentAvatarEquipped }; }
+    async function wApplyGoogleAvatar() {
+      if (!auth.currentUser) return;
+      try { const s = await getDoc(doc(db, 'playerProfiles', 'g_' + auth.currentUser.uid)); if (s.exists() && s.data().avatar) { ['wh', 'wf', 'wr', 'wb', 'ws', 'wa'].forEach(k => currentAvatarEquipped[k] = ''); Object.assign(currentAvatarEquipped, s.data().avatar); updateAvatarPreview(); } } catch (e) {}
+    }
+    async function wGoogleLink() {
+      try { localStorage.setItem('sr_gstudent', '1'); await signInWithPopup(auth, provider); wToast('✅ Google verbonden!', 2500); wSave(true); }
+      catch (e) { if (!auth.currentUser) localStorage.removeItem('sr_gstudent'); wToast('Inloggen met Google mislukt (' + (e.code || 'fout') + ')', 5000); }
+      wOpenShop();
+    }
+    function avatarExtra(c) {
+      const out = { back: '', front: '', feet: '' };
+      try {
+        const f = n => (+n).toFixed(1), hx = n => '#' + n.toString(16).padStart(6, '0');
+        const place = (it, [t, d, col, pos, rot, scl]) => {
+          const sx = scl ? scl[0] : 1, sy = scl ? scl[1] : 1, rx = rot ? rot[0] || 0 : 0, rz = rot ? rot[2] || 0 : 0, bd = it.s === 'wb', k = bd ? 34 : 42;
+          const cx = 50 + pos[0] * k, cy = bd ? 76 - pos[1] * k : 46 - pos[1] * k, c1 = hx(col), tr = rz ? ` transform="rotate(${f(-rz * 57.3)} ${f(cx)} ${f(cy)})"` : '';
+          if (t === 's') return `<ellipse cx="${f(cx)}" cy="${f(cy)}" rx="${f(d[0] * sx * k)}" ry="${f(d[0] * sy * k)}" fill="${c1}"${tr}/>`;
+          if (t === 'h') return `<path d="M${f(cx - d[0] * k)} ${f(cy)} A${f(d[0] * k)} ${f(d[0] * k * .9)} 0 0 1 ${f(cx + d[0] * k)} ${f(cy)} Z" fill="${c1}"/>`;
+          if (t === 'c') return `<polygon points="${f(cx - d[0] * k)},${f(cy - d[2] * k / 2)} ${f(cx + d[0] * k)},${f(cy - d[2] * k / 2)} ${f(cx + d[1] * k)},${f(cy + d[2] * k / 2)} ${f(cx - d[1] * k)},${f(cy + d[2] * k / 2)}" fill="${c1}"${tr}/>`;
+          if (t === 'k') { const u = Math.abs(rx) > 2 ? -1 : 1; return `<polygon points="${f(cx - d[0] * k)},${f(cy + u * d[1] * k / 2)} ${f(cx + d[0] * k)},${f(cy + u * d[1] * k / 2)} ${f(cx)},${f(cy - u * d[1] * k / 2)}" fill="${c1}"${tr}/>`; }
+          if (t === 'b') return `<rect x="${f(cx - d[0] * sx * k / 2)}" y="${f(cy - d[1] * sy * k / 2)}" width="${f(d[0] * sx * k)}" height="${f(d[1] * sy * k)}" fill="${c1}"${tr}/>`;
+          const sw = f(Math.max(1.5, d[1] * 2 * k));
+          if (d[2]) return `<path d="M${f(cx - d[0] * k)} ${f(cy)} A${f(d[0] * k)} ${f(d[0] * k)} 0 0 1 ${f(cx + d[0] * k)} ${f(cy)}" fill="none" stroke="${c1}" stroke-width="${sw}"/>`;
+          return `<ellipse cx="${f(cx)}" cy="${f(cy)}" rx="${f(d[0] * k)}" ry="${f(d[0] * k * (Math.abs(rx) > 1 ? .25 : 1))}" fill="none" stroke="${c1}" stroke-width="${sw}"/>`;
+        };
+        ['wh', 'wf', 'wr', 'wb'].forEach(slot => {
+          const it = ITEMS.find(x => x.id === c[slot]); if (!it) return;
+          it.p.forEach(sh => { const back = sh[3][2] < -.3 || (slot === 'wr' && sh[0] === 's' && sh[1][0] > .6), s = place(it, sh); if (back) out.back += s; else out.front += s; });
+        });
+        const sh = ITEMS.find(x => x.id === c.ws); if (sh) out.feet = [38, 62].map(x => `<ellipse cx="${x}" cy="95" rx="9" ry="4" fill="${hx(sh.col)}"/>`).join('');
+        const au = ITEMS.find(x => x.id === c.wa); if (au) { const ac = hx(au.p[0][2]); out.back = `<ellipse cx="50" cy="92" rx="42" ry="7" fill="none" stroke="${ac}" stroke-width="3"/><circle cx="10" cy="62" r="3" fill="${ac}"/><circle cx="90" cy="46" r="3" fill="${ac}"/><circle cx="18" cy="26" r="3" fill="${ac}"/>` + out.back; }
+      } catch (e) { return { back: '', front: '', feet: '' }; }
+      return out;
+    }
+
+
+    /* ---------- Race: M-Shop avatar uit je opgeslagen profiel + podium met emotes ---------- */
+    const RACE = { sig: {}, seen: {}, emotes: [], unsub: null, last: 0 };
+    const RACE_ANIM = { wave: 'sway', cheer: 'jump', six7: 'six7', bounce: 'bounce', think: 'sway', thumb: 'pulse', clap: 'bounce', dance: 'dance', spin: 'spin', flex: 'pulse', flip: 'flip', robot: 'shake', headbang: 'rock', faint: 'faint', rocket: 'rocket', sway: 'sway', float: 'float' };
+    async function wApplyWorldAvatar(name) {
+      RACE.emotes = [];
+      const list = wAccounts(), low = String(name).trim().toLowerCase(), acc = list.find(a => a.name.toLowerCase() === low) || (list.length === 1 ? list[0] : null); let best = null;
+      if (acc) {
+        const key = 'sr_world_' + (acc.code + '_' + acc.name).toLowerCase().replace(/[^a-z0-9_]/g, '-');
+        try { best = JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) {}
+        try { const s = await getDoc(doc(db, 'playerProfiles', key)); if (s.exists() && (!best || (s.data().updatedAt || 0) > (best.updatedAt || 0))) best = s.data(); } catch (e) {}
+      } else {
+        try { const q = await getDocs(query(collection(db, 'playerProfiles'), where('name', '==', name))), found = []; q.forEach(d => { if (!d.id.startsWith('g_') && d.data().avatar) found.push(d.data()); }); if (found.length === 1) best = found[0]; } catch (e) {}
+      }
+      if (!best || !best.avatar) return;
+      ['wh', 'wf', 'wr', 'wb', 'ws', 'wa'].forEach(k => currentAvatarEquipped[k] = ''); Object.assign(currentAvatarEquipped, best.avatar); RACE.emotes = best.emotes || [];
+    }
+    function racePodiumRender(el, list, round) {
+      if (!el) return [];
+      const rank = list.map(s => ({ ...s, acc: s.totalCount ? s.correctCount / s.totalCount : 1 })).sort((a, b) => round === 2 ? (b.acc - a.acc) || ((b.score || 0) - (a.score || 0)) : (b.score || 0) - (a.score || 0)).slice(0, 3);
+      const sig = round + JSON.stringify(rank.map(s => [s.id, s.score, s.avatarConfig]));
+      if (RACE.sig[el.id] !== sig) {
+        RACE.sig[el.id] = sig;
+        const col = (s, n, medal) => s ? `<div class="pod-col p${n}"><div class="pod-who" data-id="${s.id}"><div class="pod-bub"></div><div class="pod-av">${generateAvatarSvgString(s.avatarConfig || { hats: 'none', glasses: 'none', shirts: 'purple' })}</div><div class="pod-name">${wEsc(s.name)}</div></div><div class="pod-step">${medal}<small>${round === 2 ? Math.round(s.acc * 100) + '%' : (s.score || 0) + ' pts'}</small></div></div>` : '';
+        el.innerHTML = rank.length ? `<div class="pod">${col(rank[1], 2, '🥈')}${col(rank[0], 1, '🥇')}${col(rank[2], 3, '🥉')}</div>` : '';
+      }
+      const seen = RACE.seen[el.id] = RACE.seen[el.id] || {};
+      list.forEach(s => { if (!(s.id in seen)) seen[s.id] = s.et || 0; else if (s.et && seen[s.id] !== s.et) { seen[s.id] = s.et; racePlay(el, s.id, s.emo); } });
+      return rank;
+    }
+    function racePlay(el, sid, emoId) {
+      const em = EMOTES.find(x => x.id === emoId), who = el.querySelector(`[data-id="${sid}"]`); if (!em || !who) return;
+      const av = who.querySelector('.pod-av'), bub = who.querySelector('.pod-bub');
+      av.className = 'pod-av'; bub.classList.remove('on'); void av.offsetWidth;
+      av.className = 'pod-av em-' + (RACE_ANIM[em.m] || 'bounce'); bub.textContent = em.e; bub.classList.add('on');
+      clearTimeout(av._t); av._t = setTimeout(() => { av.className = 'pod-av'; }, em.d * 1000);
+    }
+    async function racePodiumStart(raceCode) {
+      if (RACE.unsub) RACE.unsub();
+      let round = 1; try { const g = await getDoc(doc(db, 'activeGames', raceCode)); round = (g.data() || {}).round || 1; } catch (e) {}
+      const bar = document.getElementById('studentEmoBar'); bar.dataset.ok = '';
+      RACE.unsub = onSnapshot(query(collection(db, 'activeStudents'), where('code', '==', raceCode)), snap => {
+        if (!document.getElementById('studentKlaarScherm').classList.contains('active')) { if (RACE.unsub) RACE.unsub(); RACE.unsub = null; return; }
+        const list = []; snap.forEach(d => list.push({ ...d.data(), id: d.id }));
+        const mine = racePodiumRender(document.getElementById('studentPodium'), list, round).some(s => s.id === currentStudentDocId);
+        bar.style.display = mine ? 'flex' : 'none';
+        if (mine && !bar.dataset.ok) { bar.dataset.ok = '1'; bar.innerHTML = '<div style="width:100%;font-weight:700;font-size:13px;text-align:center">Jij staat op het podium! Doe een emote 🎉</div>' + EMOTES.filter(x => !x.c || RACE.emotes.includes(x.id)).slice(0, 14).map(x => `<button data-re="${x.id}">${x.e}</button>`).join(''); }
+      }, () => {});
+    }
+    document.getElementById('studentEmoBar').onclick = e => {
+      const b = e.target.closest('[data-re]'); if (!b || !currentStudentDocId || Date.now() - RACE.last < 1500) return; RACE.last = Date.now();
+      updateDoc(doc(db, 'activeStudents', currentStudentDocId), { emo: b.dataset.re, et: Date.now() }).catch(() => {});
+    };
 
     /* ---------- Spel 2: Ballonnenknal ---------- */
     const wTop = '<div class="w-gtop"><span id="gHearts"></span><span id="gInfo"></span><button class="w-x" id="gQuit" title="Stoppen">✕</button></div>';
@@ -2876,11 +3118,17 @@
       add(new THREE.SphereGeometry(.22, 10, 8), M(0x7c3aed), -.8, 1.3, 0, 0, stl); add(new THREE.SphereGeometry(.22, 10, 8), M(0xfacc15), .8, 1.3, 0, 0, stl);
       wLabel('🛍️ M-Shop', 4.6, 11, 11, '#fde68a'); WLD.obs.push({ x: 11, z: 11, r: 1.8 }); WLD.zones.push({ x: 9.2, z: 9.2, r: 2.2, act: () => wOpenShop() });
       // besturing
-      const pick = e => { if (wLocked()) return; const rc = cv.getBoundingClientRect(), m = new THREE.Vector2((e.clientX - rc.left) / rc.width * 2 - 1, -((e.clientY - rc.top) / rc.height * 2 - 1)), pt = new THREE.Vector3(); WLD.ray.setFromCamera(m, WLD.cam); if (WLD.ray.ray.intersectPlane(WLD.plane, pt)) WLD.target = pt; };
+      const pick = e => { if (wLocked()) return; const rc = cv.getBoundingClientRect(), m = new THREE.Vector2((e.clientX - rc.left) / rc.width * 2 - 1, -((e.clientY - rc.top) / rc.height * 2 - 1)), pt = new THREE.Vector3(); WLD.ray.setFromCamera(m, WLD.cam); if (WLD.ray.ray.intersectPlane(WLD.plane, pt)) {
+        const r = Math.hypot(pt.x, pt.z); if (r > 30.5) { pt.x *= 30.5 / r; pt.z *= 30.5 / r; }
+        WLD.obs.concat([{ x: 0, z: 0, r: 2.7 }]).forEach(o => { const dx = pt.x - o.x, dz = pt.z - o.z, d = Math.hypot(dx, dz); if (d < o.r + .3) { pt.x = o.x + dx / (d || 1) * (o.r + .3); pt.z = o.z + dz / (d || 1) * (o.r + .3); } });
+        WLD.target = pt;
+      } };
       cv.addEventListener('pointerdown', e => { WLD.drag = true; pick(e); });
-      cv.addEventListener('pointermove', e => { if (WLD.drag) pick(e); });
-      window.addEventListener('pointerup', () => WLD.drag = false);
-      window.addEventListener('keydown', e => { if (!WLD.running) return; const k = e.key.toLowerCase(); if (k === 'escape') wHide(); if (k === ' ' && !wLocked()) { wJump(); e.preventDefault(); } if (!wLocked()) { WLD.keys[k] = true; if (k.startsWith('arrow')) e.preventDefault(); } });
+      cv.addEventListener('pointermove', e => { if (WLD.drag && e.buttons) pick(e); else WLD.drag = false; });
+      ['pointerup', 'pointercancel'].forEach(n => window.addEventListener(n, () => WLD.drag = false));
+      const rel = () => { WLD.keys = {}; WLD.drag = false; }; window.addEventListener('blur', rel); document.addEventListener('visibilitychange', rel);
+      window.addEventListener('keydown', e => { if (!WLD.running) return; const k = e.key.toLowerCase(); if (k === 'escape') wHide(); if (k === ' ' && !wLocked()) { wJump(); e.preventDefault(); }
+      if (!wLocked() && !e.ctrlKey && !e.metaKey) { if (k === 't') wOpenEmotes(); else if (/^[1-9]$/.test(k)) { const u = EMOTES.filter(x => !x.c || WLD.p.emotes.includes(x.id)); if (u[+k - 1]) wEmote(u[+k - 1].id); } } if (!wLocked()) { WLD.keys[k] = true; if (k.startsWith('arrow')) e.preventDefault(); } });
       window.addEventListener('keyup', e => { WLD.keys[e.key.toLowerCase()] = false; });
       const rs = () => { r.setSize(innerWidth, innerHeight, false); WLD.cam.aspect = innerWidth / innerHeight; WLD.cam.updateProjectionMatrix(); };
       window.addEventListener('resize', rs); rs();
@@ -2943,7 +3191,7 @@
       return g;
     }
     function wBuildPlayer() {
-      if (WLD.player) WLD.s.remove(WLD.player);
+      if (WLD.player) { wEndEmote(WLD.player); WLD.s.remove(WLD.player); }
       const g = wMakeChar({ ...currentAvatarEquipped, ...WLD.tryOn }); g.position.copy(WLD.pos); WLD.s.add(g); WLD.player = g;
     }
     function wBuildPet() {
@@ -2984,10 +3232,11 @@
         if (ix || iz) { dir.addScaledVector(rt, ix).addScaledVector(f, iz); WLD.target = null; }
         else if (WLD.target) { dir.subVectors(WLD.target, pos); dir.y = 0; if (dir.length() < .35) { WLD.target = null; dir.set(0, 0, 0); } }
         if (dir.lengthSq() > 0) {
-          moving = true; dir.normalize(); pos.addScaledVector(dir, 7 * dt);
+          moving = true; dir.normalize(); const px0 = pos.x, pz0 = pos.z; pos.addScaledVector(dir, 7 * dt);
           const rad = Math.hypot(pos.x, pos.z); if (rad > 31) { pos.x *= 31 / rad; pos.z *= 31 / rad; }
           if (rad < 2.7) { pos.x *= 2.7 / (rad || 1); pos.z *= 2.7 / (rad || 1); if (!rad) pos.z = 2.7; }
           WLD.obs.forEach(o => { const dx = pos.x - o.x, dz = pos.z - o.z, d = Math.hypot(dx, dz); if (d < o.r) { pos.x = o.x + dx / (d || 1) * o.r; pos.z = o.z + dz / (d || 1) * o.r; } });
+          if (WLD.target && Math.hypot(pos.x - px0, pos.z - pz0) < 7 * dt * .3) { if ((WLD.stuck = (WLD.stuck || 0) + dt) > .35) { WLD.target = null; WLD.stuck = 0; } } else WLD.stuck = 0;
           let d = Math.atan2(dir.x, dir.z) - pl.rotation.y; d = Math.atan2(Math.sin(d), Math.cos(d)); pl.rotation.y += d * Math.min(1, dt * 12);
         }
       }
@@ -2995,6 +3244,7 @@
       pl.position.set(pos.x, (moving ? Math.abs(Math.sin(t * 14)) * .14 : Math.sin(t * 2) * .02) + WLD.py, pos.z);
       const sw = moving ? Math.sin(t * 14) * .9 : 0, ud = pl.userData;
       ud.legs[0].rotation.x = sw; ud.legs[1].rotation.x = -sw; ud.arms[0].rotation.x = -sw; ud.arms[1].rotation.x = sw; if (ud.aura) ud.aura.rotation.y += dt * 1.5;
+      if (moving && ud.em) wEndEmote(pl); const ey = wAnimEmote(pl, t, dt); if (ey !== null) pl.position.y += ey;
       const pet = WLD.pet;
       if (pet) {
         const dx = pos.x - pet.position.x, dz = pos.z - pet.position.z, dist = Math.hypot(dx, dz);
