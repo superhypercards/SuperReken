@@ -477,7 +477,92 @@
     @keyframes emRocket { 50% { transform: translateY(-70px); } } @keyframes emFaint { 15%, 85% { transform: rotate(85deg) translate(10px, 20px); } 0%, 100% { transform: none; } }
     @keyframes emDance { 25% { transform: rotate(-12deg) translateY(-8px); } 75% { transform: rotate(12deg) translateY(-8px); } } @keyframes emRock { 50% { transform: rotate(14deg); } 0%, 100% { transform: rotate(-14deg); } }
     @keyframes emSix7 { 25% { transform: rotate(-8deg) translateY(-6px); } 75% { transform: rotate(8deg) translateY(-6px); } }
+    /* ===== Race-thema ===== */
+    body:has(#studentRaceSection.active, #studentOefenScherm.active, #studentKlaarScherm.active) { background: linear-gradient(160deg, #1e3a8a 0%, #7c3aed 45%, #ec4899 100%); background-size: 200% 200%; animation: raceBg 14s ease infinite; }
+    @keyframes raceBg { 50% { background-position: 100% 100%; } }
+    #raceDecor { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: -1; display: none; }
+    body:has(#studentRaceSection.active, #studentOefenScherm.active, #studentKlaarScherm.active) #raceDecor { display: block; }
+    #raceDecor span { position: absolute; bottom: -70px; opacity: .55; animation: raceFloat linear infinite; }
+    @keyframes raceFloat { to { transform: translateY(-120vh) rotate(360deg); } }
+    #studentCard:has(#studentRaceSection.active, #studentOefenScherm.active, #studentKlaarScherm.active) { background: rgba(255,255,255,.95); border: 4px solid #fde68a; padding-top: 44px; box-shadow: 0 0 0 6px rgba(255,255,255,.25), 0 25px 60px rgba(0,0,0,.35); }
+    #studentCard:has(#studentRaceSection.active, #studentOefenScherm.active, #studentKlaarScherm.active)::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 16px; border-radius: 20px 20px 0 0; background: repeating-conic-gradient(#0f172a 0 25%, #fff 0 50%) 0 0 / 16px 16px; }
+    #studentRaceSection h3 { background: linear-gradient(90deg, #7c3aed, #ec4899); -webkit-background-clip: text; background-clip: text; color: transparent; font-size: 26px !important; }
+    #studentRaceSection .waiting-box { background: linear-gradient(180deg, #faf5ff, #fdf2f8); border: 3px dashed #c4b5fd; }
+    #lobbyAvatarPreview { width: 110px !important; height: 110px !important; animation: bob 1.8s ease-in-out infinite; box-shadow: 0 0 0 6px #ede9fe, 0 8px 24px rgba(124,58,237,.35); }
+    @keyframes bob { 50% { transform: translateY(-7px); } }
+    #lobbyCount { font-weight: 800; color: #6d28d9; font-size: 15px; }
+    .lobby-players { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-height: 210px; overflow-y: auto; width: 100%; padding: 6px; }
+    .lp { width: 66px; text-align: center; font-size: 11px; font-weight: 800; animation: bob 2s ease-in-out infinite; word-break: break-word; }
+    .lp .a { width: 54px; height: 54px; margin: 0 auto 2px; border-radius: 50%; background: #fff; border: 3px solid #c4b5fd; overflow: hidden; display: grid; place-items: center; }
+    .lp.me .a { border-color: #f59e0b; box-shadow: 0 0 0 3px #fde68a; }
+    .trk-lane { position: relative; height: 54px; border-radius: 27px; margin: 0 0 16px; background: linear-gradient(#475569, #334155); border: 3px solid #1e293b; overflow: hidden; }
+    .trk-lane::before { content: ''; position: absolute; left: 10px; right: 56px; top: 50%; height: 4px; transform: translateY(-50%); background: repeating-linear-gradient(90deg, #fde68a 0 18px, transparent 18px 36px); opacity: .8; }
+    #raceCar { position: absolute; top: 6px; left: 0; font-size: 32px; transition: left .4s ease-out; transform: scaleX(-1); }
+    .trk-lane .fin { position: absolute; right: 12px; top: 8px; font-size: 30px; }
+    #raceCombo { position: absolute; left: 12px; top: 14px; font-weight: 800; font-size: 14px; color: #fde68a; text-shadow: 0 2px 0 rgba(0,0,0,.4); }
+    #raceLaps { position: absolute; right: 52px; top: 16px; font-weight: 800; font-size: 13px; color: #fff; }
+    #studentOefenScherm .math-question-box { background: linear-gradient(135deg, #ede9fe, #fce7f3); border: 3px solid #c4b5fd; border-radius: 28px; box-shadow: 0 8px 0 #c4b5fd; overflow: visible; }
+    #studentOefenScherm .math-expr { font-size: clamp(44px, 12vw, 72px); text-shadow: 0 4px 0 rgba(109,40,217,.15); }
+    #studentOefenScherm #studentAnswer { border: 4px solid #a78bfa; border-radius: 20px; font-size: 34px !important; }
+    #studentOefenScherm #submitAnswerBtn { background: linear-gradient(#34d399, #10b981); box-shadow: 0 6px 0 #047857; font-size: 20px; border-radius: 18px; }
+    #studentOefenScherm #submitAnswerBtn:active { transform: translateY(4px); box-shadow: 0 2px 0 #047857; }
+    #raceTimerDisplay { font-weight: 800; } #raceTimerDisplay.timer-low { background: #ef4444 !important; color: #fff !important; animation: timerPulse .6s ease-in-out infinite; }
+    @keyframes timerPulse { 50% { transform: scale(1.12); } }
+    .q-shake { animation: qShake .35s; } @keyframes qShake { 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
+    .cf { position: fixed; width: 9px; height: 14px; z-index: 99999; pointer-events: none; animation: cfFly 1.2s ease-out forwards; }
+    @keyframes cfFly { 0% { transform: translate(0, 0) rotate(0); opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) rotate(540deg); opacity: 0; } }
+    #studentKlaarScherm h2 { animation: bob 2s ease-in-out infinite; }
+    .menu-card-btn { transition: transform .2s; } .menu-card-btn:hover { transform: translateY(-5px) rotate(-.6deg); }
+    @media (prefers-reduced-motion: reduce) { body:has(#studentRaceSection.active, #studentOefenScherm.active, #studentKlaarScherm.active), #raceDecor span, #lobbyAvatarPreview, .lp, #studentKlaarScherm h2 { animation: none !important; } }
+    /* ===== Thema voor de hele app (leerling + leerkracht) ===== */
+    body { background: linear-gradient(160deg, #4c1d95, #7c3aed 45%, #db2777); background-size: 200% 200%; animation: raceBg 18s ease infinite; }
+    #raceDecor { display: block; opacity: .35; }
+    body:has(#studentRaceSection.active, #studentOefenScherm.active, #studentKlaarScherm.active) #raceDecor { opacity: 1; }
+    .selection-screen h1 { text-shadow: 0 4px 0 rgba(0,0,0,.18); }
+    .selection-screen h1::before { content: '🚀 '; display: inline-block; animation: bob 2s ease-in-out infinite; }
+    .selection-screen h1::after { content: 'Rekenen met een knal!'; display: block; font-size: 16px; font-weight: 700; opacity: .85; margin-top: 6px; letter-spacing: 1px; }
+    .role-card-btn { transition: transform .2s, box-shadow .2s; border-width: 3px; }
+    .role-card-btn:hover { transform: translateY(-4px) rotate(-.7deg) scale(1.01); }
+    #selectStudentBtn { background: linear-gradient(135deg, #ffffff, #ede9fe); } #selectTeacherBtn { background: linear-gradient(135deg, #ffffff, #cffafe); }
+    .role-icon-wrap { background: #fff; border-radius: 50%; padding: 8px; box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+    .form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; border-radius: 24px 24px 0 0; background: linear-gradient(90deg, #f87171, #fbbf24, #34d399, #60a5fa, #c084fc); }
+    .btn-primary { background: linear-gradient(#8b5cf6, #6d28d9); box-shadow: 0 6px 0 #4c1d95, 0 12px 20px rgba(109,40,217,.3); border-radius: 16px; transition: transform .15s, box-shadow .15s; }
+    .btn-primary:hover { transform: translateY(-2px); } .btn-primary:active { transform: translateY(4px); box-shadow: 0 2px 0 #4c1d95; }
+    .btn-secondary { border-radius: 14px; transition: transform .15s; } .btn-secondary:hover { transform: translateY(-2px); }
+    .field:focus { border-color: #a78bfa; box-shadow: 0 0 0 4px rgba(167,139,250,.3); outline: none; }
+    .tab-content, .student-section.active, #teacherHomeMenu { animation: secIn .3s ease; } @keyframes secIn { from { opacity: 0; transform: translateY(10px); } }
+    .form-header h2, #teacherHomeMenu h2, #studentMenuSection h2 { background: linear-gradient(90deg, #6d28d9, #db2777); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    #teacherHomeMenu h2::after { content: ' 👋'; -webkit-text-fill-color: initial; }
+    .dashboard-section-title { background: linear-gradient(90deg, #ede9fe, #fce7f3); border-radius: 12px; padding: 8px 14px; color: #5b21b6; display: inline-block; }
+    .teacher-menu-grid .menu-card-btn, #studentMenuSection .menu-card-btn { border-width: 3px; border-radius: 22px; }
+    .teacher-menu-grid .menu-card-btn:nth-child(1) { background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-color: #7dd3fc; }
+    .teacher-menu-grid .menu-card-btn:nth-child(2) { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: #86efac; }
+    .teacher-menu-grid .menu-card-btn:nth-child(3) { background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #fcd34d; }
+    .teacher-menu-grid .menu-card-btn:nth-child(4) { background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-color: #f9a8d4; }
+    #chooseTasksBtn { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-color: #86efac; } #chooseRaceBtn { background: linear-gradient(135deg, #ffedd5, #fed7aa); border-color: #fdba74; }
+    [data-opentab="klassen"] .menu-card-title::before { content: '🏫'; } [data-opentab="taken"] .menu-card-title::before { content: '📝'; } [data-opentab="rapporten"] .menu-card-title::before { content: '📈'; } [data-opentab="race"] .menu-card-title::before { content: '🏁'; }
+    #chooseTasksBtn .menu-card-title::before { content: '✏️'; } #chooseRaceBtn .menu-card-title::before { content: '🏁'; }
+    .menu-card-title::before { display: block; font-size: 36px; margin-bottom: 4px; }
+    .leaderboard-card-box { transition: transform .2s; } .leaderboard-card-box:hover { transform: translateY(-4px) scale(1.03); }
+    .leaderboard-grid-cards > :nth-child(1) { background: linear-gradient(#fef9c3, #fde047); border-color: #facc15; }
+    .leaderboard-grid-cards > :nth-child(2) { background: linear-gradient(#f1f5f9, #cbd5e1); border-color: #94a3b8; }
+    .leaderboard-grid-cards > :nth-child(3) { background: linear-gradient(#ffedd5, #fdba74); border-color: #fb923c; }
+    .clean-lobby-card { background: linear-gradient(135deg, #faf5ff, #eff6ff); border: 3px solid #c4b5fd; border-radius: 24px; }
+    #liveGameCodeBig, #teacherActiveCodeDisplay { background: linear-gradient(90deg, #6d28d9, #db2777, #f59e0b); -webkit-background-clip: text; background-clip: text; color: transparent !important; }
+    #teacherScreenPlaying { background: linear-gradient(135deg, #fdf4ff, #eff6ff) !important; border: 3px solid #c4b5fd !important; }
+    #teacherTimerClock { font-size: 20px; animation: timerPulse 1.6s ease-in-out infinite; }
+    .math99-avatars-grid > * { animation: bob 2.2s ease-in-out infinite; } .math99-avatars-grid > :nth-child(3n+2) { animation-delay: -.7s; } .math99-avatars-grid > :nth-child(3n) { animation-delay: -1.4s; }
+    #teacherPodium .pod { min-height: 300px; } #teacherPodium .pod-av { width: 120px; height: 120px; } #teacherPodium .p1 .pod-step { height: 150px; } #teacherPodium .p2 .pod-step { height: 112px; } #teacherPodium .p3 .pod-step { height: 80px; } #teacherPodium .pod-who { padding-top: 46px; } #teacherPodium .pod-name { font-size: 17px; }
+    @media (prefers-reduced-motion: reduce) { body, .selection-screen h1::before, .math99-avatars-grid > *, #teacherTimerClock, .tab-content, .student-section.active, #teacherHomeMenu { animation: none !important; } }
+    .s-font, .s-font * { font-family: 'Lexend', 'Plus Jakarta Sans', sans-serif !important; letter-spacing: .02em; }
+    .s-calm *, .s-calm *::before, .s-calm *::after { animation: none !important; transition: none !important; } .s-calm #raceDecor { display: none !important; }
+    #sBtn { position: fixed; left: 12px; bottom: 12px; z-index: 6000; width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(255,255,255,.6); background: rgba(30,27,75,.75); color: #fff; font-size: 20px; cursor: pointer; }
+    #sPanel { position: fixed; inset: 0; z-index: 6100; display: none; align-items: center; justify-content: center; background: rgba(30,27,75,.7); padding: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
+    [data-opentab="wereld"] .menu-card-title::before { content: '🌍'; } .teacher-menu-grid .menu-card-btn:nth-child(5) { background: linear-gradient(135deg, #ede9fe, #cffafe); border-color: #a78bfa; }
+    #teacherScreenPlaying:fullscreen { overflow: auto; padding: 30px; background: linear-gradient(135deg, #fdf4ff, #eff6ff); font-size: 130%; }
+    #teacherScreenPlaying:fullscreen .leaderboard-card-box .name { font-size: 28px; } #teacherScreenPlaying:fullscreen .leaderboard-card-box .rank { font-size: 36px; }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -668,6 +753,8 @@
           <div style="font-size: 20px; font-weight: 700; color: var(--dark);" id="joinedPlayerGreeting">Je bent verbonden!</div>
           
           <div style="width: 90px; height: 90px; background: white; border-radius: 50%; border: 3px solid var(--primary); display: grid; place-items: center; overflow: hidden; margin: 4px 0;" id="lobbyAvatarPreview"></div>
+          <div id="lobbyCount"></div>
+          <div id="lobbyPlayers" class="lobby-players"></div>
 
           <button class="btn btn-primary" id="openAvatarShopModalBtn" type="button" style="background: #10b981; width: auto; padding: 10px 20px; font-size: 15px;">🎨 Avatar Aanpassen (Gratis!)</button>
           
@@ -687,6 +774,7 @@
           </div>
         </div>
 
+        <div class="trk-lane" id="raceTrack"><span id="raceCombo"></span><span id="raceCar">🏎️</span><span id="raceLaps"></span><span class="fin">🏁</span></div>
         <div class="math-question-box" id="mathQuestionBoxContainer">
           <div class="math-expr" id="mathExpression">12 + 5 = ?</div>
           <input class="field" id="studentAnswer" type="text" placeholder="Jouw antwoord en druk op Enter" autocomplete="off" style="text-align: center; font-size: 28px;">
@@ -770,7 +858,30 @@
               <span class="menu-card-title">Live Race (3 Rondes)</span>
               <p class="menu-card-desc">Start een live wedstrijd.</p>
             </button>
+            <button class="menu-card-btn" data-opentab="wereld" type="button" style="grid-column: 1 / -1;">
+              <span class="menu-card-title">Wereld-voortgang & Klasdoel</span>
+              <p class="menu-card-desc">Zie hoe leerlingen oefenen in de 3D-wereld en stel een klasdoel in.</p>
+            </button>
           </div>
+        </div>
+
+        <div class="tab-content" id="teacherTabWereld">
+          <button class="btn btn-secondary hometab-btn" type="button" style="width: auto; margin-bottom: 12px; padding: 6px 14px;">Terug naar Menu</button>
+          <div class="form-header"><h2>🌍 Wereld-voortgang</h2></div>
+          <p>Zie hoe je leerlingen oefenen in de 3D-wereld en stel een klasdoel in.</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 10px 0;">
+            <select class="field" id="wrdClass" style="width: auto; margin: 0; background: white;"></select>
+            <button class="btn btn-secondary" id="wrdLoad" type="button" style="width: auto; margin: 0; padding: 10px 16px;">🔄 Laden</button>
+            <button class="btn btn-secondary" id="wrdCsv" type="button" style="width: auto; margin: 0; padding: 10px 16px;">⬇️ Download CSV</button>
+          </div>
+          <div class="dashboard-section-title">🐉 Klasdoel (Reuzenmonster)</div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: end; margin: 10px 0;">
+            <label style="font-size: 13px; font-weight: 700;">Doel (goede antwoorden per week)<input class="field" id="wrdTarget" type="number" min="10" value="300" style="margin: 4px 0 0;"></label>
+            <label style="font-size: 13px; font-weight: 700;">Beloning (M-Bucks)<input class="field" id="wrdReward" type="number" min="0" value="10" style="margin: 4px 0 0;"></label>
+            <button class="btn btn-primary" id="wrdSaveGoal" type="button" style="width: auto; margin: 0; padding: 12px 22px;">Opslaan</button>
+          </div>
+          <div class="status" id="wrdStatus"></div>
+          <div id="wrdTable"></div>
         </div>
 
         <div class="tab-content" id="teacherTabKlassen">
@@ -959,6 +1070,7 @@
           </div>
 
           <div id="teacherScreenPlaying" style="display: none; flex-direction: column; flex: 1; padding: 20px; background: #f8fafc; border-radius: 20px; border: 2px solid var(--border);">
+            <button class="btn btn-secondary" id="boardBtn" type="button" style="width: auto; align-self: flex-end; margin: 0 0 10px; padding: 8px 16px;">📺 Digibord-modus</button>
             
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: white; padding: 14px 20px; border-radius: 16px; border: 1px solid var(--border);">
               <div>
@@ -1030,8 +1142,10 @@
       <div class="w-pill" id="wSave">☁️</div>
       <div class="w-pill" id="wDaily">🎯 0/20</div>
       <div class="w-pill" id="wOnline">👥 1 online</div>
+      <div class="w-pill" id="wBossPill" style="cursor:pointer;pointer-events:auto">🐉 …</div>
     </div>
     <div id="wRight">
+      <button type="button" id="wSayBtn">💬 Praten</button>
       <button type="button" id="wEmoBtn">😎 Emotes</button>
       <button type="button" id="wShopBtn">🛍️ M-Shop</button>
       <button type="button" id="wPassBtn">🎫 Game Pass</button>
@@ -2304,7 +2418,7 @@
       { id: 'lucht', name: 'Luchtfeest', icon: '🎈', color: 0x22d3ee, x: 13, z: -19, games: ['race', 'duel', 'groter'] },
       { id: 'tuin', name: 'Puzzeltuin', icon: '🧩', color: 0x4ade80, x: 0, z: -27, games: ['practice', 'vul', 'rij'] }
     ];
-    const OPS = [{ id: 'add', n: 'Optellen', i: '➕' }, { id: 'sub', n: 'Aftrekken', i: '➖' }, { id: 'mul', n: 'Tafels', i: '✖️' }, { id: 'div', n: 'Delen', i: '➗' }];
+    const OPS = [{ id: 'add', n: 'Optellen', i: '➕' }, { id: 'sub', n: 'Aftrekken', i: '➖' }, { id: 'mul', n: 'Tafels', i: '✖️' }, { id: 'div', n: 'Delen', i: '➗' }, { id: 'frac', n: 'Breuken', i: '🍕' }, { id: 'klok', n: 'Klok', i: '🕒' }, { id: 'geld', n: 'Geld', i: '💶' }, { id: 'meten', n: 'Meten', i: '📏' }, { id: 'woord', n: 'Woordsommen', i: '📖' }];
     const hex = n => '#' + n.toString(16).padStart(6, '0');
 
     /* ---------- Opslag van voortgang (Firestore + lokaal) ---------- */
@@ -2414,7 +2528,8 @@
       const p = WLD.p, pr = p.prefs; WLD.pt = pt;
       wShow(`<div class="w-card"><div class="w-h"><h2>${pt.icon} ${pt.name}</h2><button class="w-x" data-close>✕</button></div>
         <h3>1. Welke sommen?</h3><div class="w-chips">${OPS.map(o => `<button class="w-chip-btn ${pr.ops.includes(o.id) ? 'on' : ''}" data-op="${o.id}">${o.i} ${o.n}</button>`).join('')}</div>
-        <h3>2. Niveau</h3><div class="w-chips">${['Makkelijk', 'Normaal', 'Moeilijk'].map((n, i) => `<button class="w-chip-btn ${pr.lvl === i + 1 ? 'on' : ''}" data-lv="${i + 1}">${n}</button>`).join('')}</div>
+        <h3>2. Niveau</h3><div class="w-chips">${['🤖 Auto', 'Makkelijk', 'Normaal', 'Moeilijk'].map((n, i) => `<button class="w-chip-btn ${pr.lvl === i ? 'on' : ''}" data-lv="${i}">${n}</button>`).join('')}</div>
+        <h3>Tafel (bij × en ÷)</h3><div class="w-chips">${[0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => `<button class="w-chip-btn ${(pr.tb || 0) === n ? 'on' : ''}" data-tb="${n}" style="padding:6px 10px">${n || 'Alle'}</button>`).join('')}</div>
         <h3>3. Kies je spel</h3>${pt.games.map(id => { const G = GAMES[id], blk = p.last === id && p.run >= 3; return `<button class="w-game" data-go="${id}" ${blk ? 'disabled' : ''}><span class="gi">${G.i}</span><span><b>${G.n}</b><small>${blk ? 'Al 3x achter elkaar gespeeld. Speel eerst een ander spel!' : G.d}</small></span><em>${p.last === id ? p.run : 0}/3</em></button>`; }).join('')}
         <p class="w-note">Je mag hetzelfde spel maximaal 3x achter elkaar spelen.</p></div>`);
     }
@@ -2430,11 +2545,15 @@
         ${OPS.map(o => { const s = p.stats[o.id] || { c: 0, t: 0 }; return `<div class="w-stat"><span>${o.i} ${o.n}</span><div class="w-bar"><i style="width:${s.t ? s.c / s.t * 100 : 0}%"></i></div><span>${s.t ? Math.round(s.c / s.t * 100) + '%' : '-'}</span></div>`; }).join('')}</div>`);
     }
     wEl('wModal').addEventListener('click', e => {
-      const t = e.target.closest('[data-close],[data-op],[data-lv],[data-go],[data-buy],[data-buyg],[data-open],[data-claim],[data-claimall],[data-glink],[data-em],[data-buye],[data-slot],[data-item],[data-buyi],[data-wear],[data-clear],[data-pet],[data-again]');
+      const t = e.target.closest('[data-close],[data-op],[data-lv],[data-go],[data-buy],[data-buyg],[data-open],[data-claim],[data-claimall],[data-tb],[data-feed],[data-say],[data-bossclaim],[data-glink],[data-em],[data-buye],[data-slot],[data-item],[data-buyi],[data-wear],[data-clear],[data-pet],[data-again]');
       if (e.target === wEl('wModal') || (t && 'close' in t.dataset)) return wHide();
       if (!t) return;
       const p = WLD.p, d = t.dataset;
       if (d.op) { const a = p.prefs.ops, i = a.indexOf(d.op); if (i >= 0 && a.length > 1) a.splice(i, 1); else if (i < 0) a.push(d.op); t.classList.toggle('on', a.includes(d.op)); }
+      else if (d.tb !== undefined) { p.prefs.tb = +d.tb; wEl('wModal').querySelectorAll('[data-tb]').forEach(b => b.classList.toggle('on', b === t)); }
+      else if (d.feed !== undefined) { const pt = p.pets[p.activePet]; if (pt && p.coins >= 5 && (pt.lv || 0) < 12) { p.coins -= 5; pt.lv = (pt.lv || 0) + 1; wBuildPet(); wHud(); wSave(); wToast('🍎 Mmm! Je huisdier is nu level ' + pt.lv, 2000); } wOpenPets(); }
+      else if (d.say !== undefined) { wHide(); wSay(+d.say); }
+      else if (d.bossclaim !== undefined) { if (p.goalClaim !== wWeek() && wGoalN() >= WLD.goal.target) { p.goalClaim = wWeek(); p.mb += WLD.goal.reward; wHud(); wSave(); wToast('🎁 +' + WLD.goal.reward + ' Ⓜ️!', 3000); } wOpenBoss(); }
       else if (d.lv) { p.prefs.lvl = +d.lv; wEl('wModal').querySelectorAll('[data-lv]').forEach(b => b.classList.toggle('on', b === t)); }
       else if (d.go || d.again) { wHide(); wSave(); wStartGame(d.go || d.again); }
       else if (d.buy !== undefined && p.coins >= 30) { p.coins -= 30; p.eggs.push({ prog: 0, need: 15 }); wHud(); wSave(); wOpenPets(); }
@@ -2461,14 +2580,23 @@
 
     /* ---------- Sommen ---------- */
     const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
-    function wQuestion() {
-      const op = GM.ops[rnd(0, GM.ops.length - 1)], L = GM.lvl;
-      const mx = [0, 20, 100, 1000][L]; let a, b, q, ans;
+    function wQuestion(ar) {
+      let ops = GM.ops; if (ar) { ops = ops.filter(o => ['add', 'sub', 'mul', 'div'].includes(o)); if (!ops.length) ops = ['add', 'sub']; }
+      const ws = ops.map(o => { const s = WLD.p.stats[o]; if (s && s.t > 60) { s.c = Math.round(s.c / 2); s.t = Math.round(s.t / 2); } return s && s.t >= 5 ? 1 + (1 - s.c / s.t) * 3 : 1.5; });
+      let r = Math.random() * ws.reduce((x, y) => x + y, 0), op = ops[0]; for (let i = 0; i < ops.length; i++) { if ((r -= ws[i]) < 0) { op = ops[i]; break; } }
+      const sc = WLD.p.stats[op], L = GM.auto ? (!sc || sc.t < 8 ? 1 : sc.c / sc.t >= .9 ? 3 : sc.c / sc.t >= .75 ? 2 : 1) : GM.lvl, mx = [0, 20, 100, 1000][L]; let a = 0, b = 0, q, ans;
       if (op === 'add') { a = rnd(2, mx); b = rnd(2, mx); q = `${a} + ${b}`; ans = a + b; }
       else if (op === 'sub') { a = rnd(5, mx); b = rnd(1, a); q = `${a} − ${b}`; ans = a - b; }
-      else if (op === 'mul') { a = rnd(2, [0, 5, 10, 12][L]); b = rnd(L === 3 ? 6 : 1, [0, 10, 10, 20][L]); q = `${a} × ${b}`; ans = a * b; }
-      else { b = rnd(2, [0, 5, 10, 12][L]); ans = rnd(1, [0, 10, 10, 15][L]); a = b * ans; q = `${a} ÷ ${b}`; }
-      return { op, q, a: ans, x: a, y: b, s: { add: '+', sub: '−', mul: '×', div: '÷' }[op] };
+      else if (op === 'mul') { a = GM.tb || rnd(2, [0, 5, 10, 12][L]); b = rnd(L === 3 ? 6 : 1, [0, 10, 10, 20][L]); q = `${a} × ${b}`; ans = a * b; }
+      else if (op === 'div') { b = GM.tb || rnd(2, [0, 5, 10, 12][L]); ans = rnd(1, [0, 10, 10, 15][L]); a = b * ans; q = `${a} ÷ ${b}`; }
+      else if (op === 'frac') { const d = [2, 4, 5, 10, 3, 8][rnd(0, L + 2)], n = rnd(1, d - 1), k = rnd(1, [0, 5, 10, 12][L]); a = d * k; ans = n * k; q = `${n}/${d} van ${a}`; }
+      else if (op === 'klok') { const h = rnd(1, 10), m = rnd(0, 5) * 5, add = rnd(1, [0, 4, 8, 11][L]) * 5, t2 = m + add; q = `Minuten van ${h}:${String(m).padStart(2, '0')} tot ${h + Math.floor(t2 / 60)}:${String(t2 % 60).padStart(2, '0')}`; ans = add; }
+      else if (op === 'geld') { const p1 = rnd(1, [0, 4, 9, 19][L]) * 50 + rnd(0, 9) * 5, pay = Math.ceil((p1 + 1) / 500) * 500; q = `Betaal €${pay / 100} voor €${(p1 / 100).toFixed(2).replace('.', ',')}. Wisselgeld in cent`; ans = pay - p1; }
+      else if (op === 'meten') { const k = rnd(2, [0, 9, 20, 99][L]), u = [['m', 'cm', 100], ['km', 'm', 1000], ['kg', 'gram', 1000], ['l', 'ml', 1000]][rnd(0, L > 1 ? 3 : 1)]; q = `${k} ${u[0]} = ? ${u[1]}`; ans = k * u[2]; }
+      else { const t = rnd(0, 3), x = rnd(3, [0, 12, 40, 90][L]), y = rnd(2, Math.min(x - 1, [0, 9, 30, 60][L])), n = rnd(2, [0, 5, 8, 10][L]), m = rnd(2, [0, 5, 8, 10][L]);
+        if (t === 0) { q = `Lisa heeft ${x} appels en krijgt er ${y} bij. Hoeveel appels nu?`; ans = x + y; } else if (t === 1) { q = `Er zijn ${x} kinderen. ${y} gaan naar huis. Hoeveel blijven er?`; ans = x - y; }
+        else if (t === 2) { q = `${n} dozen met ${m} koekjes. Hoeveel koekjes samen?`; ans = n * m; } else { q = `${m * n} snoepjes eerlijk verdelen over ${m} kinderen. Hoeveel krijgt elk kind?`; ans = n; } }
+      return { op, q, a: ans, x: a, y: b, s: { add: '+', sub: '−', mul: '×', div: '÷' }[op], t: !['add', 'sub', 'mul', 'div'].includes(op) };
     }
 
     /* ---------- Spel ---------- */
@@ -2478,7 +2606,7 @@
       const pr = WLD.p.prefs, pp = WLD.p;
       if (pp.last === mode && pp.run >= 3) { wToast('Je speelde dit spel al 3x achter elkaar. Kies eerst een ander spel!', 3000); return; }
       pp.run = pp.last === mode ? pp.run + 1 : 1; pp.last = mode;
-      Object.assign(GM, { on: true, mode, ops: [...pr.ops], lvl: pr.lvl, hp: 3, round: 1, streak: 0, correct: 0, total: 0, lock: false, time: 60 });
+      Object.assign(GM, { on: true, mode, ops: [...pr.ops], lvl: pr.lvl || 2, auto: pr.lvl === 0, tb: pr.tb || 0, hp: 3, round: 1, streak: 0, correct: 0, total: 0, lock: false, time: 60 });
       if (mode === 'race') return wStartBalloons();
       if (mode === 'practice') return wStartMemory();
       if (mode === 'sprint') return wStartSprint();
@@ -2494,10 +2622,10 @@
       wNext();
     }
     function wNext() {
-      GM.q = wQuestion(); GM.lock = false;
+      GM.q = wQuestion(GM.mode === 'vul'); GM.lock = false;
       if (GM.mode === 'vul') GM.q = { ...GM.q, q: `${GM.q.x} ${GM.q.s} ? = ${GM.q.a}`, a: GM.q.y };
       if (GM.mode === 'rij') { const L = GM.lvl, d = rnd(2, [0, 5, 10, 25][L]), a0 = rnd(1, [0, 10, 30, 100][L]); GM.q = { op: 'add', q: [0, 1, 2, 3].map(i => a0 + d * i).join(', ') + ', ?', a: a0 + d * 4 }; }
-      wEl('gQ').textContent = GM.q.q + (GM.mode === 'vul' || GM.mode === 'rij' ? '' : ' = ?');
+      wEl('gQ').textContent = GM.q.q + (GM.mode === 'vul' || GM.mode === 'rij' || GM.q.t ? '' : ' = ?');
       clearTimeout(GM.qt);
       if (GM.mode === 'bomb') {
         if (!wEl('gFuse')) wEl('gQ').insertAdjacentHTML('beforebegin', '<div class="fuse" id="gFuse"><i></i></div>');
@@ -2578,7 +2706,7 @@
       wSprintQ();
     }
     function wSprintQ() {
-      GM.q = wQuestion(); GM.lock = false; wEl('gQ').textContent = GM.q.q + ' = ?';
+      GM.q = wQuestion(); GM.lock = false; wEl('gQ').textContent = GM.q.q + (GM.q.t ? '' : ' = ?');
       const set = new Set([GM.q.a]); let n = 0; while (set.size < 3 && n++ < 60) { const d = GM.q.a + rnd(-5, 5); if (d >= 0) set.add(d); }
       const o = wEl('gOpts'); o.innerHTML = '';
       [...set].sort(() => Math.random() - .5).forEach(v => { const b = document.createElement('button'); b.className = 'w-ob'; b.textContent = v; b.onclick = () => wSprintPick(v); o.appendChild(b); });
@@ -2602,7 +2730,7 @@
     }
     function wDuelQ() {
       GM.q = wQuestion(); let s = Math.random() < .5 ? GM.q.a : GM.q.a + rnd(1, 4) * (Math.random() < .5 ? 1 : -1); if (s < 0) s = GM.q.a + 1;
-      GM.shown = s; wEl('gQ').textContent = GM.q.q + ' = ' + s; wGameHud();
+      GM.shown = s; wEl('gQ').textContent = GM.q.q + (GM.q.t ? ' → ' : ' = ') + s; wGameHud();
     }
     function wDuelPick(yes) { if (!GM.on) return; if (!wJudge(yes === (GM.shown === GM.q.a), GM.q.a)) GM.end -= 2000; wDuelQ(); }
 
@@ -2930,13 +3058,52 @@
         const list = []; snap.forEach(d => list.push({ ...d.data(), id: d.id }));
         const mine = racePodiumRender(document.getElementById('studentPodium'), list, round).some(s => s.id === currentStudentDocId);
         bar.style.display = mine ? 'flex' : 'none';
-        if (mine && !bar.dataset.ok) { bar.dataset.ok = '1'; bar.innerHTML = '<div style="width:100%;font-weight:700;font-size:13px;text-align:center">Jij staat op het podium! Doe een emote 🎉</div>' + EMOTES.filter(x => !x.c || RACE.emotes.includes(x.id)).slice(0, 14).map(x => `<button data-re="${x.id}">${x.e}</button>`).join(''); }
+        if (mine && !bar.dataset.ok) { raceFx.confetti(80); bar.dataset.ok = '1'; bar.innerHTML = '<div style="width:100%;font-weight:700;font-size:13px;text-align:center">Jij staat op het podium! Doe een emote 🎉</div>' + EMOTES.filter(x => !x.c || RACE.emotes.includes(x.id)).slice(0, 14).map(x => `<button data-re="${x.id}">${x.e}</button>`).join(''); }
       }, () => {});
     }
     document.getElementById('studentEmoBar').onclick = e => {
       const b = e.target.closest('[data-re]'); if (!b || !currentStudentDocId || Date.now() - RACE.last < 1500) return; RACE.last = Date.now();
       updateDoc(doc(db, 'activeStudents', currentStudentDocId), { emo: b.dataset.re, et: Date.now() }).catch(() => {});
     };
+
+
+    /* ---------- Race-uiterlijk: decor, lobby met spelers, racebaan, confetti ---------- */
+    const RUI = { streak: 0, pos: 0, laps: 0, last: 0, lobbyUnsub: null, lsig: '' };
+    const raceFx = {
+      confetti(n, x, y) {
+        const b = document.getElementById('mathQuestionBoxContainer').getBoundingClientRect(), cx = x ?? (b.width ? b.left + b.width / 2 : innerWidth / 2), cy = y ?? (b.height ? b.top + b.height / 2 : innerHeight / 3), cols = ['#f87171', '#fbbf24', '#34d399', '#60a5fa', '#c084fc', '#f472b6'];
+        for (let i = 0; i < n; i++) { const e = document.createElement('i'); e.className = 'cf'; e.style.cssText = `left:${cx}px;top:${cy}px;background:${cols[i % 6]};--dx:${Math.random() * 360 - 180}px;--dy:${Math.random() * 300 - 90}px;animation-delay:${Math.random() * .1}s`; document.body.appendChild(e); setTimeout(() => e.remove(), 1400); }
+      }
+    };
+    (function () {
+      const d = document.createElement('div'); d.id = 'raceDecor';
+      d.innerHTML = Array.from({ length: 20 }, (_, i) => `<span style="left:${(i * 53) % 100}%;font-size:${22 + (i * 7) % 28}px;animation-duration:${10 + (i * 3) % 12}s;animation-delay:-${(i * 5) % 14}s">${['➕', '➖', '✖️', '➗', '⭐', '🚀', '🏁', '🎈', '🔢', '✨'][i % 10]}</span>`).join('');
+      document.body.appendChild(d);
+    })();
+    function raceTrackUpdate() {
+      document.getElementById('raceCar').style.left = RUI.pos * .8 + '%';
+      document.getElementById('raceCombo').textContent = RUI.streak >= 2 ? '🔥 ' + RUI.streak + ' op rij!' : '';
+      document.getElementById('raceLaps').textContent = RUI.laps ? '🏁 x' + RUI.laps : '';
+    }
+    function raceCorrect() { RUI.streak++; RUI.pos += 10; raceFx.confetti(RUI.streak >= 5 ? 40 : 16); if (RUI.pos >= 100) { RUI.pos = 0; RUI.laps++; raceFx.confetti(90); } raceTrackUpdate(); }
+    function raceWrong() { RUI.streak = 0; const q = document.getElementById('mathQuestionBoxContainer'); q.classList.remove('q-shake'); void q.offsetWidth; q.classList.add('q-shake'); raceTrackUpdate(); }
+    function raceLobbyStop() { if (RUI.lobbyUnsub) RUI.lobbyUnsub(); RUI.lobbyUnsub = null; RUI.lsig = ''; }
+    function raceLobbyStart() {
+      const code = currentStudent.code; if (!code || RUI.lobbyUnsub) return;
+      RUI.lobbyUnsub = onSnapshot(query(collection(db, 'activeStudents'), where('code', '==', code)), snap => {
+        const list = []; snap.forEach(x => list.push({ ...x.data(), id: x.id })); const sig = JSON.stringify(list.map(s => [s.id, s.name, s.avatarConfig])); if (sig === RUI.lsig) return; RUI.lsig = sig;
+        document.getElementById('lobbyCount').textContent = '👥 ' + list.length + (list.length === 1 ? ' speler' : ' spelers') + ' in de lobby';
+        document.getElementById('lobbyPlayers').innerHTML = list.map((s, i) => `<div class="lp ${s.id === currentStudentDocId ? 'me' : ''}" style="animation-delay:-${(i * .37).toFixed(2)}s"><div class="a">${generateAvatarSvgString(s.avatarConfig || { hats: 'none', glasses: 'none', shirts: 'purple' })}</div>${wEsc(s.name || '?')}</div>`).join('');
+      }, () => {});
+    }
+    const raceWatch = (id, fn, opt) => { const el = document.getElementById(id); if (el) new MutationObserver(fn).observe(el, opt); };
+    raceWatch('studentRaceSection', () => { if (document.getElementById('studentRaceSection').classList.contains('active')) raceLobbyStart(); else raceLobbyStop(); }, { attributes: true, attributeFilter: ['class'] });
+    raceWatch('studentOefenScherm', () => { if (document.getElementById('studentOefenScherm').classList.contains('active')) { RUI.streak = 0; RUI.pos = 0; RUI.last = +document.getElementById('miniScoreVal').textContent || 0; raceTrackUpdate(); } }, { attributes: true, attributeFilter: ['class'] });
+    raceWatch('miniScoreVal', () => { const v = +document.getElementById('miniScoreVal').textContent || 0; if (v > RUI.last) raceCorrect(); RUI.last = v; }, { childList: true, characterData: true, subtree: true });
+    raceWatch('gameFeedbackStatus', () => { const t = document.getElementById('gameFeedbackStatus').textContent; if (t.startsWith('Fout')) raceWrong(); else if (t.startsWith('Goed')) raceCorrect(); }, { childList: true, characterData: true, subtree: true });
+    raceWatch('raceTimerDisplay', () => { const el = document.getElementById('raceTimerDisplay'), m = /(\d+):(\d+)/.exec(el.textContent); el.classList.toggle('timer-low', !!m && +m[1] * 60 + +m[2] <= 10); }, { childList: true, characterData: true, subtree: true });
+
+    document.getElementById('startActiveGameBtn').addEventListener('click', () => raceFx.confetti(70));
 
     /* ---------- Spel 2: Ballonnenknal ---------- */
     const wTop = '<div class="w-gtop"><span id="gHearts"></span><span id="gInfo"></span><button class="w-x" id="gQuit" title="Stoppen">✕</button></div>';
@@ -2949,7 +3116,7 @@
       wBalloonQ(); wGameHud();
     }
     function wBalloonQ() {
-      GM.q = wQuestion(); wEl('gQ').textContent = GM.q.q + ' = ?';
+      GM.q = wQuestion(); wEl('gQ').textContent = GM.q.q + (GM.q.t ? '' : ' = ?');
       const f = wEl('gField'); f.innerHTML = '';
       const ans = new Set([GM.q.a]); let n = 0;
       while (ans.size < 4 && n++ < 60) { const d = GM.q.a + rnd(-6, 6) * (Math.random() < .5 ? 1 : 2); if (d >= 0) ans.add(d); }
@@ -2979,7 +3146,7 @@
     }
     function wMemRound() {
       const pairs = []; let n = 0;
-      while (pairs.length < 6 && n++ < 300) { const q = wQuestion(); if (!pairs.some(x => x.a === q.a || x.q === q.q)) pairs.push(q); }
+      while (pairs.length < 6 && n++ < 300) { const q = wQuestion(true); if (!pairs.some(x => x.a === q.a || x.q === q.q)) pairs.push(q); }
       const cards = pairs.flatMap((q, i) => [{ id: i, t: q.q, op: q.op, k: 'q' }, { id: i, t: String(q.a), op: q.op, k: 'a' }]).sort(() => Math.random() - .5);
       GM.left = pairs.length; GM.open = []; GM.lock = false;
       const g = wEl('gMem'); g.innerHTML = '';
